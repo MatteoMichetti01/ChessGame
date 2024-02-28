@@ -1,7 +1,10 @@
-package Controller;
+package controller;
+import java.io.*;
+import java.util.Scanner;
 
 public class Mossa {
     protected int Posx, Posy;
+    public Scanner input = new Scanner(System.in);
 
     public Mossa(int posx, int posy) {
         Posx = posx;
