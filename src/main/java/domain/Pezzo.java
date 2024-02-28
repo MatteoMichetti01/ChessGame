@@ -10,7 +10,10 @@ abstract class Pezzo {
             this.posX = pX;
             this.posY = pY;
         }
-
-
-
+        public String getColore(){
+            return this.colore;
+        }
+        public void setColore(String c){
+            this.colore = c;
+        }
     }
