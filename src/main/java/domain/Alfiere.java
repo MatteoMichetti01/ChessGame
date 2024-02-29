@@ -1,7 +1,7 @@
 package domain;
 
 public class Alfiere extends Pezzo{
-    public Alfiere(String n, String c) {
-        super(n, c);
+    public Alfiere(String nome, String colore, int posX, int posY) {
+        super(nome, colore, posX, posY);
     }
 }

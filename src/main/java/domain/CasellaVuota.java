@@ -1,7 +1,8 @@
 package domain;
 
 public class CasellaVuota extends Pezzo{
-    public CasellaVuota(String n, String c) {
-        super(n, c);
+
+    public CasellaVuota(String nome, String colore, int posX, int posY) {
+        super(nome, colore, posX, posY);
     }
 }

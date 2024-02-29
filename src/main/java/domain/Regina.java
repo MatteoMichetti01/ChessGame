@@ -1,7 +1,8 @@
 package domain;
 
 public class Regina extends Pezzo {
-    public Regina(String n, String c) {
-        super(n, c);
+
+    public Regina(String nome, String colore, int posX, int posY) {
+        super(nome, colore, posX, posY);
     }
 }
