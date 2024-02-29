@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 import java.io.*;
 import java.util.Scanner;
 
@@ -9,6 +9,9 @@ public class Mossa {
     public Mossa(int posx, int posy) {
         Posx = posx;
         Posy = posy;
+    }
+    public Mossa() {
+
     }
 
     public int getPosx() {
@@ -25,5 +28,14 @@ public class Mossa {
 
     public void setPosy(int posy) {
         Posy = posy;
+    }
+
+    @Override
+    public String toString() {
+        return "Mossa{" +
+                "Posx=" + Posx +
+                ", Posy=" + Posy +
+                ", input=" + input +
+                '}';
     }
 }

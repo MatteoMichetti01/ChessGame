@@ -1,4 +1,9 @@
 package domain;
+
+import Controller.Mossa;
+
+import java.util.Arrays;
+
 public class Scacchiera {
     public Pezzo[][] p;
     public Scacchiera(Pezzo[][] p){
@@ -39,5 +44,31 @@ public class Scacchiera {
 
         return c;
     }
+    public Mossa getPoszione(String nome, String colore){
+        Mossa posAttuale = new Mossa();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if(p[i][j].getNome().equals(nome) && p[i][j].getColore().equals(colore)) {
+                    posAttuale.setPosx(i);
+                    posAttuale.setPosy(j);
+                }
+            }
 
+        }
+        return posAttuale;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Scacchiera that = (Scacchiera) o;
+        return Arrays.equals(p, that.p);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(p);
+    }
 }
