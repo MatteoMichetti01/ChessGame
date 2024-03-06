@@ -2,9 +2,8 @@ package logic;
 
 //import Controller.PedoneServiceImpl;
 import domain.*;
-import Controller.*;
+import controller.*;
 import java.util.Scanner;
-import java.util.*;
 
 public class ChessGame {
     static Casella[][] casella = new Casella[9][9];
@@ -14,13 +13,17 @@ public class ChessGame {
 
         ViewScacchiera viewScacchiera = new ViewScacchiera(scacchiera);
         Scanner scanner = new Scanner(System.in);
+        System.out.println("");
+        System.out.println("Quale colore vuoi essere?(bianco o nero): ");
+        String c=scanner.nextLine();
+        System.out.println("");
         System.out.println("Inserisci il pezzo che vuoi spostare:");
         String a = scanner.nextLine();
         System.out.println("Inserisci mossa: ");
         String b = scanner.nextLine();
         PedoneService p1 = new PedoneService(scacchiera);
 
-        scacchiera = p1.move(a,b);
+        scacchiera = p1.move(a,b,c);
 
         viewScacchiera.viewscacchiera(scacchiera);
 

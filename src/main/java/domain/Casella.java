@@ -51,11 +51,10 @@ public class Casella {
         this.posX = posPezzoX;
     }
 
-    public String getPezzo() {
-        if(this.pezzo==null){
-            return "|    |";
-        }
-        return pezzo.nome;
+    public Pezzo getPezzo() {
+
+
+        return pezzo;
     }
 
     public void setPezzo(Pezzo pezzo) {

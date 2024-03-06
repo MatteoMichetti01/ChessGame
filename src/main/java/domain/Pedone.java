@@ -6,7 +6,8 @@ public class Pedone extends Pezzo {
         super(nome, colore, posX, posY);
     }
 
-    public Pedone(String nome) {
-        super(nome);
+    public Pedone(String nome, String colore) {
+        super(nome, colore);
     }
+
 }

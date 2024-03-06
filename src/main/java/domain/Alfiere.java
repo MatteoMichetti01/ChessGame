@@ -5,7 +5,8 @@ public class Alfiere extends Pezzo{
         super(nome, colore, posX, posY);
     }
 
-    public Alfiere(String nome) {
-        super(nome);
+    public Alfiere(String nome, String colore) {
+        super(nome, colore);
     }
+
 }

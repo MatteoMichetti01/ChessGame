@@ -1,9 +1,5 @@
 package domain;
 
-import Controller.MossaTest;
-
-import java.util.Arrays;
-
 public class Scacchiera {
     public Casella[][] casella;
     public Pezzo pezzo;
@@ -31,18 +27,18 @@ public class Scacchiera {
         }
 
 
-        casella[1][1] = new Casella("A1", new Torre("t1"),1,1,true);
-        casella[1][2] = new Casella("B1", new Cavallo( "c1"),1,2,true);
-        casella[1][3] = new Casella("C1", new Alfiere("a1"),1,3,true);
-        casella[1][4] = new Casella("D1", new Regina("qn"),1,4,true);
-        casella[1][5] = new Casella("E1", new Re("re"),1,5,true);
-        casella[1][6] = new Casella("F1", new Alfiere("a2"),1,6,true);
-        casella[1][7] = new Casella("G1", new Cavallo("c2"),1,7,true);
-        casella[1][8] = new Casella("H1", new Torre("t2"),1,8,true);
+        casella[1][1] = new Casella("A1", new Torre("t1","nero"),1,1,true);
+        casella[1][2] = new Casella("B1", new Cavallo( "c1","nero"),1,2,true);
+        casella[1][3] = new Casella("C1", new Alfiere("a1","nero"),1,3,true);
+        casella[1][4] = new Casella("D1", new Regina("qn","nero"),1,4,true);
+        casella[1][5] = new Casella("E1", new Re("re","nero"),1,5,true);
+        casella[1][6] = new Casella("F1", new Alfiere("a2","nero"),1,6,true);
+        casella[1][7] = new Casella("G1", new Cavallo("c2","nero"),1,7,true);
+        casella[1][8] = new Casella("H1", new Torre("t2","nero"),1,8,true);
 
         String[]  lettere = new String[]{"j", "A", "B", "C", "D", "E", "F", "G", "H"};
         for (int i = 1; i <= 8; i++) {
-            casella[2][i] = new Casella(lettere[i]+"2",new Pedone("p" + i),2,i,true);
+            casella[2][i] = new Casella(lettere[i]+"2",new Pedone("p" + i,"nero"),2,i,true);
         }
 
         for (int i = 3; i <= 7; i++) {
@@ -58,18 +54,18 @@ public class Scacchiera {
 
         casella[7][0] = new Casella("7");
         for (int i = 1; i <= 8; i++) {
-            casella[7][i] = new Casella(lettere[i]+"7",new Pedone("p"+i),7,i,true);
+            casella[7][i] = new Casella(lettere[i]+"7",new Pedone("p"+i,"bianco"),7,i,true);
         }
 
         casella[8][0] = new Casella("8");
-        casella[8][1] = new Casella("A8", new Torre("t1"),8,1,true);
-        casella[8][2] = new Casella("B8",new Cavallo("c1"),8,2,true);
-        casella[8][3] = new Casella ("C8",new Alfiere("a1"),8,3,true);
-        casella[8][4] = new Casella("D8",new Regina("qn"),8,4,true);
-        casella[8][5] = new Casella("E8",new Re("re"),8,5,true);
-        casella[8][6] = new Casella("F8",new Alfiere("a2"),8,6,true);
-        casella[8][7] = new Casella ("G8", new Cavallo("c2"),8,7,true);
-        casella[8][8] = new Casella ("H8",new Torre("t2"),8,8,true);
+        casella[8][1] = new Casella("A8", new Torre("t1","bianco"),8,1,true);
+        casella[8][2] = new Casella("B8",new Cavallo("c1","bianco"),8,2,true);
+        casella[8][3] = new Casella ("C8",new Alfiere("a1","bianco"),8,3,true);
+        casella[8][4] = new Casella("D8",new Regina("qn","bianco"),8,4,true);
+        casella[8][5] = new Casella("E8",new Re("re","bianco"),8,5,true);
+        casella[8][6] = new Casella("F8",new Alfiere("a2","bianco"),8,6,true);
+        casella[8][7] = new Casella ("G8", new Cavallo("c2","bianco"),8,7,true);
+        casella[8][8] = new Casella ("H8",new Torre("t2","bianco"),8,8,true);
 
 
 

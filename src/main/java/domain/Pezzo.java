@@ -16,7 +16,7 @@ public abstract class Pezzo {
         this.posX = posX;
         this.posY = posY;
     }
-    public Pezzo(String nome){this.nome=nome;}
+    public Pezzo(String nome, String colore){this.nome=nome; this.colore=colore;}
 
     public String getColore(){
             return this.colore;

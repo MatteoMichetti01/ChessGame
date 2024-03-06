@@ -6,7 +6,7 @@ public class Re extends Pezzo {
         super(nome, colore, posX, posY);
     }
 
-    public Re(String nome) {
-        super(nome);
+    public Re(String nome, String colore) {
+        super(nome, colore);
     }
 }

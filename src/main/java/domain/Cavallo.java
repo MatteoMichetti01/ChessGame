@@ -5,7 +5,7 @@ public class Cavallo  extends Pezzo{
         super(nome, colore, posX, posY);
     }
 
-    public Cavallo(String nome) {
-        super(nome);
+    public Cavallo(String nome, String colore) {
+        super(nome, colore);
     }
 }
