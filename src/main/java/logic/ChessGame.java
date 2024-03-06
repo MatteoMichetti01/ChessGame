@@ -1,23 +1,20 @@
 package logic;
 
-import Controller.PedoneServiceImpl;
+//import Controller.PedoneServiceImpl;
+import domain.Casella;
 import domain.Pezzo;
 import domain.Scacchiera;
 
 import java.util.Scanner;
 
 public class ChessGame {
-    static Pezzo[][] p = new Pezzo[9][9];
-    static Scacchiera c = new Scacchiera(p);
+    static Casella[][] casella = new Casella[9][9];
+    static Scacchiera scacchiera = new Scacchiera(casella);
 
     public static void main(String[] args) {
-        for (int i = 0; i < 9; i++) {
-            System.out.println();
-            for (int j = 0; j < 9; j++) {
-                System.out.print(c.p[i][j].getNome() + " ");
-            }
+        ViewScacchiera viewScacchiera= new ViewScacchiera(scacchiera);
         }
-            Scanner scanner = new Scanner(System.in);
+           /* Scanner scanner = new Scanner(System.in);
             System.out.println("Inserisci mossa: posX: ");
             int a = scanner.nextInt();
             System.out.println("Inserisci mossa: posY: ");
@@ -32,7 +29,6 @@ public class ChessGame {
                 }
             }
 
-
+*/
 
     }
-}
