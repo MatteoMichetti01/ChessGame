@@ -20,10 +20,14 @@ public class Casella {
 
     }
 
-    public Casella(String nome, String Posizione){
+    public Casella(String nome){
+        this.nome=nome;
+    }
 
+    public Casella(String nome, String Posizione, boolean occupata){
         this.Posizione = Posizione;
         this.nome=nome;
+        this.occupata=false;
     }
 
     public String getNome() {
