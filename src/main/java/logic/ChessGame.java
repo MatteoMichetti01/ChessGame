@@ -9,7 +9,7 @@ public class ChessGame {
     static Casella[][] casella = new Casella[9][9];
     static Scacchiera scacchiera = new Scacchiera(casella);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MossaNonValida {
 
         ViewScacchiera viewScacchiera = new ViewScacchiera(scacchiera);
         Scanner scanner = new Scanner(System.in);

@@ -30,6 +30,8 @@ public class Casella {
         this.occupata=false;
     }
 
+
+
     public String getNome() {
         if (occupata){return pezzo.getNome();}
         return nome;
