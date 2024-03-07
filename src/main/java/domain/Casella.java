@@ -62,4 +62,10 @@ public class Casella {
     public void setPezzo(Pezzo pezzo) {
         this.pezzo = pezzo;
     }
+
+    public boolean isOccupata() {
+        if (this.occupata)
+            return true;
+        else return false;
+    }
 }
