@@ -42,6 +42,42 @@ public class PedoneService implements Mossa {
 
             case 'a':
                 if (Math.abs(nuovaPosX - vecchiaPosX) != Math.abs(nuovaPosY - vecchiaPosY)) throw new MossaNonValida("L'alfiere può andare solo in diagonale");
+
+                //CASO SPOSTAMENTO IN DIAGONALE IN AVANTI VERSO DESTRA
+                if( vecchiaPosX > nuovaPosX && vecchiaPosY < nuovaPosY){
+                    for(int i = vecchiaPosX; i > nuovaPosX; i-- ){
+                    for(int j = vecchiaPosY; j < nuovaPosY; j++){
+                        if(scacchiera.casella[i][j].isOccupata())throw new MossaNonValida("pezzo in mezzo");
+                    }
+                    }
+                }
+
+                //CASO SPOSTAMENTO IN DIAGONALE IN AVANTI VERSO SINISTRA
+                if( vecchiaPosX > nuovaPosX && vecchiaPosY > nuovaPosY){
+                    for(int i = vecchiaPosX; i > nuovaPosX; i-- ){
+                        for(int j = vecchiaPosY; j > nuovaPosY; j--){
+                            if(scacchiera.casella[i][j].isOccupata())throw new MossaNonValida("pezzo in mezzo");
+                        }
+                    }
+                }
+
+                //CASO SPOSTAMENTO IN DIAGONALE INDIETRO VERSO DESTRA
+                if( vecchiaPosX < nuovaPosX && vecchiaPosY < nuovaPosY){
+                    for(int i = vecchiaPosX; i < nuovaPosX; i++ ){
+                        for(int j = vecchiaPosY; j < nuovaPosY; j++){
+                            if(scacchiera.casella[i][j].isOccupata())throw new MossaNonValida("pezzo in mezzo");
+                        }
+                    }
+                }
+
+                //CASO SPOSTAMENTO IN DIAGONALE INDIETRO VERSO SINISTRA
+                if( vecchiaPosX < nuovaPosX && vecchiaPosY > nuovaPosY){
+                    for(int i = vecchiaPosX; i < nuovaPosX; i++ ){
+                        for(int j = vecchiaPosY; j > nuovaPosY; j--){
+                            if(scacchiera.casella[i][j].isOccupata())throw new MossaNonValida("pezzo in mezzo");
+                        }
+                    }
+                }
                 break;
 
             case 't':
@@ -79,12 +115,28 @@ public class PedoneService implements Mossa {
                     }
                 }
                 break;
+
+
+            case 'c':
+                /*System.out.println("vecchia posx: "+vecchiaPosX);
+                System.out.println("vecchia posy: "+vecchiaPosY);
+                System.out.println("nuova posx: "+nuovaPosX);
+                System.out.println("nuova posy: "+nuovaPosY);*/
+               if(!((nuovaPosX == vecchiaPosX+2 && nuovaPosY == vecchiaPosY+1 )|| (nuovaPosX == vecchiaPosX+2 && nuovaPosY == vecchiaPosY-1)
+                       ||(nuovaPosX == vecchiaPosX-2 && nuovaPosY == vecchiaPosY-1 )||(nuovaPosX == vecchiaPosX-2 && nuovaPosY == vecchiaPosY+1 )
+                       || (nuovaPosX == vecchiaPosX+1 && nuovaPosY == vecchiaPosY+2 )|| (nuovaPosX == vecchiaPosX+1 && nuovaPosY == vecchiaPosY-2)
+                       ||(nuovaPosX == vecchiaPosX-1 && nuovaPosY == vecchiaPosY-2)||(nuovaPosX == vecchiaPosX-1 && nuovaPosY == vecchiaPosY+2 ))){
+                   throw new MossaNonValida("Il cavallo può muoversi solo ad L");
+                         }
+
+
+                break;
+
+            case 'q':
+                
+
+
         }
-
-
-
-
-
 
 
 
@@ -107,4 +159,7 @@ public class PedoneService implements Mossa {
 
         return scacchiera;
     }
-}
+}/*System.out.println("vecchia posx: "+vecchiaPosX);
+                System.out.println("vecchia posy: "+vecchiaPosY);
+                System.out.println("nuova posx: "+nuovaPosX);
+                System.out.println("nuova posy: "+nuovaPosY);*/
