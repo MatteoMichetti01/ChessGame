@@ -41,44 +41,8 @@ public class PedoneService implements Mossa {
                 break;
 
             case 'a':
-                if (Math.abs(nuovaPosX - vecchiaPosX) != Math.abs(nuovaPosY - vecchiaPosY)) throw new MossaNonValida("L'alfiere può andare solo in diagonale");
+                AlfiereService.controlloAlfiere(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
 
-                //CASO SPOSTAMENTO IN DIAGONALE IN AVANTI VERSO DESTRA
-                if( vecchiaPosX > nuovaPosX && vecchiaPosY < nuovaPosY){
-                    for(int i = vecchiaPosX; i > nuovaPosX; i-- ){
-                    for(int j = vecchiaPosY; j < nuovaPosY; j++){
-                        if(scacchiera.casella[i][j].isOccupata())throw new MossaNonValida("pezzo in mezzo");
-                    }
-                    }
-                }
-
-                //CASO SPOSTAMENTO IN DIAGONALE IN AVANTI VERSO SINISTRA
-                if( vecchiaPosX > nuovaPosX && vecchiaPosY > nuovaPosY){
-                    for(int i = vecchiaPosX; i > nuovaPosX; i-- ){
-                        for(int j = vecchiaPosY; j > nuovaPosY; j--){
-                            if(scacchiera.casella[i][j].isOccupata())throw new MossaNonValida("pezzo in mezzo");
-                        }
-                    }
-                }
-
-                //CASO SPOSTAMENTO IN DIAGONALE INDIETRO VERSO DESTRA
-                if( vecchiaPosX < nuovaPosX && vecchiaPosY < nuovaPosY){
-                    for(int i = vecchiaPosX; i < nuovaPosX; i++ ){
-                        for(int j = vecchiaPosY; j < nuovaPosY; j++){
-                            if(scacchiera.casella[i][j].isOccupata())throw new MossaNonValida("pezzo in mezzo");
-                        }
-                    }
-                }
-
-                //CASO SPOSTAMENTO IN DIAGONALE INDIETRO VERSO SINISTRA
-                if( vecchiaPosX < nuovaPosX && vecchiaPosY > nuovaPosY){
-                    for(int i = vecchiaPosX; i < nuovaPosX; i++ ){
-                        for(int j = vecchiaPosY; j > nuovaPosY; j--){
-                            if(scacchiera.casella[i][j].isOccupata())throw new MossaNonValida("pezzo in mezzo");
-                        }
-                    }
-                }
-                break;
 
             case 't':
                 if (nuovaPosY != vecchiaPosY) {
