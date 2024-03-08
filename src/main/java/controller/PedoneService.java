@@ -133,7 +133,58 @@ public class PedoneService implements Mossa {
                 break;
 
             case 'q':
-                
+                // Verifica se la regina si sta muovendo lungo una linea retta (orizzontalmente, verticalmente o diagonalmente)
+                if (!((nuovaPosX == vecchiaPosX || nuovaPosY == vecchiaPosY) ||
+                        (Math.abs(nuovaPosX - vecchiaPosX) == Math.abs(nuovaPosY - vecchiaPosY)))) {
+                    throw new MossaNonValida("La regina può muoversi solo lungo linee rette");
+                }
+
+                // Verifica la presenza di pezzi nel percorso se lo spostamento è lungo una linea retta
+                if (nuovaPosX == vecchiaPosX) {
+                    // Movimento verticale
+                    int inizio = Math.min(vecchiaPosY, nuovaPosY) + 1;
+                    int fine = Math.max(vecchiaPosY, nuovaPosY);
+                    for (int i = inizio; i < fine; i++) {
+                        if (scacchiera.casella[vecchiaPosX][i].isOccupata()) {
+                            throw new MossaNonValida("Pezzo in mezzo");
+                        }
+                    }
+                } else if (nuovaPosY == vecchiaPosY) {
+                    // Movimento orizzontale
+                    int inizio = Math.min(vecchiaPosX, nuovaPosX) + 1;
+                    int fine = Math.max(vecchiaPosX, nuovaPosX);
+                    for (int i = inizio; i < fine; i++) {
+                        if (scacchiera.casella[i][vecchiaPosY].isOccupata()) {
+                            throw new MossaNonValida("Pezzo in mezzo");
+                        }
+                    }
+                } else {
+                    // Movimento diagonale
+                    int startX = Math.min(vecchiaPosX, nuovaPosX) + 1;
+                    int startY = Math.min(vecchiaPosY, nuovaPosY) + 1;
+                    int endX = Math.max(vecchiaPosX, nuovaPosX);
+                    int endY = Math.max(vecchiaPosY, nuovaPosY);
+                    for (int i = startX, j = startY; i < endX && j < endY; i++, j++) {
+                        if (scacchiera.casella[i][j].isOccupata()) {
+                            throw new MossaNonValida("Pezzo in mezzo");
+                        }
+                    }
+                }
+                break;
+            case 'r':
+                // Verifica che il re si stia muovendo di una sola casella in qualsiasi direzione
+                if (!(Math.abs(nuovaPosX - vecchiaPosX) <= 1 && Math.abs(nuovaPosY - vecchiaPosY) <= 1)) {
+                    throw new MossaNonValida("Il re può muoversi solo di una casella alla volta");
+                }
+
+                // Verifica se la destinazione è occupata dallo stesso colore o meno
+                if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() &&
+                        scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore())) {
+                    throw new MossaNonValida("La casella è già occupata dallo stesso colore");
+                }
+                break;
+
+
 
 
         }
