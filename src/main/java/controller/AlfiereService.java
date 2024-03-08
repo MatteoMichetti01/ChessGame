@@ -12,37 +12,45 @@ public class AlfiereService {
 
         //CASO SPOSTAMENTO IN DIAGONALE IN AVANTI VERSO DESTRA
         if (vecchiaPosX > nuovaPosX && vecchiaPosY < nuovaPosY) {
-            for (int i = vecchiaPosX; i > nuovaPosX; i--) {
-                for (int j = vecchiaPosY; j < nuovaPosY; j++) {
-                    if (scacchiera.casella[i][j].isOccupata()) throw new MossaNonValida("pezzo in mezzo");
-                }
+            int i = vecchiaPosX - 1;
+            int j = vecchiaPosY + 1;
+            while (i > nuovaPosX && j < nuovaPosY) {
+                if (scacchiera.casella[i][j].isOccupata()) throw new MossaNonValida("pezzo in mezzo");
+                i--;
+                j++;
             }
         }
 
         //CASO SPOSTAMENTO IN DIAGONALE IN AVANTI VERSO SINISTRA
         if (vecchiaPosX > nuovaPosX && vecchiaPosY > nuovaPosY) {
-            for (int i = vecchiaPosX; i > nuovaPosX; i--) {
-                for (int j = vecchiaPosY; j > nuovaPosY; j--) {
-                    if (scacchiera.casella[i][j].isOccupata()) throw new MossaNonValida("pezzo in mezzo");
-                }
+            int i = vecchiaPosX - 1;
+            int j = vecchiaPosY - 1;
+            while (i > nuovaPosX && j > nuovaPosY) {
+                if (scacchiera.casella[i][j].isOccupata()) throw new MossaNonValida("pezzo in mezzo");
+                i--;
+                j--;
             }
         }
 
         //CASO SPOSTAMENTO IN DIAGONALE INDIETRO VERSO DESTRA
         if (vecchiaPosX < nuovaPosX && vecchiaPosY < nuovaPosY) {
-            for (int i = vecchiaPosX; i < nuovaPosX; i++) {
-                for (int j = vecchiaPosY; j < nuovaPosY; j++) {
-                    if (scacchiera.casella[i][j].isOccupata()) throw new MossaNonValida("pezzo in mezzo");
-                }
+            int i = vecchiaPosX + 1;
+            int j = vecchiaPosY + 1;
+            while (i < nuovaPosX && j < nuovaPosY) {
+                if (scacchiera.casella[i][j].isOccupata()) throw new MossaNonValida("pezzo in mezzo");
+                i++;
+                j++;
             }
         }
 
         //CASO SPOSTAMENTO IN DIAGONALE INDIETRO VERSO SINISTRA
         if (vecchiaPosX < nuovaPosX && vecchiaPosY > nuovaPosY) {
-            for (int i = vecchiaPosX; i < nuovaPosX; i++) {
-                for (int j = vecchiaPosY; j > nuovaPosY; j--) {
-                    if (scacchiera.casella[i][j].isOccupata()) throw new MossaNonValida("pezzo in mezzo");
-                }
+            int i = vecchiaPosX + 1;
+            int j = vecchiaPosY - 1;
+            while (i < nuovaPosX && j > nuovaPosY) {
+                if (scacchiera.casella[i][j].isOccupata()) throw new MossaNonValida("pezzo in mezzo");
+                i++;
+                j--;
             }
         }
 

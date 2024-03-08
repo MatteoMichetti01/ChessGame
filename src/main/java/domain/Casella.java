@@ -68,4 +68,9 @@ public class Casella {
             return true;
         else return false;
     }
+
+    public void cambioOccupata() {
+        if(this.occupata) this.occupata=false;
+        else this.occupata = true;
+    }
 }
