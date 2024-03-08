@@ -82,59 +82,13 @@ public class PedoneService implements Mossa {
 
 
             case 'c':
-                /*System.out.println("vecchia posx: "+vecchiaPosX);
-                System.out.println("vecchia posy: "+vecchiaPosY);
-                System.out.println("nuova posx: "+nuovaPosX);
-                System.out.println("nuova posy: "+nuovaPosY);*/
-               if(!((nuovaPosX == vecchiaPosX+2 && nuovaPosY == vecchiaPosY+1 )|| (nuovaPosX == vecchiaPosX+2 && nuovaPosY == vecchiaPosY-1)
-                       ||(nuovaPosX == vecchiaPosX-2 && nuovaPosY == vecchiaPosY-1 )||(nuovaPosX == vecchiaPosX-2 && nuovaPosY == vecchiaPosY+1 )
-                       || (nuovaPosX == vecchiaPosX+1 && nuovaPosY == vecchiaPosY+2 )|| (nuovaPosX == vecchiaPosX+1 && nuovaPosY == vecchiaPosY-2)
-                       ||(nuovaPosX == vecchiaPosX-1 && nuovaPosY == vecchiaPosY-2)||(nuovaPosX == vecchiaPosX-1 && nuovaPosY == vecchiaPosY+2 ))){
-                   throw new MossaNonValida("Il cavallo può muoversi solo ad L");
-                         }
-
-
-                break;
+               CavalloService.controlloCavallo(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
+               break;
 
             case 'q':
-                // Verifica se la regina si sta muovendo lungo una linea retta (orizzontalmente, verticalmente o diagonalmente)
-                if (!((nuovaPosX == vecchiaPosX || nuovaPosY == vecchiaPosY) ||
-                        (Math.abs(nuovaPosX - vecchiaPosX) == Math.abs(nuovaPosY - vecchiaPosY)))) {
-                    throw new MossaNonValida("La regina può muoversi solo lungo linee rette");
-                }
-
-                // Verifica la presenza di pezzi nel percorso se lo spostamento è lungo una linea retta
-                if (nuovaPosX == vecchiaPosX) {
-                    // Movimento verticale
-                    int inizio = Math.min(vecchiaPosY, nuovaPosY) + 1;
-                    int fine = Math.max(vecchiaPosY, nuovaPosY);
-                    for (int i = inizio; i < fine; i++) {
-                        if (scacchiera.casella[vecchiaPosX][i].isOccupata()) {
-                            throw new MossaNonValida("Pezzo in mezzo");
-                        }
-                    }
-                } else if (nuovaPosY == vecchiaPosY) {
-                    // Movimento orizzontale
-                    int inizio = Math.min(vecchiaPosX, nuovaPosX) + 1;
-                    int fine = Math.max(vecchiaPosX, nuovaPosX);
-                    for (int i = inizio; i < fine; i++) {
-                        if (scacchiera.casella[i][vecchiaPosY].isOccupata()) {
-                            throw new MossaNonValida("Pezzo in mezzo");
-                        }
-                    }
-                } else {
-                    // Movimento diagonale
-                    int startX = Math.min(vecchiaPosX, nuovaPosX) + 1;
-                    int startY = Math.min(vecchiaPosY, nuovaPosY) + 1;
-                    int endX = Math.max(vecchiaPosX, nuovaPosX);
-                    int endY = Math.max(vecchiaPosY, nuovaPosY);
-                    for (int i = startX, j = startY; i < endX && j < endY; i++, j++) {
-                        if (scacchiera.casella[i][j].isOccupata()) {
-                            throw new MossaNonValida("Pezzo in mezzo");
-                        }
-                    }
-                }
+                ReginaService.controlloRegina(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
                 break;
+                
             case 'r':
                 // Verifica che il re si stia muovendo di una sola casella in qualsiasi direzione
                 if (!(Math.abs(nuovaPosX - vecchiaPosX) <= 1 && Math.abs(nuovaPosY - vecchiaPosY) <= 1)) {
