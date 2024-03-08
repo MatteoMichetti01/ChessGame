@@ -42,42 +42,10 @@ public class PedoneService implements Mossa {
 
             case 'a':
                 AlfiereService.controlloAlfiere(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
+                break;
 
-
-            case 't':
-                if (nuovaPosY != vecchiaPosY) {
-                    if (nuovaPosX != vecchiaPosX) {
-                        throw new MossaNonValida("Mossa non valida, la torre non può andare in diagonale");
-                    }
-                    else {
-                        if (vecchiaPosY > nuovaPosY) {
-                            for (int i = vecchiaPosY - 1; i > nuovaPosY; i--) {
-                                if (scacchiera.casella[vecchiaPosX][i].isOccupata())
-                                    throw new MossaNonValida("pezzo in mezzo");
-                            }
-                        }
-                        else {
-                            for (int i = vecchiaPosY + 1; i < nuovaPosY; i++) {
-                                if (scacchiera.casella[vecchiaPosX][i].isOccupata())
-                                    throw new MossaNonValida("pezzo in mezzo");
-                            }
-                        }
-                    }
-                }
-                else{
-                    if (vecchiaPosX > nuovaPosX) {
-                        for (int i = vecchiaPosX - 1; i > nuovaPosX; i--) {
-                            if (scacchiera.casella[i][vecchiaPosY].isOccupata())
-                                throw new MossaNonValida("pezzo in mezzo");
-                        }
-                    }
-                    else {
-                        for (int i = vecchiaPosX + 1; i < nuovaPosX; i++) {
-                            if (scacchiera.casella[i][vecchiaPosY].isOccupata())
-                                throw new MossaNonValida("pezzo in mezzo");
-                        }
-                    }
-                }
+                case 't':
+                TorreService.controlloTorre(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
                 break;
 
 
@@ -136,21 +104,8 @@ public class PedoneService implements Mossa {
                 }
                 break;
             case 'r':
-                // Verifica che il re si stia muovendo di una sola casella in qualsiasi direzione
-                if (!(Math.abs(nuovaPosX - vecchiaPosX) <= 1 && Math.abs(nuovaPosY - vecchiaPosY) <= 1)) {
-                    throw new MossaNonValida("Il re può muoversi solo di una casella alla volta");
-                }
-
-                // Verifica se la destinazione è occupata dallo stesso colore o meno
-                if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() &&
-                        scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore())) {
-                    throw new MossaNonValida("La casella è già occupata dallo stesso colore");
-                }
+                ReService.controlloRe(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
                 break;
-
-
-
-
         }
 
 
