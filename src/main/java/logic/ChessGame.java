@@ -6,11 +6,10 @@ import controller.*;
 import java.util.Scanner;
 
 public class ChessGame {
-    static Casella[][] casella = new Casella[9][9];
-    static Scacchiera scacchiera = new Scacchiera(casella);
+    static Scacchiera scacchiera = new Scacchiera();
 
     public static void main(String[] args) throws MossaNonValida {
-        boolean trovato=true;
+        /*boolean trovato=true;
         while (trovato) {
 
             ViewScacchiera viewScacchiera = new ViewScacchiera(scacchiera);
@@ -30,6 +29,10 @@ public class ChessGame {
             viewScacchiera.viewscacchiera(scacchiera);
             System.out.println();
             System.out.println();
-        }
+        }*/
+        Partita partita = new Partita();
+        Modalita modalita = partita.selezionaModalita();
+        modalita.startGame();
+
     }
 }

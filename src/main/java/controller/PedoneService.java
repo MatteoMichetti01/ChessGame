@@ -14,7 +14,7 @@ public class PedoneService {
             if (nuovaPosY == vecchiaPosY && Math.abs(nuovaPosX - vecchiaPosX) > 1)
                 throw new MossaNonValida("Mossa non valida, il pedone può avanzare una casella alla volta");
         }
-        if (nuovaPosY != vecchiaPosY) throw new MossaNonValida("Mossa non valida, il pedone può andare solo dritto");
+        if (nuovaPosY != vecchiaPosY) throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti");
 
         String colore = scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore();
         if (colore.equals("bianco")) {

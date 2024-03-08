@@ -1,13 +1,13 @@
 package domain;
 
 public class Scacchiera {
-    public Casella[][] casella;
+    public Casella[][] casella = new Casella[9][9];
     public Pezzo pezzo;
-    public Scacchiera(Casella[][] casella){
-        this.casella= this.creazioneScacchiera(casella);
+    public Scacchiera(){
+        this.casella = creazioneScacchiera();
 
     }
-    public Casella[][] creazioneScacchiera(Casella[][] casella) {
+    public Casella[][] creazioneScacchiera() {
         casella[0][0] = new Casella(" ");
         casella[0][1] = new Casella("A ");
         casella[0][2] = new Casella("B ");
@@ -81,7 +81,19 @@ public class Scacchiera {
         return casella;
     }
 
+    public void viewscacchiera(){
+        for(int k=0;k<9;k++){
+            System.out.print(" "+this.casella[0][k].getNome()+"  ");
+        }
+        for (int i =1;i<9;i++){
+            System.out.println();
+            for(int j=0;j<9;j++){
+                System.out.print(this.casella[i][j].getNome()+ " | ");
 
+            }
+        }
+
+    }
 
 
 
