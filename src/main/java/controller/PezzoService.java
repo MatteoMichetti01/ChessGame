@@ -64,19 +64,6 @@ public class PezzoService implements Mossa {
 
         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione,scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY, true);
         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ", vecchiapos, false);
-        for (int i = 1; i < 9; i++) {
-            for (int j = 1; j < 9; j++) {
-                if(scacchiera.casella[i][j].getNome() != "  ") {
-                    if (scacchiera.casella[i][j].getPezzo().getNome().equals("re") && scacchiera.casella[i][j].getPezzo().getColore().equals("nero")) {
-                        Re re = new Re();
-                        re = (Re) scacchiera.casella[i][j].getPezzo();
-                        re.setPosX(i);
-                        re.setPosY(j);
-                        re.controlloScacco(re,scacchiera);
-                    }
-                }
-            }
-        }
 
         return scacchiera;
     }

@@ -1,4 +1,4 @@
-/*package controller;
+package controller;
 
 import domain.Casella;
 import domain.Scacchiera;
@@ -65,4 +65,3 @@ public class Scacco {
 
     }
 }
-*/

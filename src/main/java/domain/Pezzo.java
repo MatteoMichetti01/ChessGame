@@ -18,10 +18,6 @@ public abstract class Pezzo {
     }
     public Pezzo(String nome, String colore){this.nome=nome; this.colore=colore;}
 
-    public Pezzo() {
-
-    }
-
     public String getColore(){
             return this.colore;
         }
