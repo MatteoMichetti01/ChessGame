@@ -28,6 +28,7 @@ public class Casella {
         this.Posizione = Posizione;
         this.nome=nome;
         this.occupata=false;
+        this.pezzo=null;
     }
 
 
@@ -54,8 +55,6 @@ public class Casella {
     }
 
     public Pezzo getPezzo() {
-
-
         return pezzo;
     }
 
