@@ -66,8 +66,7 @@ public class Scacco {
                 }
             }
         }
-        System.out.println("pos re x:" + posxRE);
-        System.out.println("pos re y:" + posyRE);
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (scacchiera.casella[i][j].getPezzo() != null) {
@@ -76,17 +75,12 @@ public class Scacco {
                         try {
                             p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE,posyRE,i,j, scacchiera);
                             System.out.println("il re "+scacchiera.casella[posxRE][posyRE].getPezzo().getColore()+" è sotto scacco");
-                        } catch (MossaNonValida m) {
-                            return false;
-                        }
+                            return true;
+                        } catch (MossaNonValida m){ }
                     }
-
                 }
-
             }
-
-
         }
-        return true;
+        return false;
     }
 }
