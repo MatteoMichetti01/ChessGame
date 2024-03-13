@@ -24,21 +24,37 @@ public class GiocatoreControGiocatore extends Modalita{
         System.out.println("Inizia il turno "+ this.giocatore1.getNome());
         while (true) {
             //TURNO GIOCATORE BIANCO
-            System.out.println("Tocca a "+ this.giocatore1.getNome());
-            System.out.println("Inserisci il pezzo che vuoi spostare:");
-            String pezzoBianco = scanner.nextLine();
-            System.out.println("Inserisci mossa: ");
-            String mossaBianco= scanner.nextLine();
-            scacchiera = p1.move(pezzoBianco, mossaBianco, this.giocatore1.getColore());
+            while (!mossaFatta) {
+                System.out.println("Tocca a " + this.giocatore1.getNome());
+                System.out.println("Inserisci il pezzo che vuoi spostare:");
+                String pezzoBianco = scanner.nextLine();
+                System.out.println("Inserisci mossa: ");
+                String mossaBianco = scanner.nextLine();
+                try {
+                    scacchiera = p1.move(pezzoBianco, mossaBianco, this.giocatore1.getColore());
+                    mossaFatta = true;
+                } catch (MossaNonValida m) {
+                    System.out.println("Mossa non valida, prova a reinserire un'altra mossa");
+                }
+            }
             scacchiera.viewscacchiera();
             System.out.println("");
+            mossaFatta=false;
             //TURNO GIOCATORE NERO
-            System.out.println("Tocca a "+ this.giocatore2.getNome());
-            System.out.println("Inserisci il pezzo che vuoi spostare:");
-            String pezzoNero= scanner.nextLine();
-            System.out.println("Inserisci mossa: ");
-            String mossaNero= scanner.nextLine();
-            scacchiera = p1.move(pezzoNero, mossaNero, this.giocatore2.getColore());
+            while (!mossaFatta) {
+                System.out.println("Tocca a " + this.giocatore2.getNome());
+                System.out.println("Inserisci il pezzo che vuoi spostare:");
+                String pezzoNero = scanner.nextLine();
+                System.out.println("Inserisci mossa: ");
+                String mossaNero = scanner.nextLine();
+                try{
+                    scacchiera = p1.move(pezzoNero, mossaNero, this.giocatore2.getColore());
+                    mossaFatta=true;
+                }
+                catch (MossaNonValida m) {
+                    System.out.println("Mossa non valida, prova a reinserire un'altra mossa");
+                }
+            }
             scacchiera.viewscacchiera();
             System.out.println("");
         }
