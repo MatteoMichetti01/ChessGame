@@ -101,10 +101,10 @@ public class PezzoService implements Mossa {
                 ReService.controlloRe(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
                 break;
         }
-
+        // effettua la mossa: mette nella nuova posizione il pezzo, e inserisce la casella vuota nella vecchia posizione
         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione,scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY, true);
         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ", vecchiapos, false);
-        Scacco.controlloScaccoReNero(scacchiera);
+        Scacco.controlloScaccoReNero(scacchiera,nuovaPosX,nuovaPosY);
 
         return scacchiera;
     }

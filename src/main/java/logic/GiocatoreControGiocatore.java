@@ -57,6 +57,7 @@ public class GiocatoreControGiocatore extends Modalita{
             }
             scacchiera.viewscacchiera();
             System.out.println("");
+            mossaFatta=false;
         }
 
     }
