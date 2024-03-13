@@ -34,7 +34,7 @@ public class GiocatoreControGiocatore extends Modalita{
                     scacchiera = p1.move(pezzoBianco, mossaBianco, this.giocatore1.getColore());
                     mossaFatta = true;
                 } catch (MossaNonValida m) {
-                    System.out.println("Mossa non valida, prova a reinserire un'altra mossa");
+                    System.out.println(m);
                 }
             }
             scacchiera.viewscacchiera();
@@ -52,7 +52,7 @@ public class GiocatoreControGiocatore extends Modalita{
                     mossaFatta=true;
                 }
                 catch (MossaNonValida m) {
-                    System.out.println("Mossa non valida, prova a reinserire un'altra mossa");
+                    System.out.println(m);
                 }
             }
             scacchiera.viewscacchiera();

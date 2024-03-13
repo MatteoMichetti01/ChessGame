@@ -3,7 +3,7 @@ import domain.*;
 import logic.MossaNonValida;
 
 public class PezzoService implements Mossa {
-
+    public boolean sottoScacco = false;
     Scacchiera scacchiera;
 
     public PezzoService(Scacchiera scacchiera) {
@@ -18,8 +18,6 @@ public class PezzoService implements Mossa {
             throw new MossaNonValida("la casella è gia occupata");
         //questo if qua sopra per ora va bene ma quando implementeremo "mangiare" bisogna gestirlo
         switch (nomePezzo.charAt(0)) {
-
-
 
             case 'p':
                 PedoneService.controlloPedone(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
@@ -102,10 +100,19 @@ public class PezzoService implements Mossa {
                 break;
         }
         // effettua la mossa: mette nella nuova posizione il pezzo, e inserisce la casella vuota nella vecchia posizione
+
         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione,scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY, true);
         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ", vecchiapos, false);
-        Scacco.controlloScaccoReNero(scacchiera,nuovaPosX,nuovaPosY);
+        if(sottoScacco){
+            sottoScacco = Scacco.uscitaScacco(scacchiera , nuovaPosX, nuovaPosY);
+            if (sottoScacco) {
+                scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(new_Posizione,scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX,vecchiaPosY, true);
+                scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("  ", vecchiapos, false);
+                throw new MossaNonValida("sei ancora in scacco, riprova un'altra mossa ");
+            }
 
+        }
+        sottoScacco = Scacco.controlloScacco(scacchiera,nuovaPosX,nuovaPosY);
         return scacchiera;
     }
 }
