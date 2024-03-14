@@ -49,13 +49,13 @@ public class PezzoService implements Mossa {
 
         // effettua la mossa: mette nella nuova posizione il pezzo, e inserisce la casella vuota nella vecchia posizione
         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione,scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY, true);
-        scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ", vecchiapos, false);
+        scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("   ", vecchiapos, false);
 
         if(sottoScacco){
             sottoScacco = Scacco.uscitaScacco(scacchiera , nuovaPosX, nuovaPosY);
             if (sottoScacco) {
                 scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(new_Posizione,scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX,vecchiaPosY, true);
-                scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("  ", vecchiapos, false);
+                scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", vecchiapos, false);
                 throw new MossaNonValida("sei ancora in scacco, riprova un'altra mossa ");
             }
         }

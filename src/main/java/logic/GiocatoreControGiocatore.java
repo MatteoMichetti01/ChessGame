@@ -27,7 +27,7 @@ public class GiocatoreControGiocatore extends Modalita{
             while (!mossaFatta) {
                 System.out.println("Tocca a " + this.giocatore1.getNome());
                 System.out.println("Inserisci il pezzo che vuoi spostare:");
-                String pezzoBianco = scanner.nextLine();
+                String pezzoBianco = scanner.nextLine()+"W";
                 System.out.println("Inserisci mossa: ");
                 String mossaBianco = scanner.nextLine();
                 try {
@@ -44,7 +44,7 @@ public class GiocatoreControGiocatore extends Modalita{
             while (!mossaFatta) {
                 System.out.println("Tocca a " + this.giocatore2.getNome());
                 System.out.println("Inserisci il pezzo che vuoi spostare:");
-                String pezzoNero = scanner.nextLine();
+                String pezzoNero = scanner.nextLine()+"B";
                 System.out.println("Inserisci mossa: ");
                 String mossaNero = scanner.nextLine();
                 try{
