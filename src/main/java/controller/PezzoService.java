@@ -12,12 +12,12 @@ public class PezzoService implements Mossa {
 
 
 
-    public boolean controlloScacco(String nomePezzo, int nuovaPosX,int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera ) throws MossaNonValida {
-        if (nuovaPosX == 0 || nuovaPosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
-        if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
+    public boolean controlloScacco(String nomePezzo, int PosXRe,int PosYRe, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera ) throws MossaNonValida {
+        if (PosXRe == 0 || PosYRe == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
+        if (scacchiera.casella[PosXRe][PosYRe].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[PosXRe][PosYRe].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
         //switch-case
-        ControlloMosse.controlloMossa(nomePezzo,nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
+        ControlloMosse.controlloMossa(nomePezzo,PosXRe,PosYRe,vecchiaPosX,vecchiaPosY,scacchiera);
         return true;
     }
 
