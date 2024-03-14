@@ -16,34 +16,8 @@ public class PezzoService implements Mossa {
         if (nuovaPosX == 0 || nuovaPosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
-        //questo if qua sopra per ora va bene ma quando implementeremo "mangiare" bisogna gestirlo
-        switch (nomePezzo.charAt(0)) {
-
-            case 'p':
-                PedoneService.controlloPedone(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-
-            case 'a':
-                AlfiereService.controlloAlfiere(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-
-            case 't':
-                TorreService.controlloTorre(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-
-            case 'c':
-                CavalloService.controlloCavallo(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-
-            case 'q':
-                ReginaService.controlloRegina(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-
-            case 'r':
-                ReService.controlloRe(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-        }
-
+        //switch-case
+        ControlloMosse.controlloMossa(nomePezzo,nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
         return true;
     }
 
@@ -70,39 +44,13 @@ public class PezzoService implements Mossa {
         if (nuovaPosX == 0 || nuovaPosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
-        //questo if qua sopra per ora va bene ma quando implementeremo "mangiare" bisogna gestirlo
-        switch (nomePezzo.charAt(0)) {
 
+        ControlloMosse.controlloMossa(nomePezzo,nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
 
-
-            case 'p':
-                PedoneService.controlloPedone(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-
-            case 'a':
-                AlfiereService.controlloAlfiere(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-
-            case 't':
-                TorreService.controlloTorre(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-
-            case 'c':
-               CavalloService.controlloCavallo(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-               break;
-
-            case 'q':
-                ReginaService.controlloRegina(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-                
-            case 'r':
-                ReService.controlloRe(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
-                break;
-        }
         // effettua la mossa: mette nella nuova posizione il pezzo, e inserisce la casella vuota nella vecchia posizione
-
         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione,scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY, true);
         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ", vecchiapos, false);
+
         if(sottoScacco){
             sottoScacco = Scacco.uscitaScacco(scacchiera , nuovaPosX, nuovaPosY);
             if (sottoScacco) {
@@ -110,9 +58,9 @@ public class PezzoService implements Mossa {
                 scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("  ", vecchiapos, false);
                 throw new MossaNonValida("sei ancora in scacco, riprova un'altra mossa ");
             }
-
         }
         sottoScacco = Scacco.controlloScacco(scacchiera,nuovaPosX,nuovaPosY);
+
         return scacchiera;
     }
 }
