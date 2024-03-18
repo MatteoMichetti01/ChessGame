@@ -12,4 +12,10 @@ public class GiocatoreControComputer extends Modalita{
     public void startGame() throws MossaNonValida {
 
     }
+
+    @Override
+    public String opzioni() {
+
+        return null;
+    }
 }

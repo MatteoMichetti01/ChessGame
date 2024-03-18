@@ -15,6 +15,7 @@ public class GiocatoreControGiocatore extends Modalita{
 
     @Override
     public void startGame() throws MossaNonValida {
+        Boolean resa= true;
         Boolean mossaFatta= false;
         Scanner scanner = new Scanner(System.in);
         Scacchiera scacchiera = new Scacchiera();
@@ -22,16 +23,18 @@ public class GiocatoreControGiocatore extends Modalita{
         scacchiera.viewscacchiera();
         System.out.println("");
         System.out.println("Inizia il turno "+ this.giocatore1.getNome());
-        while (true) {
+        while (true && resa) {
+
             //TURNO GIOCATORE BIANCO
-            while (!mossaFatta) {
+            while (!mossaFatta && resa) {
                 System.out.println("Tocca a " + this.giocatore1.getNome());
-                System.out.println("Inserisci il pezzo che vuoi spostare:");
-                String pezzoBianco = scanner.nextLine()+"W";
+                System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
+                String pezzoBianco = scanner.nextLine();
+                if(pezzoBianco.equals("o")){if(this.opzioni().equals("3")) resa=false; break;}
                 System.out.println("Inserisci mossa: ");
                 String mossaBianco = scanner.nextLine();
                 try {
-                    scacchiera = p1.move(pezzoBianco, mossaBianco, this.giocatore1.getColore());
+                    scacchiera = p1.move(pezzoBianco+"W", mossaBianco.toUpperCase(), this.giocatore1.getColore());
                     mossaFatta = true;
                 } catch (MossaNonValida m) {
                     System.out.println(m);
@@ -40,15 +43,16 @@ public class GiocatoreControGiocatore extends Modalita{
             scacchiera.viewscacchiera();
             System.out.println("");
             mossaFatta=false;
+
             //TURNO GIOCATORE NERO
-            while (!mossaFatta) {
+            while (!mossaFatta && resa) {
                 System.out.println("Tocca a " + this.giocatore2.getNome());
                 System.out.println("Inserisci il pezzo che vuoi spostare:");
-                String pezzoNero = scanner.nextLine()+"B";
+                String pezzoNero = scanner.nextLine();
                 System.out.println("Inserisci mossa: ");
                 String mossaNero = scanner.nextLine();
                 try{
-                    scacchiera = p1.move(pezzoNero, mossaNero, this.giocatore2.getColore());
+                    scacchiera = p1.move(pezzoNero+"B", mossaNero.toUpperCase(), this.giocatore2.getColore());
                     mossaFatta=true;
                 }
                 catch (MossaNonValida m) {
@@ -59,6 +63,17 @@ public class GiocatoreControGiocatore extends Modalita{
             System.out.println("");
             mossaFatta=false;
         }
+        System.out.println("Fine partita!");
 
+    }
+
+    @Override
+    public String opzioni() {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        System.out.println("Salva partita (1)");
+        System.out.println("Annulla mossa (2)");
+        System.out.println("Arrenditi (3)");
+        return input = scanner.nextLine();
     }
 }

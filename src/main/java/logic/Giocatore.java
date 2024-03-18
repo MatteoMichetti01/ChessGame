@@ -33,4 +33,5 @@ public class Giocatore {
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
     }
+
 }
