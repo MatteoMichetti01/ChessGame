@@ -6,7 +6,7 @@ import domain.*;
 import java.util.Scanner;
 
 public class Partita {
-Modalita modalita;
+public Modalita modalita;
 
     public Partita() {
 

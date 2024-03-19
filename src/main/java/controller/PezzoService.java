@@ -1,30 +1,39 @@
 package controller;
 import domain.*;
+import logic.GiocatoreControGiocatore;
 import logic.MossaNonValida;
+import logic.Partita;
 
 public class PezzoService implements Mossa {
     public boolean sottoScacco = false;
+    public boolean scaccoMatto = false;
     Scacchiera scacchiera;
 
     public PezzoService(Scacchiera scacchiera) {
         this.scacchiera = scacchiera;
     }
 
-
-
-    public boolean controlloScacco(String nomePezzo, int PosXRe,int PosYRe, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera ) throws MossaNonValida {
+    // questo metodo viene chiamato da controlloScacco e controlla se il pezzo che stiamo controllando può arrivare alla casella del re. Se può farlo restituisce true, quindi è sotto scacco, se non può farlo va in eccezione e quindi va avanti
+    public boolean controlloSePezzoArrivaRe(String nomePezzo, int PosXRe, int PosYRe, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         if (PosXRe == 0 || PosYRe == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         if (scacchiera.casella[PosXRe][PosYRe].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[PosXRe][PosYRe].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
         //switch-case
-        ControlloMosse.controlloMossa(nomePezzo,PosXRe,PosYRe,vecchiaPosX,vecchiaPosY,scacchiera);
+        ControlloMosse.controlloMossa(nomePezzo, PosXRe, PosYRe, vecchiaPosX, vecchiaPosY, scacchiera);
+        return true;
+    }
+
+    public boolean controlloProtetto(String nomePezzo, int PosX, int PosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
+        if (PosX == 0 || PosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
+        //switch-case
+        ControlloMosse.controlloMossa(nomePezzo, PosX, PosY, vecchiaPosX, vecchiaPosY, scacchiera);
         return true;
     }
 
 
-    public Scacchiera move (String nomePezzo, String new_Posizione, String colore) throws MossaNonValida {
-        int vecchiaPosX  = 0 , vecchiaPosY = 0 ;
-        int nuovaPosX  = 0 , nuovaPosY = 0;
+    public Scacchiera move(String nomePezzo, String new_Posizione, String colore) throws MossaNonValida {
+        int vecchiaPosX = 0, vecchiaPosY = 0;
+        int nuovaPosX = 0, nuovaPosY = 0;
         String vecchiapos = " ";
 
         for (int x = 1; x < 9; x++) {
@@ -45,25 +54,32 @@ public class PezzoService implements Mossa {
         if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
 
-        ControlloMosse.controlloMossa(nomePezzo,nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
+        ControlloMosse.controlloMossa(nomePezzo, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY, scacchiera);
 
         // effettua la mossa: mette nella nuova posizione il pezzo, e inserisce la casella vuota nella vecchia posizione
-        scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione,scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY, true);
+        scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione, scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX, nuovaPosY, true);
         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("   ", vecchiapos, false);
 
-        if(sottoScacco){
-            sottoScacco = Scacco.uscitaScacco(scacchiera , nuovaPosX, nuovaPosY);
+        if (sottoScacco) {
+            sottoScacco = Scacco.uscitaScacco(scacchiera, nuovaPosX, nuovaPosY);
             if (sottoScacco) {
-                scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(new_Posizione,scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX,vecchiaPosY, true);
+                System.out.println("il re è ancora sotto scacco");
+                scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(new_Posizione, scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
                 scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", vecchiapos, false);
                 throw new MossaNonValida("sei ancora in scacco, riprova un'altra mossa ");
             }
         }
-        sottoScacco = Scacco.controlloScacco(scacchiera,nuovaPosX,nuovaPosY);
-
+        sottoScacco = Scacco.controlloScacco(scacchiera, nuovaPosX, nuovaPosY);
+        if (sottoScacco) {
+            scaccoMatto = Scacco.controlloScaccoMatto(scacchiera, nuovaPosX, nuovaPosY);
+            if (scaccoMatto)
+                System.out.println("SCACCO MATTO");
+                GiocatoreControGiocatore.setScaccoMatto1(true);
+        }
         return scacchiera;
     }
 }
+
 
 /*System.out.println("vecchia posx: "+vecchiaPosX);
                 System.out.println("vecchia posy: "+vecchiaPosY);

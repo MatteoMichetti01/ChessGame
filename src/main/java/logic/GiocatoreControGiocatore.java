@@ -7,6 +7,14 @@ import java.util.Scanner;
 
 public class GiocatoreControGiocatore extends Modalita{
 
+    public static void setScaccoMatto1(boolean scaccoMatto1) {
+        scaccoMatto1 = scaccoMatto1;
+    }
+
+    public boolean scaccoMatto1 = false;
+
+
+
     public GiocatoreControGiocatore(Giocatore giocatore1, Giocatore giocatore2) {
 
         super(giocatore1, giocatore2);
@@ -24,10 +32,10 @@ public class GiocatoreControGiocatore extends Modalita{
         scacchiera.viewscacchiera();
         System.out.println("");
         System.out.println("Inizia il turno "+ this.giocatore1.getNome());
-        while (true && resa) {
+        while (resa && !(scaccoMatto1)) {
 
             //TURNO GIOCATORE BIANCO
-            while (!mossaFatta && resa) {
+            while (!mossaFatta && resa && !(scaccoMatto1)) {
                 System.out.println("Tocca a " + this.giocatore1.getNome());
                 System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                 String pezzoBianco = scanner.nextLine();
@@ -36,18 +44,19 @@ public class GiocatoreControGiocatore extends Modalita{
                 String mossaBianco = scanner.nextLine();
                 try {
                     scacchiera = p1.move(pezzoBianco+"W", mossaBianco.toUpperCase(), this.giocatore1.getColore());
+                    System.out.println(scaccoMatto1);
                     mossaFatta = true;
                 } catch (MossaNonValida m) {
                     System.out.println(m);
                 }
             }
-            if(mossaFatta){
+            if(mossaFatta && !(scaccoMatto1)){
             scacchiera.viewscacchiera();
             System.out.println("");
             mossaFatta=false;}
 
             //TURNO GIOCATORE NERO
-            while (!mossaFatta && resa) {
+            while (!mossaFatta && resa && !(scaccoMatto1)) {
                 System.out.println("Tocca a " + this.giocatore2.getNome());
                 System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                 String pezzoNero = scanner.nextLine();
@@ -62,13 +71,18 @@ public class GiocatoreControGiocatore extends Modalita{
                     System.out.println(m);
                 }
             }
-            if(mossaFatta){
+            if(mossaFatta && !(scaccoMatto1)){
             scacchiera.viewscacchiera();
             System.out.println("");
             mossaFatta=false;}
         }
-        System.out.println("Fine partita!");
-        System.out.println(nomeResa+" si è arreso");
+        if (!resa) {
+            System.out.println("Fine partita!");
+            System.out.println(nomeResa + " si è arreso");
+        }
+        if (scaccoMatto1) {
+            System.out.println("Scacco matto partita finita");
+        }
 
     }
 

@@ -48,7 +48,7 @@ public class Scacco {
         return posReN;
     }
 
-    public static boolean uscitaScacco(Scacchiera scacchiera, int posPezzoX,int posPezzoY ){
+    public static boolean uscitaScacco(Scacchiera scacchiera, int posPezzoX,int posPezzoY){
         int posxRE = 0, posyRE = 0;
         String colore = scacchiera.casella[posPezzoX][posPezzoY].getPezzo().getColore();
         if (colore.equals("nero")) {
@@ -84,8 +84,8 @@ public class Scacco {
                     if (!(scacchiera.casella[i][j].getPezzo().getColore().equals(colore))) {
                         PezzoService p1 = new PezzoService(scacchiera);
                         try {
-                            p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE,posyRE,i,j, scacchiera);
-                            System.out.println("IL RE "+scacchiera.casella[posxRE][posyRE].getPezzo().getColore().toUpperCase()+" E' ANCORA SOTTO SCACCO!");
+                            p1.controlloSePezzoArrivaRe(scacchiera.casella[i][j].getPezzo().getNome(), posxRE,posyRE,i,j, scacchiera);
+                            //System.out.println("IL RE "+scacchiera.casella[posxRE][posyRE].getPezzo().getColore().toUpperCase()+" E' ANCORA SOTTO SCACCO!");
                             return true;
                         } catch (MossaNonValida m){ }
                     }
@@ -128,19 +128,16 @@ public class Scacco {
                 }
             }
         }
-
+        //controlloScaccoMatto(scacchiera,posPezzoX,posPezzoY,colore,posxRE,posyRE);
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
-                    if (scacchiera.casella[i][j].getPezzo() != null) {
-                        if (scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
-                            PezzoService p1 = new PezzoService(scacchiera);
-                            try {
-                                p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE, posyRE, i, j, scacchiera);
-                                System.out.println("IL RE " + scacchiera.casella[posxRE][posyRE].getPezzo().getColore().toUpperCase() + "E' SOTTO SCACCO!");
-                                return true;
-                            } catch (MossaNonValida m) {
-                            }
-                        }
+                    if (scacchiera.casella[i][j].getPezzo() != null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
+                        PezzoService p1 = new PezzoService(scacchiera);
+                        try {
+                            p1.controlloSePezzoArrivaRe(scacchiera.casella[i][j].getPezzo().getNome(), posxRE, posyRE, i, j, scacchiera);
+                            System.out.println("IL RE " + scacchiera.casella[posxRE][posyRE].getPezzo().getColore().toUpperCase() + "E' SOTTO SCACCO!");
+                            return true;
+                        } catch (MossaNonValida m) {}
                     }
                 }
             }
@@ -148,51 +145,41 @@ public class Scacco {
     }
 
     public static boolean controlloScaccoMatto(Scacchiera scacchiera, int posPezzoX, int posPezzoY)throws MossaNonValida {
-        Boolean intornoRe = false;
-        int posxRE = 0, posyRE = 0;
+        boolean mossasi = true;
+        boolean sScacco = true;
         String colore = scacchiera.casella[posPezzoX][posPezzoY].getPezzo().getColore();
-        if (colore.equals("bianco")) {
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    if (scacchiera.casella[i][j].getPezzo() != null) {
-                        if (scacchiera.casella[i][j].getPezzo().getNome().equals("reB") && !(scacchiera.casella[i][j].getPezzo().getColore().equals(colore))) {
-                            posxRE = i;
-                            posyRE = j;
-                        }
+        for (int i=1; i<9; i++) {
+            for (int j=1; j<9; j++) {
+                if (scacchiera.casella[i][j].getPezzo() != null && !(scacchiera.casella[i][j].getPezzo().getColore().equals(colore))) {
+                    for (int k=1; k<9; k++) {
+                        for (int z=1; z<9; z++) {
+                            mossasi = true;
+                            if (scacchiera.casella[k][z].isOccupata() && scacchiera.casella[i][j].getPezzo().getColore().equals(scacchiera.casella[k][z].getPezzo().getColore())) {
+                                mossasi = false;
+                            }
+                            else {
+                                try {
+                                    ControlloMosse.controlloMossa(scacchiera.casella[i][j].getPezzo().getNome(), k, z, i, j, scacchiera);
+                                } catch (MossaNonValida m) {
+                                    mossasi = false;
+                                }
+                            }
+                            if (mossasi) {
+                                scacchiera.casella[k][z] = new Casella(scacchiera.casella[i][j].getNome(), scacchiera.casella[i][j].getPezzo(), k, z, true);
+                                scacchiera.casella[i][j] = new Casella("   ", scacchiera.casella[i][j].getPosizione(), false);
+                                sScacco = Scacco.uscitaScacco(scacchiera, k, z);
+                                scacchiera.casella[i][j] = new Casella(scacchiera.casella[k][z].getNome(), scacchiera.casella[k][z].getPezzo(), i, j, true);
+                                scacchiera.casella[k][z] = new Casella("   ", scacchiera.casella[k][z].getPosizione(), false);
+                                if (!(sScacco)) {
+                                    return false;
+                                }
+                            }
 
-                    }
-                }
-            }
-        } else {
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    if (scacchiera.casella[i][j].getPezzo() != null) {
-                        if (scacchiera.casella[i][j].getPezzo().getNome().equals("reW") && !(scacchiera.casella[i][j].getPezzo().getColore().equals(colore))) {
-                            posxRE = i;
-                            posyRE = j;
                         }
-
                     }
                 }
             }
         }
-
-        for (int i = 0; i < 9; i++){
-            for (int j = 0; j < 9; j++){
-                if(scacchiera.casella[i][j].getPezzo()!= null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)){
-                    PezzoService p1= new PezzoService(scacchiera);
-                    if (p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE - 1, posyRE, i, j, scacchiera) &&
-                            p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE - 1, posyRE + 1, i, j, scacchiera) &&
-                            p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE - 1, posyRE - 1, i, j, scacchiera) &&
-                            p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE, posyRE + 1, i, j, scacchiera) &&
-                            p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE, posyRE - 1, i, j, scacchiera) &&
-                            p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE + 1, posyRE, i, j, scacchiera) &&
-                            p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE + 1, posyRE - 1, i, j, scacchiera) &&
-                            p1.controlloScacco(scacchiera.casella[i][j].getPezzo().getNome(), posxRE + 1, posyRE + 1, i, j, scacchiera)
-                    ) {intornoRe = true;}
-                }
-            }
-        }
-        return intornoRe;
+        return true;
     }
 }
