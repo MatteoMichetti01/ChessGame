@@ -128,7 +128,6 @@ public class Scacco {
                 }
             }
         }
-        //controlloScaccoMatto(scacchiera,posPezzoX,posPezzoY,colore,posxRE,posyRE);
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
                     if (scacchiera.casella[i][j].getPezzo() != null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {

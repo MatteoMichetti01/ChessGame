@@ -7,12 +7,13 @@ import java.util.Scanner;
 
 public class GiocatoreControGiocatore extends Modalita{
 
-    public static void setScaccoMatto1(boolean scaccoMatto1) {
-        scaccoMatto1 = scaccoMatto1;
+
+
+    public static boolean scaccoMatto1 = false;
+
+    public static void setScaccoMatto1(boolean scaccoMatto) {
+        scaccoMatto1 = scaccoMatto;
     }
-
-    public boolean scaccoMatto1 = false;
-
 
 
     public GiocatoreControGiocatore(Giocatore giocatore1, Giocatore giocatore2) {
@@ -24,13 +25,13 @@ public class GiocatoreControGiocatore extends Modalita{
     @Override
     public void startGame() throws MossaNonValida {
         String nomeResa = null;
-        Boolean resa= true;
-        Boolean mossaFatta= false;
+        boolean resa= true;
+        boolean mossaFatta= false;
         Scanner scanner = new Scanner(System.in);
         Scacchiera scacchiera = new Scacchiera();
         PezzoService p1 = new PezzoService(scacchiera);
         scacchiera.viewscacchiera();
-        System.out.println("");
+        System.out.println();
         System.out.println("Inizia il turno "+ this.giocatore1.getNome());
         while (resa && !(scaccoMatto1)) {
 
@@ -44,7 +45,6 @@ public class GiocatoreControGiocatore extends Modalita{
                 String mossaBianco = scanner.nextLine();
                 try {
                     scacchiera = p1.move(pezzoBianco+"W", mossaBianco.toUpperCase(), this.giocatore1.getColore());
-                    System.out.println(scaccoMatto1);
                     mossaFatta = true;
                 } catch (MossaNonValida m) {
                     System.out.println(m);
@@ -52,7 +52,7 @@ public class GiocatoreControGiocatore extends Modalita{
             }
             if(mossaFatta && !(scaccoMatto1)){
             scacchiera.viewscacchiera();
-            System.out.println("");
+            System.out.println();
             mossaFatta=false;}
 
             //TURNO GIOCATORE NERO
@@ -73,15 +73,20 @@ public class GiocatoreControGiocatore extends Modalita{
             }
             if(mossaFatta && !(scaccoMatto1)){
             scacchiera.viewscacchiera();
-            System.out.println("");
+            System.out.println();
             mossaFatta=false;}
         }
         if (!resa) {
             System.out.println("Fine partita!");
             System.out.println(nomeResa + " si è arreso");
+            System.out.println("Torna al menù principale (1)");
+            System.out.println("Esci (2)");
+            if(scanner.nextLine().equals("1")){ChessGame.newGame();}
         }
         if (scaccoMatto1) {
-            System.out.println("Scacco matto partita finita");
+            System.out.println("Torna al menù principale (1)");
+            System.out.println("Esci (2)");
+            if(scanner.nextLine().equals("1")){ChessGame.newGame();}
         }
 
     }
@@ -89,10 +94,9 @@ public class GiocatoreControGiocatore extends Modalita{
     @Override
     public String opzioni() {
         Scanner scanner = new Scanner(System.in);
-        String input;
         System.out.println("Salva partita (1)");
         System.out.println("Annulla mossa (2)");
         System.out.println("Arrenditi (3)");
-        return input = scanner.nextLine();
+        return scanner.nextLine();
     }
 }
