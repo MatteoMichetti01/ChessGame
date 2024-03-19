@@ -15,6 +15,7 @@ public class GiocatoreControGiocatore extends Modalita{
 
     @Override
     public void startGame() throws MossaNonValida {
+        String nomeResa = null;
         Boolean resa= true;
         Boolean mossaFatta= false;
         Scanner scanner = new Scanner(System.in);
@@ -30,7 +31,7 @@ public class GiocatoreControGiocatore extends Modalita{
                 System.out.println("Tocca a " + this.giocatore1.getNome());
                 System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                 String pezzoBianco = scanner.nextLine();
-                if(pezzoBianco.equals("o")){if(this.opzioni().equals("3")) resa=false; break;}
+                if(pezzoBianco.equals("o")){if(this.opzioni().equals("3")) resa=false;nomeResa= this.giocatore1.getNome();break;}
                 System.out.println("Inserisci mossa: ");
                 String mossaBianco = scanner.nextLine();
                 try {
@@ -40,15 +41,17 @@ public class GiocatoreControGiocatore extends Modalita{
                     System.out.println(m);
                 }
             }
+            if(mossaFatta){
             scacchiera.viewscacchiera();
             System.out.println("");
-            mossaFatta=false;
+            mossaFatta=false;}
 
             //TURNO GIOCATORE NERO
             while (!mossaFatta && resa) {
                 System.out.println("Tocca a " + this.giocatore2.getNome());
-                System.out.println("Inserisci il pezzo che vuoi spostare:");
+                System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                 String pezzoNero = scanner.nextLine();
+                if(pezzoNero.equals("o")){if(this.opzioni().equals("3")) resa=false;nomeResa= this.giocatore2.getNome();break;}
                 System.out.println("Inserisci mossa: ");
                 String mossaNero = scanner.nextLine();
                 try{
@@ -59,11 +62,13 @@ public class GiocatoreControGiocatore extends Modalita{
                     System.out.println(m);
                 }
             }
+            if(mossaFatta){
             scacchiera.viewscacchiera();
             System.out.println("");
-            mossaFatta=false;
+            mossaFatta=false;}
         }
         System.out.println("Fine partita!");
+        System.out.println(nomeResa+" si è arreso");
 
     }
 
