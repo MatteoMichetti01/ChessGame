@@ -15,19 +15,20 @@ public class ReService {
                 scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore())) {
             throw new MossaNonValida("La casella è già occupata dallo stesso colore");
         }
-
+        // verifica che il re non mangi un pezzo protetto.
         if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() != null) {
             if (!(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore().equals(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore()))) {
-                boolean controllo = controlloPezzoProtetto(scacchiera,nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY);
+                boolean controllo = controlloPezzoProtetto(scacchiera,nuovaPosX,nuovaPosY);
                 if(controllo)
                     throw new MossaNonValida("il pezzo è protetto");
             }
         }
     }
 
-    public static boolean controlloPezzoProtetto (Scacchiera scacchiera, int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY) {
+    //controlla se un pezzo è protetto. Per fare ciò controlla ogni pezzo dello stesso colore, e se ne trova uno che può
+    //raggiungere la casella del pezzo che si trova in nuovaPosX,nuovaPosY, allora quel pezzo è protetto.
+    public static boolean controlloPezzoProtetto (Scacchiera scacchiera, int nuovaPosX, int nuovaPosY) {
         String colore = scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore();
-        System.out.println(colore);
         for (int i=1; i<9; i++) {
             for (int j=1; j<9; j++) {
                 if (scacchiera.casella[i][j].getPezzo() != null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {

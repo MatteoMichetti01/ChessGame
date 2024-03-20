@@ -74,19 +74,10 @@ public class PezzoService implements Mossa {
             scaccoMatto = Scacco.controlloScaccoMatto(scacchiera, nuovaPosX, nuovaPosY);
             if (scaccoMatto){
                 System.out.println("SCACCO MATTO");
-                String colorePerdente;
-                if(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore().equals("bianco")){colorePerdente="nero";}
-                else {colorePerdente="bianco";}
-                System.out.println("Il "+colorePerdente+" ha perso!");
+                System.out.println("Il "+ scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore() +" ha perso!");
                 GiocatoreControGiocatore.setScaccoMatto1(true);
             }
         }
         return scacchiera;
     }
 }
-
-
-/*System.out.println("vecchia posx: "+vecchiaPosX);
-                System.out.println("vecchia posy: "+vecchiaPosY);
-                System.out.println("nuova posx: "+nuovaPosX);
-                System.out.println("nuova posy: "+nuovaPosY);*/
