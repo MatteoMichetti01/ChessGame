@@ -48,6 +48,8 @@ public class GiocatoreControGiocatore extends Modalita{
                     mossaFatta = true;
                 } catch (MossaNonValida m) {
                     System.out.println(m);
+                    scacchiera.viewscacchiera();
+                    System.out.println("");
                 }
             }
             if(mossaFatta && !(scaccoMatto1)){
@@ -69,12 +71,15 @@ public class GiocatoreControGiocatore extends Modalita{
                 }
                 catch (MossaNonValida m) {
                     System.out.println(m);
+                    scacchiera.viewscacchiera();
+                    System.out.println("");
                 }
             }
             if(mossaFatta && !(scaccoMatto1)){
-            scacchiera.viewscacchiera();
-            System.out.println();
-            mossaFatta=false;}
+                scacchiera.viewscacchiera();
+                System.out.println();
+                mossaFatta=false;
+            }
         }
         if (!resa) {
             System.out.println("Fine partita!");

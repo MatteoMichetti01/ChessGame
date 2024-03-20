@@ -109,7 +109,7 @@ public class Scacco {
                     PezzoService p1 = new PezzoService(scacchiera);
                     try {
                         p1.controlloSePezzoArrivaRe(scacchiera.casella[i][j].getPezzo().getNome(), posxRE, posyRE, i, j, scacchiera);
-                        System.out.println("IL RE " + scacchiera.casella[posxRE][posyRE].getPezzo().getColore().toUpperCase() + " E' SOTTO SCACCO!");
+                        //System.out.println("IL RE " + scacchiera.casella[posxRE][posyRE].getPezzo().getColore().toUpperCase() + " E' SOTTO SCACCO!");
                         return true;
                     } catch (MossaNonValida m) {}
                 }

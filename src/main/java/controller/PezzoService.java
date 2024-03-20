@@ -74,8 +74,14 @@ public class PezzoService implements Mossa {
             scaccoMatto = Scacco.controlloScaccoMatto(scacchiera, nuovaPosX, nuovaPosY);
             if (scaccoMatto){
                 System.out.println("SCACCO MATTO");
-                System.out.println("Il "+ scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore() +" ha perso!");
+                System.out.println("Il "+ scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore() +" ha vinto!");
                 GiocatoreControGiocatore.setScaccoMatto1(true);
+            }
+            else {
+                if (colore.equals("bianco"))
+                    System.out.println("Il re nero è sotto scacco!");
+                else
+                    System.out.println("Il re bianco è sotto scacco!");
             }
         }
         return scacchiera;

@@ -26,7 +26,6 @@ public class ReService {
         }
         if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() == null) {
             boolean autoscacco= controlloAutoScacco(scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
-            System.out.println("boolean state controllo" + autoscacco);
             if (autoscacco)
                 throw new MossaNonValida("Non puoi darti scacco da solo");
 
@@ -68,20 +67,6 @@ public static boolean controlloAutoScacco(Scacchiera scacchiera, int nuovaPosX, 
                     try {
                         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY,true);
                         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ",scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), false);
-                       /* if(colore.equals("bianco")){
-                                if(scacchiera.casella[nuovaPosX-1][nuovaPosY+1].getPezzo()!=null||scacchiera.casella[nuovaPosX-1][nuovaPosY-1].getPezzo()!=null)
-                                    if(!(scacchiera.casella[nuovaPosX-1][nuovaPosY+1].getPezzo().getColore().equals(colore) ) ^ !(scacchiera.casella[nuovaPosX-1][nuovaPosY-1].getPezzo().getColore().equals(colore)))
-                                        if(scacchiera.casella[nuovaPosX-1][nuovaPosY+1].getPezzo().getNome().charAt(0)=='p'|| scacchiera.casella[nuovaPosX-1][nuovaPosY-1].getPezzo().getNome().charAt(0)=='p')
-                                            return true;
-                        }
-                        else{
-                            if(scacchiera.casella[nuovaPosX+1][nuovaPosY+1].getPezzo()!=null||scacchiera.casella[nuovaPosX+1][nuovaPosY-1].getPezzo()!=null)
-                                 if(!(scacchiera.casella[nuovaPosX+1][nuovaPosY+1].getPezzo().getColore().equals(colore) )|| !(scacchiera.casella[nuovaPosX+1][nuovaPosY-1].getPezzo().getColore().equals(colore)))
-                                     if(scacchiera.casella[nuovaPosX+1][nuovaPosY+1].getPezzo().getNome().charAt(0)=='p'|| scacchiera.casella[nuovaPosX+1][nuovaPosY-1].getPezzo().getNome().charAt(0)=='p')
-                                         return true;
-                        }
-
-                        */
                         p1.controlloProtetto(scacchiera.casella[i][j].getPezzo().getNome(), nuovaPosX, nuovaPosY, i, j, scacchiera);
                         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
                         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione() , false);
