@@ -24,14 +24,14 @@ public class MossaServiceImpl implements Mossa {
         if (scacchiera.casella[PosXRe][PosYRe].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[PosXRe][PosYRe].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
         //switch-case
-        PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
+        PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
         service.controlloMossa(PosXRe,PosYRe,vecchiaPosX,vecchiaPosY,scacchiera);
     }
 
     public boolean controlloProtetto(String nomePezzo, int PosX, int PosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         if (PosX == 0 || PosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         //switch-case
-        PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
+        PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
         service.controlloMossa(PosX,PosY,vecchiaPosX,vecchiaPosY,scacchiera);
         return true;
     }
@@ -42,14 +42,6 @@ public class MossaServiceImpl implements Mossa {
         int vecchiaPosX = 0, vecchiaPosY = 0;
         int nuovaPosX = 0, nuovaPosY = 0;
         String vecchiapos = " ";
-
-        Map<Character, PezzoService<? extends Pezzo>> mappaServizi = new HashMap<>();
-        mappaServizi.put('p', new PedoneServiceImpl());
-        mappaServizi.put('a', new AlfiereServiceImpl());
-            //mappaServizi.put('t', new TorreService());
-            //mappaServizi.put('c', new CavalloService());
-            //mappaServizi.put('q', new ReginaService());
-            //mappaServizi.put('r', new ReService());
 
 
         for (int x = 1; x < 9; x++) {
@@ -70,8 +62,7 @@ public class MossaServiceImpl implements Mossa {
         if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
 
-        //ControlloMosse.controlloMossa(nomePezzo, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY, scacchiera);
-        PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
+        PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
         service.controlloMossa(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
 
         // effettua la mossa: mette nella nuova posizione il pezzo, e inserisce la casella vuota nella vecchia posizione

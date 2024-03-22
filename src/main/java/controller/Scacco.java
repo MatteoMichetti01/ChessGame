@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Casella;
+import domain.Pezzo;
 import domain.Scacchiera;
 import controller.MossaNonValida;
 import controller.impl.*;
@@ -109,7 +110,7 @@ public class Scacco {
                     try {
                         MossaServiceImpl.controlloSePezzoArrivaRe(posxRE, posyRE, i, j, scacchiera);
                         return true;
-                    } catch (MossaNonValida m) {}
+                    } catch (MossaNonValida m) { }
                 }
             }
         }
@@ -146,7 +147,7 @@ public class Scacco {
                             }
                             else {
                                 try {
-                                    PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
+                                    PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
                                     service.controlloMossa(k,z,i,j,scacchiera);
                                 } catch (MossaNonValida m) {
                                     mossasi = false;
