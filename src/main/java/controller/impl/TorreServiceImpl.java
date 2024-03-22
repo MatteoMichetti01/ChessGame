@@ -1,12 +1,14 @@
-package controller;
+package controller.impl;
 
+import controller.MossaNonValida;
+import controller.PezzoService;
 import domain.Scacchiera;
-import logic.MossaNonValida;
+import domain.Torre;
 
-public class TorreService {
+public class TorreServiceImpl implements PezzoService<Torre> {
 
-    public static void controlloTorre(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
-
+    @Override
+    public void controlloMossa(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         if (nuovaPosY != vecchiaPosY) {
             if (nuovaPosX != vecchiaPosX) {
                 throw new MossaNonValida("Mossa non valida, la torre non può andare in diagonale");

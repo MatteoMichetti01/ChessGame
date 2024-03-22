@@ -1,11 +1,13 @@
-package controller;
+package controller.impl;
 
+import controller.MossaNonValida;
+import controller.PezzoService;
+import domain.Regina;
 import domain.Scacchiera;
-import logic.MossaNonValida;
 
-public class ReginaService {
-
-    public static void controlloRegina (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
+public class ReginaServiceImpl implements PezzoService<Regina> {
+    @Override
+    public void controlloMossa(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         if (!((nuovaPosX == vecchiaPosX || nuovaPosY == vecchiaPosY) ||
                 (Math.abs(nuovaPosX - vecchiaPosX) == Math.abs(nuovaPosY - vecchiaPosY)))) {
             throw new MossaNonValida("La regina può muoversi solo lungo linee rette");

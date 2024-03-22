@@ -1,11 +1,14 @@
-package controller;
+package controller.impl;
 
+import controller.MossaNonValida;
+import controller.PezzoService;
+import domain.Pedone;
 import domain.Scacchiera;
-import logic.MossaNonValida;
 
-public class PedoneService {
+public class PedoneServiceImpl implements PezzoService<Pedone> {
 
-    public static void controlloPedone (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
+    @Override
+    public void controlloMossa (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         if (nuovaPosY == vecchiaPosY && (vecchiaPosX == 2 || vecchiaPosX == 7)) {
             if (Math.abs(nuovaPosX - vecchiaPosX) > 2)
                 throw new MossaNonValida("Mossa non valida, il pedone può avanzare alla prima mossa al massimo di due caselle");
@@ -34,6 +37,7 @@ public class PedoneService {
 
         if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() != null && nuovaPosY == vecchiaPosY)
             throw new MossaNonValida("il pedone mangia solo in diagonale");
+
     }
+
 }
-//&& scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() == null && Math.abs(nuovaPosX - vecchiaPosX) != 1 && Math.abs(nuovaPosY - vecchiaPosY) != 1

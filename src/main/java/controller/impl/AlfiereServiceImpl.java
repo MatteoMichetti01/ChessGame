@@ -1,12 +1,14 @@
-package controller;
+package controller.impl;
 
+import controller.MossaNonValida;
+import controller.PezzoService;
+import domain.Alfiere;
 import domain.Scacchiera;
-import logic.MossaNonValida;
 
-public class AlfiereService {
+public class AlfiereServiceImpl implements PezzoService<Alfiere> {
 
-    public static void controlloAlfiere(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida  {
-
+    @Override
+    public void controlloMossa (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         if (Math.abs(nuovaPosX - vecchiaPosX) != Math.abs(nuovaPosY - vecchiaPosY))
             throw new MossaNonValida("L'alfiere può andare solo in diagonale");
 

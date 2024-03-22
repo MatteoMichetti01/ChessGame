@@ -1,5 +1,7 @@
 package logic;
 
+import controller.MossaNonValida;
+
 public class GiocatoreControComputer extends Modalita{
 
     public GiocatoreControComputer(Giocatore giocatore1) {

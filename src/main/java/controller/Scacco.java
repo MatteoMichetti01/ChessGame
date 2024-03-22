@@ -2,7 +2,8 @@ package controller;
 
 import domain.Casella;
 import domain.Scacchiera;
-import logic.MossaNonValida;
+import controller.MossaNonValida;
+import controller.impl.*;
 
 import java.util.*;
 public class Scacco {
@@ -10,7 +11,7 @@ public class Scacco {
     /*
     Questo metodo viene chiamato solo nel caso in cui si è verificato uno scacco, controlla se con la mossa inserita dell'utente
     si è risolto lo scacco. Restituisce true se il re dopo la mossa è ancora sotto scacco, false altrimenti.
-     */
+    */
     public static boolean uscitaScacco(Scacchiera scacchiera, int posPezzoX,int posPezzoY){
         int posxRE = 0, posyRE = 0;
         // mi salvo in una variabile il colore del re che dovò controllare
@@ -50,9 +51,8 @@ public class Scacco {
             for (int j = 0; j < 9; j++) {
                 if (scacchiera.casella[i][j].getPezzo() != null) {
                     if (!(scacchiera.casella[i][j].getPezzo().getColore().equals(colore))) {
-                        PezzoService p1 = new PezzoService(scacchiera);
                         try {
-                            p1.controlloSePezzoArrivaRe(scacchiera.casella[i][j].getPezzo().getNome(), posxRE,posyRE,i,j, scacchiera);
+                            MossaServiceImpl.controlloSePezzoArrivaRe(posxRE,posyRE,i,j, scacchiera);
                             return true;
                         } catch (MossaNonValida m){ }
                     }
@@ -106,10 +106,8 @@ public class Scacco {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (scacchiera.casella[i][j].getPezzo() != null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
-                    PezzoService p1 = new PezzoService(scacchiera);
                     try {
-                        p1.controlloSePezzoArrivaRe(scacchiera.casella[i][j].getPezzo().getNome(), posxRE, posyRE, i, j, scacchiera);
-                        //System.out.println("IL RE " + scacchiera.casella[posxRE][posyRE].getPezzo().getColore().toUpperCase() + " E' SOTTO SCACCO!");
+                        MossaServiceImpl.controlloSePezzoArrivaRe(posxRE, posyRE, i, j, scacchiera);
                         return true;
                     } catch (MossaNonValida m) {}
                 }
@@ -118,7 +116,7 @@ public class Scacco {
         return false;
     }
 
-     /*
+    /*
      * Questo metodo verifica se il re è in scacco matto.
      * Restituisce true se il re è in scacco matto, altrimenti restituisce false e continua.
      * Per determinare lo scacco matto, controlla se tutti i pezzi del colore del re sotto scacco
@@ -128,7 +126,7 @@ public class Scacco {
      * Se viene trovata una mossa che consente al re di uscire dallo scacco, il metodo restituisce false.
      *
      * @return true se il re è in scacco matto, altrimenti false.
-     */
+    */
     public static boolean controlloScaccoMatto(Scacchiera scacchiera, int posPezzoX, int posPezzoY)throws MossaNonValida {
         boolean mossasi = true;
         boolean sScacco = true;
@@ -148,7 +146,8 @@ public class Scacco {
                             }
                             else {
                                 try {
-                                    ControlloMosse.controlloMossa(scacchiera.casella[i][j].getPezzo().getNome(), k, z, i, j, scacchiera);
+                                    PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
+                                    service.controlloMossa(k,z,i,j,scacchiera);
                                 } catch (MossaNonValida m) {
                                     mossasi = false;
                                 }

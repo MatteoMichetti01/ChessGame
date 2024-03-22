@@ -1,6 +1,6 @@
 package logic;
 
-import domain.Pezzo;
+import controller.MossaNonValida;
 
 public abstract class Modalita {
     Giocatore giocatore1;

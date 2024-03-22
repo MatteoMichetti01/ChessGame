@@ -1,6 +1,7 @@
 package logic;
 
-import controller.PezzoService;
+import controller.MossaNonValida;
+import controller.impl.MossaServiceImpl;
 import domain.Scacchiera;
 
 import java.util.Scanner;
@@ -29,7 +30,7 @@ public class GiocatoreControGiocatore extends Modalita{
         boolean mossaFatta= false;
         Scanner scanner = new Scanner(System.in);
         Scacchiera scacchiera = new Scacchiera();
-        PezzoService p1 = new PezzoService(scacchiera);
+        MossaServiceImpl p1 = new MossaServiceImpl(scacchiera);
         scacchiera.viewscacchiera();
         System.out.println();
         System.out.println("Inizia il turno "+ this.giocatore1.getNome());

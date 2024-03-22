@@ -1,7 +1,6 @@
 package logic;
 
 import controller.*;
-import domain.*;
 
 import java.util.Scanner;
 
