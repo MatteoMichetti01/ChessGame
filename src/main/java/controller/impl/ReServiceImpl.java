@@ -44,13 +44,15 @@ public class ReServiceImpl implements PezzoService<Re> {
         String colore = scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore();
         for (int i=1; i<9; i++) {
             for (int j=1; j<9; j++) {
-                if (scacchiera.casella[i][j].getPezzo() != null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
-                    if (scacchiera.casella[i][j].getPezzo().getNome().charAt(0) != 'r') {
-                        try {
-                            PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
-                            service.controlloMossa(nuovaPosX,nuovaPosY,i,j,scacchiera);
-                            return true;
-                        } catch (MossaNonValida m) {
+                if (i != nuovaPosX || j != nuovaPosY) {
+                    if (scacchiera.casella[i][j].getPezzo() != null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
+                        if (scacchiera.casella[i][j].getPezzo().getNome().charAt(0) != 'r') {
+                            try {
+                                PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
+                                service.controlloMossa(nuovaPosX, nuovaPosY, i, j, scacchiera);
+                                return true;
+                            } catch (MossaNonValida m) {
+                            }
                         }
                     }
                 }
