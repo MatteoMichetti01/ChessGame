@@ -158,11 +158,18 @@ public class Scacco {
                             // matto. Se non trova nessuna mossa per nessun pezzo per uscire dallo scacco allora arriva alla fine del metodo e
                             // restituisce true perchè è scacco matto.
                             if (mossasi) {
-                                scacchiera.casella[k][z] = new Casella(scacchiera.casella[i][j].getNome(), scacchiera.casella[i][j].getPezzo(), k, z, true);
-                                scacchiera.casella[i][j] = new Casella("   ", scacchiera.casella[i][j].getPosizione(), false);
-                                sScacco = Scacco.uscitaScacco(scacchiera, k, z);
-                                scacchiera.casella[i][j] = new Casella(scacchiera.casella[k][z].getNome(), scacchiera.casella[k][z].getPezzo(), i, j, true);
-                                scacchiera.casella[k][z] = new Casella("   ", scacchiera.casella[k][z].getPosizione(), false);
+                                if(scacchiera.casella[k][z].isOccupata()){
+                                    sScacco = Scacco.uscitaScacco(scacchiera, k, z);
+                                }
+                                else {
+
+
+                                    scacchiera.casella[k][z] = new Casella(scacchiera.casella[i][j].getNome(), scacchiera.casella[i][j].getPezzo(), k, z, true);
+                                    scacchiera.casella[i][j] = new Casella("   ", scacchiera.casella[i][j].getPosizione(), false);
+                                    sScacco = Scacco.uscitaScacco(scacchiera, k, z);
+                                    scacchiera.casella[i][j] = new Casella(scacchiera.casella[k][z].getNome(), scacchiera.casella[k][z].getPezzo(), i, j, true);
+                                    scacchiera.casella[k][z] = new Casella("   ", scacchiera.casella[k][z].getPosizione(), false);
+                                }
                                 if (!(sScacco)) {
                                     return false;
                                 }
