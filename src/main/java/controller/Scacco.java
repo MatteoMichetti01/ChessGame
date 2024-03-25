@@ -3,10 +3,7 @@ package controller;
 import domain.Casella;
 import domain.Pezzo;
 import domain.Scacchiera;
-import controller.MossaNonValida;
 import controller.impl.*;
-
-import java.util.*;
 public class Scacco {
 
     /*

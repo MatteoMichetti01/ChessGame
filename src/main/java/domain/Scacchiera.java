@@ -48,10 +48,6 @@ public class Scacchiera {
             }
         }
 
-        /*for (int i = 1; i <= 8; i++) {
-            casella[2][i] = new Casella(lettere[i]+"2",new Pedone("| p" + i + " |"),2,i,true);
-        }*/
-
         casella[7][0] = new Casella("7");
         for (int i = 1; i <= 8; i++) {
             casella[7][i] = new Casella(lettere[i]+"7",new Pedone("p"+i+"W","bianco"),7,i,true);
@@ -73,10 +69,6 @@ public class Scacchiera {
         //inserimento nome per attributo di casella con coordinate giuste di scachiera
 
 
-       // for(int i=2; i<8; i++) {
-         //   for (int j= 0; j < 8; j++) casella[i][j].setNome(lettere[i] + j);
-       // }
-
 
         return casella;
     }
@@ -95,33 +87,4 @@ public class Scacchiera {
 
     }
 
-
-
-   /* public MossaTest getPoszione(String nome, String colore){
-        MossaTest posAttuale = new MossaTest();
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if(p[i][j].getNome().equals(nome) && p[i][j].getColore().equals(colore)) {
-                    posAttuale.setPosx(i);
-                    posAttuale.setPosy(j);
-                }
-            }
-
-        }
-        return posAttuale;
-
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Scacchiera that = (Scacchiera) o;
-        return Arrays.equals(o.pezzo, that.pezzo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(pezzo);
-    }*/
 }

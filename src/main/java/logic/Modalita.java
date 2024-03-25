@@ -12,7 +12,7 @@ public abstract class Modalita {
 
     }
 
-    public Modalita(Giocatore giocatore11) {
+    public Modalita(Giocatore giocatore1) {
     this.giocatore1=giocatore1;
     }
 

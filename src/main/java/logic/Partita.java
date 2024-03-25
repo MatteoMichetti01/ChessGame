@@ -46,7 +46,15 @@ public class Partita {
         System.out.println("Nuova partita (1)");
         System.out.println("Carica partita (2)");
         String input = scanner.nextLine();
-        if(input.equals("1")){this.selezionaModalita();}
+        try{
+            if(input.equals("1")){this.selezionaModalita();}
+            throw new MossaNonValida("Inserisci una modalità");
+        }
+        catch (MossaNonValida m ) {
+            System.out.println(m.getMessage());
+            menuPrincipale();}
+
+
 
     }
 

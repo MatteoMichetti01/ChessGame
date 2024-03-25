@@ -4,15 +4,12 @@ import domain.*;
 import logic.GiocatoreControGiocatore;
 import controller.MossaNonValida;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MossaServiceImpl implements Mossa {
     public boolean sottoScacco = false;
     public boolean scaccoMatto = false;
 
     Scacchiera scacchiera;
-    private Pezzo PezzoService;
+
 
     public MossaServiceImpl(Scacchiera scacchiera) {
         this.scacchiera = scacchiera;
@@ -28,13 +25,14 @@ public class MossaServiceImpl implements Mossa {
         service.controlloMossa(PosXRe,PosYRe,vecchiaPosX,vecchiaPosY,scacchiera);
     }
 
-    public boolean controlloProtetto(String nomePezzo, int PosX, int PosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
+  /*  public boolean controlloProtetto(int PosX, int PosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         if (PosX == 0 || PosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
-        //switch-case
         PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
         service.controlloMossa(PosX,PosY,vecchiaPosX,vecchiaPosY,scacchiera);
         return true;
     }
+
+   */
 
 
 

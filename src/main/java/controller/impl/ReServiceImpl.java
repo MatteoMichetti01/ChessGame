@@ -3,6 +3,7 @@ package controller.impl;
 import controller.MossaNonValida;
 import controller.PezzoService;
 import domain.Casella;
+import domain.Pezzo;
 import domain.Re;
 import domain.Scacchiera;
 
@@ -28,6 +29,7 @@ public class ReServiceImpl implements PezzoService<Re> {
                     throw new MossaNonValida("il pezzo è protetto");
             }
         }
+        //verifica che il re non si metta in scacco da solo
         if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() == null) {
             boolean autoscacco= controlloAutoScacco(scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
             if (autoscacco)
@@ -48,7 +50,7 @@ public class ReServiceImpl implements PezzoService<Re> {
                     if (scacchiera.casella[i][j].getPezzo() != null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
                         if (scacchiera.casella[i][j].getPezzo().getNome().charAt(0) != 'r') {
                             try {
-                                PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
+                                PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
                                 service.controlloMossa(nuovaPosX, nuovaPosY, i, j, scacchiera);
                                 return true;
                             } catch (MossaNonValida m) {
@@ -62,7 +64,8 @@ public class ReServiceImpl implements PezzoService<Re> {
     }
 
 
-
+    //controlla se il re non fa una mossa che lo metta in scacco. Per fare ciò controlla ogni pezzo del colore opposto, e se ne trova uno che può
+    //raggiungere la casella del re che si trova in nuovaPosX,nuovaPosY, allora questa mossa mette in scacco il re per cui non è valida.
     public static boolean controlloAutoScacco(Scacchiera scacchiera, int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY) {
         String colore = scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore();
         for (int i=1; i<9; i++) {
@@ -70,14 +73,18 @@ public class ReServiceImpl implements PezzoService<Re> {
                 if (scacchiera.casella[i][j].getPezzo() != null && !(scacchiera.casella[i][j].getPezzo().getColore().equals(colore))) {
                     if (scacchiera.casella[i][j].getPezzo().getNome().charAt(0) != 'r') {
                         try {
+                            //simula la mossa
                             scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY,true);
                             scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ",scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), false);
-                            PezzoService service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
+                            //controlla la mossa
+                            PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
                             service.controlloMossa(nuovaPosX,nuovaPosY,i,j,scacchiera);
+                            //annulla la mossa (torna indietro)
                             scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
                             scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione() , false);
                             return true;
                         } catch (MossaNonValida m) {
+                            //nel caso la mossa non va a buon fine essa deve essere in ogni caso annullata
                             scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
                             scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione() , false);
                         }

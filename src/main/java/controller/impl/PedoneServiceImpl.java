@@ -19,12 +19,12 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
         }
         if (nuovaPosY != vecchiaPosY) {
             if (Math.abs(nuovaPosX - vecchiaPosX) != 1 || Math.abs(nuovaPosY - vecchiaPosY) != 1){
-                throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti1");
+                throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti");
             }
             if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo()==null)
-                throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti2");
+                throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti");
             if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() != null && scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore().equals(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore()))
-                throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti3");
+                throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti");
         }
 
         String colore = scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore();

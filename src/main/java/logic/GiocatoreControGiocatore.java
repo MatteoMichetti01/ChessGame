@@ -48,9 +48,9 @@ public class GiocatoreControGiocatore extends Modalita{
                     scacchiera = p1.move(pezzoBianco+"W", mossaBianco.toUpperCase(), this.giocatore1.getColore());
                     mossaFatta = true;
                 } catch (MossaNonValida m) {
-                    System.out.println(m);
+                    System.out.println(m.getMessage());
                     scacchiera.viewscacchiera();
-                    System.out.println("");
+                    System.out.println();
                 }
             }
             if(mossaFatta && !(scaccoMatto1)){
@@ -71,9 +71,9 @@ public class GiocatoreControGiocatore extends Modalita{
                     mossaFatta=true;
                 }
                 catch (MossaNonValida m) {
-                    System.out.println(m);
+                    System.out.println(m.getMessage());
                     scacchiera.viewscacchiera();
-                    System.out.println("");
+                    System.out.println();
                 }
             }
             if(mossaFatta && !(scaccoMatto1)){

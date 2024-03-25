@@ -64,13 +64,10 @@ public class Casella {
     }
 
     public boolean isOccupata() {
-        if (this.occupata)
-            return true;
-        else return false;
+        return this.occupata;
     }
 
     public void cambioOccupata() {
-        if(this.occupata) this.occupata=false;
-        else this.occupata = true;
+        this.occupata= !this.occupata;
     }
 }
