@@ -2,7 +2,6 @@ package domain;
 
 public class Scacchiera {
     public Casella[][] casella = new Casella[9][9];
-    public Pezzo pezzo;
     public Scacchiera(){
         this.casella = creazioneScacchiera();
 
