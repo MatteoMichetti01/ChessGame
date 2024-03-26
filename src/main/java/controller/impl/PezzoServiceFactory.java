@@ -2,26 +2,24 @@ package controller.impl;
 
 import controller.MossaNonValida;
 import controller.PezzoService;
-import domain.Pedone;
-import domain.Pezzo;
+import domain.*;
 
 public class PezzoServiceFactory {
-    public static PezzoService<? extends Pezzo> getPezzoService (Pezzo p) throws MossaNonValida{
-        switch (p.getNome().charAt(0)) {
-            case 'p':
-                return new PedoneServiceImpl();
-            case 'a':
-                return new AlfiereServiceImpl();
-            case 't':
-                return new TorreServiceImpl();
-            case 'r':
-                return new ReServiceImpl();
-            case 'c':
-                return new CavalloServiceImpl();
-            case 'q':
-                return new ReginaServiceImpl();
-            default:
-                throw new MossaNonValida("pezzo non trovato");
-        }
+    public static PezzoService<? extends Pezzo> getPezzoService (Class clas) throws MossaNonValida {
+        if (clas.equals(Pedone.class))
+            return new PedoneServiceImpl();
+        if (clas.equals(Alfiere.class))
+            return new AlfiereServiceImpl();
+        if (clas.equals(Torre.class))
+            return new TorreServiceImpl();
+        if (clas.equals(Re.class))
+            return new ReServiceImpl();
+        if (clas.equals(Cavallo.class))
+            return new CavalloServiceImpl();
+        if (clas.equals(Regina.class))
+            return new ReginaServiceImpl();
+
+
+        return null;
     }
 }
