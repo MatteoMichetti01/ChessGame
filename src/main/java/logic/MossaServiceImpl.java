@@ -1,8 +1,5 @@
-package controller.impl;
-import controller.*;
+package logic;
 import domain.*;
-import logic.GiocatoreControGiocatore;
-import controller.MossaNonValida;
 
 public class MossaServiceImpl implements Mossa {
     public boolean sottoScacco = false;
@@ -20,20 +17,9 @@ public class MossaServiceImpl implements Mossa {
         if (PosXRe == 0 || PosYRe == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         if (scacchiera.casella[PosXRe][PosYRe].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[PosXRe][PosYRe].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
-        //switch-case
-        PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
+        PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getClass());
         service.controlloMossa(PosXRe,PosYRe,vecchiaPosX,vecchiaPosY,scacchiera);
     }
-
-  /*  public boolean controlloProtetto(int PosX, int PosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
-        if (PosX == 0 || PosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
-        PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo());
-        service.controlloMossa(PosX,PosY,vecchiaPosX,vecchiaPosY,scacchiera);
-        return true;
-    }
-
-   */
-
 
 
     public Scacchiera move(String nomePezzo, String new_Posizione, String colore) throws MossaNonValida {

@@ -1,7 +1,5 @@
-package controller.impl;
+package logic;
 
-import controller.MossaNonValida;
-import controller.PezzoService;
 import domain.Casella;
 import domain.Pezzo;
 import domain.Re;
@@ -50,7 +48,7 @@ public class ReServiceImpl implements PezzoService<Re> {
                     if (scacchiera.casella[i][j].getPezzo() != null && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
                         if (scacchiera.casella[i][j].getPezzo().getNome().charAt(0) != 'r') {
                             try {
-                                PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
+                                PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo().getClass());
                                 service.controlloMossa(nuovaPosX, nuovaPosY, i, j, scacchiera);
                                 return true;
                             } catch (MossaNonValida m) {
@@ -77,7 +75,7 @@ public class ReServiceImpl implements PezzoService<Re> {
                             scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY,true);
                             scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ",scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), false);
                             //controlla la mossa
-                            PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
+                            PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo().getClass());
                             service.controlloMossa(nuovaPosX,nuovaPosY,i,j,scacchiera);
                             //annulla la mossa (torna indietro)
                             scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);

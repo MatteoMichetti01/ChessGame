@@ -1,7 +1,5 @@
 package logic;
 
-import controller.MossaNonValida;
-
 public abstract class Modalita {
     Giocatore giocatore1;
     Giocatore giocatore2;

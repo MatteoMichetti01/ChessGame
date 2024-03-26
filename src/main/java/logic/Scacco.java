@@ -1,9 +1,9 @@
-package controller;
+package logic;
 
 import domain.Casella;
 import domain.Pezzo;
 import domain.Scacchiera;
-import controller.impl.*;
+
 public class Scacco {
 
     /*
@@ -144,7 +144,7 @@ public class Scacco {
                             }
                             else {
                                 try {
-                                    PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo());
+                                    PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo().getClass());
                                     service.controlloMossa(k,z,i,j,scacchiera);
                                 } catch (MossaNonValida m) {
                                     mossasi = false;

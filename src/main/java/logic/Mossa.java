@@ -1,4 +1,4 @@
-package controller;
+package logic;
 import domain.*;
 
 public interface Mossa  {

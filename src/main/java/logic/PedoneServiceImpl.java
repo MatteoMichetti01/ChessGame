@@ -1,7 +1,5 @@
-package controller.impl;
+package logic;
 
-import controller.MossaNonValida;
-import controller.PezzoService;
 import domain.Pedone;
 import domain.Scacchiera;
 

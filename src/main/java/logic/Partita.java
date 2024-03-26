@@ -1,7 +1,5 @@
 package logic;
 
-import controller.*;
-
 import java.util.Scanner;
 
 public class Partita {

@@ -1,7 +1,5 @@
 package logic;
 
-import controller.MossaNonValida;
-import controller.impl.MossaServiceImpl;
 import domain.Scacchiera;
 
 import java.util.Scanner;
