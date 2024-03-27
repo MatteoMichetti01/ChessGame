@@ -11,26 +11,26 @@ public class Partita {
 
     public void selezionaModalita() throws MossaNonValida {
 
-        Scanner scanner = new Scanner(System.in);
+        GestioneInput gestioneInput = GestioneInput.getInstance();
         System.out.println("Seleziona la modalità di gioco: ");
         System.out.println("- Giocatore contro giocatore (1)");
         System.out.println("- Giocatore contro computer (2)");
-        String input = scanner.nextLine();
+        String input = gestioneInput.leggiNumeroInput();
         if(input.equals("1")){
             System.out.println("Chi vuole essere il bianco?(inserisci il nome):  ");
-            String nomeBianco = scanner.nextLine();
+            String nomeBianco = gestioneInput.inputNonVuoto();
             Giocatore g1 = new Giocatore(nomeBianco,"bianco");
             System.out.println("Inserisci nome per giocatore nero:  ");
-            String nomeNero = scanner.nextLine();
+            String nomeNero = gestioneInput.inputNonVuoto();
             Giocatore g2 = new Giocatore(nomeNero,"nero");
             this.modalita = new GiocatoreControGiocatore(g1, g2);
             this.modalita.startGame();
         }
         else{
         System.out.println("Quale colore vuoi essere?(bianco o nero):  ");
-        String colore = scanner.nextLine();
+        String colore = gestioneInput.inputNonVuoto();
         System.out.println("Inserisci il nome:  ");
-        String nome = scanner.nextLine();
+        String nome = gestioneInput.inputNonVuoto();
         Giocatore g1 = new Giocatore(nome,colore);
             this.modalita= new GiocatoreControComputer(g1);
             this.modalita.startGame();
@@ -38,22 +38,15 @@ public class Partita {
 
     }
 
-    public void  menuPrincipale() throws MossaNonValida {
-        Scanner scanner = new Scanner(System.in);
+    public void menuPrincipale() throws MossaNonValida {
+        GestioneInput gestioneInput = GestioneInput.getInstance();
         System.out.println("BENVENUTO IN SCACCHI MAC!");
         System.out.println("Nuova partita (1)");
         System.out.println("Carica partita (2)");
-        String input = scanner.nextLine();
-        try{
-            if(input.equals("1")){this.selezionaModalita();}
-            throw new MossaNonValida("Inserisci una modalità");
+        String input = gestioneInput.leggiNumeroInput();
+        if (input.equals("1")) {
+            this.selezionaModalita();
         }
-        catch (MossaNonValida m ) {
-            System.out.println(m.getMessage());
-            menuPrincipale();}
-
-
-
     }
 
 

@@ -26,7 +26,7 @@ public class GiocatoreControGiocatore extends Modalita{
         String nomeResa = null;
         boolean resa= true;
         boolean mossaFatta= false;
-        Scanner scanner = new Scanner(System.in);
+        GestioneInput gestioneInput = GestioneInput.getInstance();
         Scacchiera scacchiera = new Scacchiera();
         MossaServiceImpl p1 = new MossaServiceImpl(scacchiera);
         scacchiera.viewscacchiera();
@@ -38,10 +38,10 @@ public class GiocatoreControGiocatore extends Modalita{
             while (!mossaFatta && resa && !(scaccoMatto1)) {
                 System.out.println("Tocca a " + this.giocatore1.getNome());
                 System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
-                String pezzoBianco = scanner.nextLine();
+                String pezzoBianco = gestioneInput.leggiPezzoInput();
                 if(pezzoBianco.equals("o")){if(this.opzioni().equals("3")) resa=false;nomeResa= this.giocatore1.getNome();break;}
                 System.out.println("Inserisci mossa: ");
-                String mossaBianco = scanner.nextLine();
+                String mossaBianco = gestioneInput.inputNonVuoto();
                 try {
                     scacchiera = p1.move(pezzoBianco+"W", mossaBianco.toUpperCase(), this.giocatore1.getColore());
                     mossaFatta = true;
@@ -60,10 +60,10 @@ public class GiocatoreControGiocatore extends Modalita{
             while (!mossaFatta && resa && !(scaccoMatto1)) {
                 System.out.println("Tocca a " + this.giocatore2.getNome());
                 System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
-                String pezzoNero = scanner.nextLine();
+                String pezzoNero = gestioneInput.leggiPezzoInput();
                 if(pezzoNero.equals("o")){if(this.opzioni().equals("3")) resa=false;nomeResa= this.giocatore2.getNome();break;}
                 System.out.println("Inserisci mossa: ");
-                String mossaNero = scanner.nextLine();
+                String mossaNero = gestioneInput.inputNonVuoto();
                 try{
                     scacchiera = p1.move(pezzoNero+"B", mossaNero.toUpperCase(), this.giocatore2.getColore());
                     mossaFatta=true;
@@ -85,12 +85,14 @@ public class GiocatoreControGiocatore extends Modalita{
             System.out.println(nomeResa + " si è arreso");
             System.out.println("Torna al menù principale (1)");
             System.out.println("Esci (2)");
-            if(scanner.nextLine().equals("1")){ChessGame.newGame();}
+            String input = gestioneInput.leggiNumeroInput();
+            if(input.equals("1")){ChessGame.newGame();}
         }
         if (scaccoMatto1) {
             System.out.println("Torna al menù principale (1)");
             System.out.println("Esci (2)");
-            if(scanner.nextLine().equals("1")){ChessGame.newGame();}
+            String input = gestioneInput.leggiNumeroInput();
+            if(input.equals("1")){ChessGame.newGame();}
         }
 
     }
