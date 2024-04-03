@@ -3,6 +3,7 @@ package logic;
 import java.util.Scanner;
 
 public class Partita {
+    private Giocatore giocatoreAttuale;
     Modalita modalita;
 
     public Partita() {
@@ -37,6 +38,8 @@ public class Partita {
         }
 
     }
+
+
 
     public void menuPrincipale() throws MossaNonValida {
         GestioneInput gestioneInput = GestioneInput.getInstance();

@@ -1,7 +1,8 @@
 package logic;
-
-import domain.Pedone;
+import domain.*;
 import domain.Scacchiera;
+
+import java.util.Scanner;
 
 public class PedoneServiceImpl implements PezzoService<Pedone> {
 
@@ -10,16 +11,15 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
         if (nuovaPosY == vecchiaPosY && (vecchiaPosX == 2 || vecchiaPosX == 7)) {
             if (Math.abs(nuovaPosX - vecchiaPosX) > 2)
                 throw new MossaNonValida("Mossa non valida, il pedone può avanzare alla prima mossa al massimo di due caselle");
-        }
-        else {
+        } else {
             if (nuovaPosY == vecchiaPosY && Math.abs(nuovaPosX - vecchiaPosX) > 1)
                 throw new MossaNonValida("Mossa non valida, il pedone può avanzare una casella alla volta");
         }
         if (nuovaPosY != vecchiaPosY) {
-            if (Math.abs(nuovaPosX - vecchiaPosX) != 1 || Math.abs(nuovaPosY - vecchiaPosY) != 1){
+            if (Math.abs(nuovaPosX - vecchiaPosX) != 1 || Math.abs(nuovaPosY - vecchiaPosY) != 1) {
                 throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti");
             }
-            if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo()==null)
+            if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() == null)
                 throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti");
             if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() != null && scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore().equals(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore()))
                 throw new MossaNonValida("Mossa non valida, il pedone può andare solo in avanti");
@@ -28,14 +28,72 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
         String colore = scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore();
         if (colore.equals("bianco")) {
             if (vecchiaPosX < nuovaPosX) throw new MossaNonValida("il pedone non può andare indietro");
-        }
-        else {
+        } else {
             if (vecchiaPosX > nuovaPosX) throw new MossaNonValida("il pedone non può andare indietro");
         }
 
         if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() != null && nuovaPosY == vecchiaPosY)
             throw new MossaNonValida("il pedone mangia solo in diagonale");
 
+
+        //PROMOZIONE
+        if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco") && nuovaPosX == 1) {
+            System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
+            System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");
+            GestioneInput gestioneInput = GestioneInput.getInstance();
+            String pezzoBianco = gestioneInput.leggiPezzoInputPromozione();
+            switch (pezzoBianco) {
+                case "torre":
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("tP","bianco"),nuovaPosX,nuovaPosY,true);
+                    System.out.println("posizione " + scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione());
+                    break;
+                case "regina":
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("qP","bianco"),nuovaPosX,nuovaPosY,true);
+                    break;
+                case "alfiere":
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("aP","bianco"),nuovaPosX,nuovaPosY,true);
+
+                    break;
+                case "cavallo":
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("cP","bianco"),nuovaPosX,nuovaPosY,true);
+
+                    break;
+
+                default:
+                    System.out.println("Scelta non valida.");
+                    break;
+
+            }
+
+        }
+        if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosX == 8) {
+            System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
+            System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");
+            GestioneInput gestioneInput = GestioneInput.getInstance();
+            String pezzoNero = gestioneInput.leggiPezzoInput();
+            switch (pezzoNero) {
+                case "torre":
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("tP","nero"),nuovaPosX,nuovaPosY,true);
+                    break;
+                case "regina":
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("qP","nero"),nuovaPosX,nuovaPosY,true);
+                    break;
+                case "alfiere":
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("aP","nero"),nuovaPosX,nuovaPosY,true);
+
+                    break;
+                case "cavallo":
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("cP","nero"),nuovaPosX,nuovaPosY,true);
+
+                    break;
+
+                default:
+                    System.out.println("Scelta non valida.");
+                    break;
+
+            }
+
+        }
     }
 
 }

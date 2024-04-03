@@ -3,7 +3,7 @@ package logic;
 public class Giocatore {
     String nome;
     String colore;
-    int punteggio=0;
+   static  int punteggio=0;
 
     public Giocatore(String nome, String colore) {
         this.nome = nome;
@@ -30,8 +30,9 @@ public class Giocatore {
         return punteggio;
     }
 
-    public void setPunteggio(int punteggio) {
-        this.punteggio = punteggio;
+    public void setPunteggio(int punteggio_) {
+        punteggio = punteggio_;
     }
-
 }
+
+

@@ -5,6 +5,7 @@ import java.util.Objects;
 public abstract class Pezzo {
         protected String colore;
         protected String nome;
+        protected int valore;
 
         protected int posX;
         protected int posY;
@@ -42,6 +43,14 @@ public abstract class Pezzo {
 
     public void setPosY(int posY) {
         this.posY = posY;
+    }
+
+    public int getValore() {
+        return valore;
+    }
+
+    public void setValore(int valore) {
+        this.valore = valore;
     }
 
     @Override

@@ -49,6 +49,29 @@ public class MossaServiceImpl implements Mossa {
         PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getClass());
         service.controlloMossa(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
 
+        //punteggio
+
+
+       if(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo()!=null) {
+           //CONTROLLO SE IL PEZZO HA UN COLORE DIVERSO
+           if (!(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore().equals(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore()))) {
+               //verifico il colore
+               if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco")) {
+                   //assegno il valore del pezzo mangiato
+                   int pb = GiocatoreControGiocatore.getGiocatore1().getPunteggio();
+                   pb+=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getValore();
+                   GiocatoreControGiocatore.getGiocatore1().setPunteggio(pb);
+                   System.out.println("punteggio bianco : " + GiocatoreControGiocatore.getGiocatore1().getPunteggio());
+               } else {
+                   int pn = GiocatoreControGiocatore.getGiocatore2().getPunteggio();
+                   pn+=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getValore();
+                   GiocatoreControGiocatore.getGiocatore2().setPunteggio(pn);
+                   System.out.println("punteggio nero : " + GiocatoreControGiocatore.getGiocatore2().getPunteggio());
+               }
+           }
+       }
+
+
         // effettua la mossa: mette nella nuova posizione il pezzo, e inserisce la casella vuota nella vecchia posizione
         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione, scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX, nuovaPosY, true);
         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("   ", vecchiapos, false);
