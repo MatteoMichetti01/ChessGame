@@ -6,6 +6,8 @@ import domain.Scacchiera;
 public class ReginaServiceImpl implements PezzoService<Regina> {
     @Override
     public void controlloMossa(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
+        if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
+            throw new MossaNonValida("la casella è gia occupata");
         //controllo che vada solo avanti o indietro sulla stessa riga o colonna e in diagonale
         if (!((nuovaPosX == vecchiaPosX || nuovaPosY == vecchiaPosY) ||
                 (Math.abs(nuovaPosX - vecchiaPosX) == Math.abs(nuovaPosY - vecchiaPosY)))) {

@@ -30,7 +30,7 @@ public class GiocatoreControComputer extends Modalita{
             System.out.println();
             System.out.println("Inizia il turno " + computer.getNome());
             while (resa && !(scaccoMatto1)) {
-                List<Pezzo> pezziComputer = new ArrayList<Pezzo>();
+                List<Pezzo> pezziComputer = new ArrayList<>();
                 List<String> mosse = new ArrayList<>();
 
                 for (int i = 0; i < 9; i++) {
@@ -43,42 +43,37 @@ public class GiocatoreControComputer extends Modalita{
 
                     }
                 }
-                for (Pezzo m : pezziComputer) {
-                    System.out.println(m.getNome());
-                }
-                // while(mosse.isEmpty()){
 
+            while (mosse.isEmpty()) {
                 int c = random1.nextInt(pezziComputer.size());
                 temp = pezziComputer.get(c);
-                int vecchiaposx =0;
-                int vecchiaposy=0;
+
+
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
-                        if (scacchiera.casella[i][j].getPezzo()!= null) {
+                        if (scacchiera.casella[i][j].getPezzo() != null) {
                             if (temp.getNome().equals(scacchiera.casella[i][j].getPezzo().getNome())) {
-                                vecchiaposx =i;
-                                vecchiaposy=j;
-                                System.out.println("POSX: " + vecchiaposx + " POSY: " + vecchiaposy);
                                 temp.setPosX(i);
                                 temp.setPosY(j);
                             }
                         }
-
                     }
-                    System.out.println("POSX: " + vecchiaposx + " POSY: " + vecchiaposy);
-
-                    System.out.println("indice: " + c + "NOME: " + temp.getNome() + "POSX: " + temp.getPosX() + " POSY: " + temp.getPosY());
-                    for (int k = 1; k < 9; k++) {
-                        for (int z = 1; z < 9; z++) {
-                            try {
-                                PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(temp.getClass());
-                                service.controlloMossa(k, z, temp.getPosX(), temp.getPosY(), scacchiera);
-                                mosse.add(scacchiera.casella[k][z].getPosizione());
-                            } catch (MossaNonValida m) {
-                            }
+                }
+                System.out.println("indice: " + c + "NOME: " + temp.getNome() + "POSX: " + temp.getPosX() + " POSY: " + temp.getPosY());
+                for (int k = 1; k < 9; k++) {
+                    for (int z = 1; z < 9; z++) {
+                        try {
+                            PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(temp.getClass());
+                            service.controlloMossa(k, z, temp.getPosX(), temp.getPosY(), scacchiera);
+                            mosse.add(scacchiera.casella[k][z].getPosizione());
+                        } catch (MossaNonValida m) {
                         }
                     }
-                    //}
+                }
+            }
+                    for(String m : mosse){
+                        System.out.println(m);
+                    }
 
                     int m = random2.nextInt(mosse.size());
                     String mossaTemp = mosse.get(m);
@@ -87,7 +82,7 @@ public class GiocatoreControComputer extends Modalita{
                     System.out.println();
 
 
-                }
+
             }
 
         }

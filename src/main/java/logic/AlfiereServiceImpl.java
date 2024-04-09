@@ -7,6 +7,8 @@ public class AlfiereServiceImpl implements PezzoService<Alfiere> {
 
     @Override
     public void controlloMossa (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
+        if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
+            throw new MossaNonValida("la casella è gia occupata");
         if (Math.abs(nuovaPosX - vecchiaPosX) != Math.abs(nuovaPosY - vecchiaPosY))
             throw new MossaNonValida("L'alfiere può andare solo in diagonale");
 

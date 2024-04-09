@@ -12,5 +12,7 @@ public class CavalloServiceImpl implements PezzoService<Cavallo> {
                 ||(nuovaPosX == vecchiaPosX-1 && nuovaPosY == vecchiaPosY-2)||(nuovaPosX == vecchiaPosX-1 && nuovaPosY == vecchiaPosY+2 ))){
             throw new MossaNonValida("Il cavallo può muoversi solo ad L");
         }
+        if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
+            throw new MossaNonValida("la casella è gia occupata");
     }
 }

@@ -13,6 +13,7 @@ public class ReServiceImpl implements PezzoService<Re> {
             throw new MossaNonValida("Il re può muoversi solo di una casella alla volta");
         }
 
+
         // Verifica se la destinazione è occupata dallo stesso colore o meno
         if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() &&
                 scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore())) {
