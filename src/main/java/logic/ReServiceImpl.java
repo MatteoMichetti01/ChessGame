@@ -72,19 +72,19 @@ public class ReServiceImpl implements PezzoService<Re> {
                     if (scacchiera.casella[i][j].getPezzo().getNome().charAt(0) != 'r') {
                         try {
                             //simula la mossa
-                            scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY,true);
+                            scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX,nuovaPosY,true);
                             scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("  ",scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), false);
                             //controlla la mossa
                             PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo().getClass());
                             service.controlloMossa(nuovaPosX,nuovaPosY,i,j,scacchiera);
                             //annulla la mossa (torna indietro)
-                            scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
-                            scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione() , false);
+                            scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
+                            scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione() , false);
                             return true;
                         } catch (MossaNonValida m) {
                             //nel caso la mossa non va a buon fine essa deve essere in ogni caso annullata
-                            scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
-                            scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione() , false);
+                            scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
+                            scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione() , false);
                         }
                     }
                 }

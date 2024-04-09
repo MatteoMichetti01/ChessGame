@@ -160,12 +160,10 @@ public class Scacco {
                                     sScacco = Scacco.uscitaScacco(scacchiera, k, z);
                                 }
                                 else {
-
-
-                                    scacchiera.casella[k][z] = new Casella(scacchiera.casella[i][j].getNome(), scacchiera.casella[i][j].getPezzo(), k, z, true);
+                                    scacchiera.casella[k][z] = new Casella(scacchiera.casella[k][z].getPosizione(), scacchiera.casella[i][j].getPezzo(), k, z, true);
                                     scacchiera.casella[i][j] = new Casella("   ", scacchiera.casella[i][j].getPosizione(), false);
                                     sScacco = Scacco.uscitaScacco(scacchiera, k, z);
-                                    scacchiera.casella[i][j] = new Casella(scacchiera.casella[k][z].getNome(), scacchiera.casella[k][z].getPezzo(), i, j, true);
+                                    scacchiera.casella[i][j] = new Casella(scacchiera.casella[i][j].getPosizione(), scacchiera.casella[k][z].getPezzo(), i, j, true);
                                     scacchiera.casella[k][z] = new Casella("   ", scacchiera.casella[k][z].getPosizione(), false);
                                 }
                                 if (!(sScacco)) {
