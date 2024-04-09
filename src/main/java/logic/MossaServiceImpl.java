@@ -1,6 +1,8 @@
 package logic;
 import domain.*;
 
+import java.util.*;
+
 public class MossaServiceImpl implements Mossa {
     public boolean sottoScacco = false;
     public boolean scaccoMatto = false;
@@ -20,7 +22,6 @@ public class MossaServiceImpl implements Mossa {
         PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getClass());
         service.controlloMossa(PosXRe,PosYRe,vecchiaPosX,vecchiaPosY,scacchiera);
     }
-
 
     public Scacchiera move(String nomePezzo, String new_Posizione, String colore) throws MossaNonValida {
         int vecchiaPosX = 0, vecchiaPosY = 0;
@@ -42,6 +43,7 @@ public class MossaServiceImpl implements Mossa {
                 }
             }
         }
+        if (vecchiaPosX == 0 || vecchiaPosY == 0) throw new MossaNonValida("Mossa non valida, il pezzo non esiste");
         if (nuovaPosX == 0 || nuovaPosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");

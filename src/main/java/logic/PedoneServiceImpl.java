@@ -44,18 +44,20 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
             String pezzoBianco = gestioneInput.leggiPezzoInputPromozione();
             switch (pezzoBianco) {
                 case "torre":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("tP","bianco"),nuovaPosX,nuovaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("tPW","bianco"),nuovaPosX,nuovaPosY,true);
                     System.out.println("posizione " + scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione());
+                    System.out.println("pezzo " + scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getNome());
+
                     break;
                 case "regina":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("qP","bianco"),nuovaPosX,nuovaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("qPW","bianco"),vecchiaPosX,vecchiaPosY,true);
                     break;
                 case "alfiere":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("aP","bianco"),nuovaPosX,nuovaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("aPW","bianco"),nuovaPosX,nuovaPosY,true);
 
                     break;
                 case "cavallo":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("cP","bianco"),nuovaPosX,nuovaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("cPW","bianco"),nuovaPosX,nuovaPosY,true);
 
                     break;
 
@@ -70,20 +72,20 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
             System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
             System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");
             GestioneInput gestioneInput = GestioneInput.getInstance();
-            String pezzoNero = gestioneInput.leggiPezzoInput();
+            String pezzoNero = gestioneInput.leggiPezzoInputPromozione();
             switch (pezzoNero) {
                 case "torre":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("tP","nero"),nuovaPosX,nuovaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("tPB","nero"),nuovaPosX,nuovaPosY,true);
                     break;
                 case "regina":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("qP","nero"),nuovaPosX,nuovaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("qPB","nero"),nuovaPosX,nuovaPosY,true);
                     break;
                 case "alfiere":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("aP","nero"),nuovaPosX,nuovaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("aPB","nero"),nuovaPosX,nuovaPosY,true);
 
                     break;
                 case "cavallo":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("cP","nero"),nuovaPosX,nuovaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("cPB","nero"),nuovaPosX,nuovaPosY,true);
 
                     break;
 
