@@ -32,8 +32,9 @@ public class Partita {
         String colore = gestioneInput.inputNonVuoto();
         System.out.println("Inserisci il nome:  ");
         String nome = gestioneInput.inputNonVuoto();
-        Giocatore g1 = new Giocatore(nome,colore);
-            this.modalita= new GiocatoreControComputer(g1);
+        Giocatore g2 = new Giocatore(nome,colore);
+        Giocatore g1 = new Giocatore("computer","bianco");
+            this.modalita= new GiocatoreControComputer(g1,g2);
             this.modalita.startGame();
         }
 

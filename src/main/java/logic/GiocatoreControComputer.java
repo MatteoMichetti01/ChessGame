@@ -7,15 +7,15 @@ import java.util.*;
 public class GiocatoreControComputer extends Modalita{
     public static boolean scaccoMatto1 = false;
 
-    public GiocatoreControComputer(Giocatore giocatore1) {
+    public GiocatoreControComputer(Giocatore giocatore1, Giocatore giocatore2) {
 
-        super(giocatore1);
+        super(giocatore1, giocatore2);
 
     }
 
     @Override
     public void startGame() throws MossaNonValida {
-        if (giocatore1.getColore().equals("nero")) {
+        if (giocatore2.getColore().equals("nero")) {
             Random random1 = new Random();
             Random random2 = new Random();
             Pezzo temp = null;
@@ -59,7 +59,6 @@ public class GiocatoreControComputer extends Modalita{
                         }
                     }
                 }
-                System.out.println("indice: " + c + "NOME: " + temp.getNome() + "POSX: " + temp.getPosX() + " POSY: " + temp.getPosY());
                 for (int k = 1; k < 9; k++) {
                     for (int z = 1; z < 9; z++) {
                         try {
@@ -71,26 +70,49 @@ public class GiocatoreControComputer extends Modalita{
                     }
                 }
             }
-                    for(String m : mosse){
-                        System.out.println(m);
-                    }
 
-                    int m = random2.nextInt(mosse.size());
-                    String mossaTemp = mosse.get(m);
-                    p1.move(temp.getNome(), mossaTemp, computer.getColore());
+            int m = random2.nextInt(mosse.size());
+            String mossaTemp = mosse.get(m);
+            p1.move(temp.getNome(), mossaTemp, computer.getColore());
+            System.out.println("il computer ha mosso il pezzo: " + temp.getNome() + " nella casella: " + mossaTemp);
+            scacchiera.viewscacchiera();
+            System.out.println();
+
+            while (!mossaFatta && resa && !(scaccoMatto1)) {
+                System.out.println("Tocca a " + this.giocatore2.getNome());
+                System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
+                String pezzoNero = gestioneInput.leggiPezzoInput();
+                if(pezzoNero.equals("o")){if(this.opzioni().equals("3")) resa=false;nomeResa= this.giocatore2.getNome();break;}
+                System.out.println("Inserisci mossa: ");
+                String mossaNero = gestioneInput.inputNonVuoto();
+                try{
+                    scacchiera = p1.move(pezzoNero+"B", mossaNero.toUpperCase(), this.giocatore2.getColore());
+                    mossaFatta=true;
+                }
+                catch (MossaNonValida message) {
+                    System.out.println(message.getMessage());
                     scacchiera.viewscacchiera();
                     System.out.println();
-
-
+                }
+            }
+            if(mossaFatta && !(scaccoMatto1)){
+                scacchiera.viewscacchiera();
+                System.out.println();
+                System.out.println();
+                mossaFatta=false;
+            }
+            }
 
             }
 
-        }
     }
 
     @Override
     public String opzioni() {
-
-        return null;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Salva partita (1)");
+        System.out.println("Annulla mossa (2)");
+        System.out.println("Arrenditi (3)");
+        return scanner.nextLine();
     }
 }
