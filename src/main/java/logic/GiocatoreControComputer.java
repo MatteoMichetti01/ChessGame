@@ -1,6 +1,11 @@
 package logic;
 
+import domain.Pezzo;
+import domain.Scacchiera;
+import java.util.*;
+
 public class GiocatoreControComputer extends Modalita{
+    public static boolean scaccoMatto1 = false;
 
     public GiocatoreControComputer(Giocatore giocatore1) {
 
@@ -10,7 +15,82 @@ public class GiocatoreControComputer extends Modalita{
 
     @Override
     public void startGame() throws MossaNonValida {
+        if (giocatore1.getColore().equals("nero")) {
+            Random random1 = new Random();
+            Random random2 = new Random();
+            Pezzo temp = null;
+            Giocatore computer = new Giocatore("Computer", "bianco");
+            String nomeResa = null;
+            boolean resa = true;
+            boolean mossaFatta = false;
+            GestioneInput gestioneInput = GestioneInput.getInstance();
+            Scacchiera scacchiera = new Scacchiera();
+            MossaServiceImpl p1 = new MossaServiceImpl(scacchiera);
+            scacchiera.viewscacchiera();
+            System.out.println();
+            System.out.println("Inizia il turno " + computer.getNome());
+            while (resa && !(scaccoMatto1)) {
+                List<Pezzo> pezziComputer = new ArrayList<Pezzo>();
+                List<String> mosse = new ArrayList<>();
 
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        if (scacchiera.casella[i][j].getPezzo() != null) {
+                            if (scacchiera.casella[i][j].getPezzo().getColore().equals(computer.getColore())) {
+                                pezziComputer.add(scacchiera.casella[i][j].getPezzo());
+                            }
+                        }
+
+                    }
+                }
+                for (Pezzo m : pezziComputer) {
+                    System.out.println(m.getNome());
+                }
+                // while(mosse.isEmpty()){
+
+                int c = random1.nextInt(pezziComputer.size());
+                temp = pezziComputer.get(c);
+                int vecchiaposx =0;
+                int vecchiaposy=0;
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        if (scacchiera.casella[i][j].getPezzo()!= null) {
+                            if (temp.getNome().equals(scacchiera.casella[i][j].getPezzo().getNome())) {
+                                vecchiaposx =i;
+                                vecchiaposy=j;
+                                System.out.println("POSX: " + vecchiaposx + " POSY: " + vecchiaposy);
+                                temp.setPosX(i);
+                                temp.setPosY(j);
+                            }
+                        }
+
+                    }
+                    System.out.println("POSX: " + vecchiaposx + " POSY: " + vecchiaposy);
+
+                    System.out.println("indice: " + c + "NOME: " + temp.getNome() + "POSX: " + temp.getPosX() + " POSY: " + temp.getPosY());
+                    for (int k = 1; k < 9; k++) {
+                        for (int z = 1; z < 9; z++) {
+                            try {
+                                PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(temp.getClass());
+                                service.controlloMossa(k, z, temp.getPosX(), temp.getPosY(), scacchiera);
+                                mosse.add(scacchiera.casella[k][z].getPosizione());
+                            } catch (MossaNonValida m) {
+                            }
+                        }
+                    }
+                    //}
+
+                    int m = random2.nextInt(mosse.size());
+                    String mossaTemp = mosse.get(m);
+                    p1.move(temp.getNome(), mossaTemp, computer.getColore());
+                    scacchiera.viewscacchiera();
+                    System.out.println();
+
+
+                }
+            }
+
+        }
     }
 
     @Override

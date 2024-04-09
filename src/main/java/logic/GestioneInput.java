@@ -56,9 +56,10 @@ public class GestioneInput {
         while(true) {
             try {
                 String input = scanner.nextLine();
-                if (input.equals("1")) {
+                if (input.equals("1") || input.equals("2")) {
                     return input;
                 }
+
                 throw new MossaNonValida("Inserisci una modalità valida (suggerimento: o 1 o 2):");
             } catch (MossaNonValida m) {
                 System.out.println(m.getMessage());

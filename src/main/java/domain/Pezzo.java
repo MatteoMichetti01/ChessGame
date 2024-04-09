@@ -7,8 +7,8 @@ public abstract class Pezzo {
         protected String nome;
         protected int valore;
 
-        protected int posX;
-        protected int posY;
+         int posX;
+         int posY;
 
 
     public Pezzo(String nome, String colore, int posX, int posY) {
