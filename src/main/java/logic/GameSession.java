@@ -162,6 +162,8 @@ public class GameSession extends Modalita{
                                 for (int z = 1; z < 9; z++) {
                                     try {
                                         PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(temp.getClass());
+                                        if (scacchiera.casella[k][z].isOccupata() && scacchiera.casella[temp.getPosX()][temp.getPosY()].getPezzo().getColore().equals(scacchiera.casella[k][z].getPezzo().getColore()))
+                                            throw new MossaNonValida("la casella è gia occupata");
                                         service.controlloMossa(k, z, temp.getPosX(), temp.getPosY(), scacchiera);
                                         mosse.add(scacchiera.casella[k][z].getPosizione());
                                     } catch (MossaNonValida m) {
@@ -213,7 +215,7 @@ public class GameSession extends Modalita{
                     }
                 }
 
-            }else{
+            }else {
                 Random random1 = new Random();
                 Random random2 = new Random();
                 Pezzo temp = null;
@@ -226,25 +228,26 @@ public class GameSession extends Modalita{
                 scacchiera.viewscacchiera();
                 System.out.println();
                 System.out.println("Inizia il turno " + giocatore1.getNome());
-
-                while (!mossaFatta && resa && !(scaccoMatto1)) {
-                    System.out.println("Tocca a " + giocatore1.getNome());
-                    System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
-                    String pezzoBianco = gestioneInput.leggiPezzoInput();
-                    if (pezzoBianco.equals("o")) {
-                        if (this.opzioni().equals("3")) resa = false;
-                        nomeResa = giocatore1.getNome();
-                        break;
-                    }
-                    System.out.println("Inserisci mossa: ");
-                    String mossaBianco = gestioneInput.inputNonVuoto();
-                    try {
-                        scacchiera = p1.move(pezzoBianco + "W", mossaBianco.toUpperCase(), giocatore1.getColore());
-                        mossaFatta = true;
-                    } catch (MossaNonValida message) {
-                        System.out.println(message.getMessage());
-                        scacchiera.viewscacchiera();
-                        System.out.println();
+                while (resa && !(scaccoMatto1)) {
+                    while (!mossaFatta && resa && !(scaccoMatto1)) {
+                        System.out.println("Tocca a " + giocatore1.getNome());
+                        System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
+                        String pezzoBianco = gestioneInput.leggiPezzoInput();
+                        if (pezzoBianco.equals("o")) {
+                            if (this.opzioni().equals("3")) resa = false;
+                            nomeResa = giocatore1.getNome();
+                            break;
+                        }
+                        System.out.println("Inserisci mossa: ");
+                        String mossaBianco = gestioneInput.inputNonVuoto();
+                        try {
+                            scacchiera = p1.move(pezzoBianco + "W", mossaBianco.toUpperCase(), giocatore1.getColore());
+                            mossaFatta = true;
+                        } catch (MossaNonValida message) {
+                            System.out.println(message.getMessage());
+                            scacchiera.viewscacchiera();
+                            System.out.println();
+                        }
                     }
 
                     if (mossaFatta && !(scaccoMatto1)) {
@@ -288,6 +291,8 @@ public class GameSession extends Modalita{
                                 for (int z = 1; z < 9; z++) {
                                     try {
                                         PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(temp.getClass());
+                                        if (scacchiera.casella[k][z].isOccupata() && scacchiera.casella[temp.getPosX()][temp.getPosY()].getPezzo().getColore().equals(scacchiera.casella[k][z].getPezzo().getColore()))
+                                            throw new MossaNonValida("la casella è gia occupata");
                                         service.controlloMossa(k, z, temp.getPosX(), temp.getPosY(), scacchiera);
                                         mosse.add(scacchiera.casella[k][z].getPosizione());
                                     } catch (MossaNonValida m) {
@@ -310,12 +315,12 @@ public class GameSession extends Modalita{
                     System.out.println();
                     mossaFatta = false;
                 }
-
             }
+        }
 
 
         }
-    }
+
 
     @Override
     public String opzioni() {
