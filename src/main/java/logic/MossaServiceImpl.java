@@ -71,7 +71,10 @@ public class MossaServiceImpl implements Mossa {
            }
        }
 
-
+        Casella temp = new Casella("  ", new_Posizione,false);
+        if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() != null) {
+            temp = scacchiera.casella[nuovaPosX][nuovaPosY];
+        }
         // effettua la mossa: mette nella nuova posizione il pezzo, e inserisce la casella vuota nella vecchia posizione
         scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(new_Posizione, scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX, nuovaPosY, true);
         scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("   ", vecchiapos, false);
@@ -81,7 +84,11 @@ public class MossaServiceImpl implements Mossa {
             if (sottoScacco) {
                // System.out.println("il re è ancora sotto scacco");
                 scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(vecchiapos, scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
-                scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", new_Posizione, false);
+                if (temp.isOccupata()) {
+                    scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
+                } else {
+                    scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
+                }
                 throw new MossaNonValida("sei ancora in scacco, riprova con un'altra mossa ");
             }
         }
