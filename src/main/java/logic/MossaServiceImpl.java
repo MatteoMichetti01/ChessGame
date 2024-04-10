@@ -1,8 +1,6 @@
 package logic;
 import domain.*;
 
-import java.util.*;
-
 public class MossaServiceImpl implements Mossa {
     public boolean sottoScacco = false;
     public boolean scaccoMatto = false;
@@ -16,7 +14,7 @@ public class MossaServiceImpl implements Mossa {
 
     // questo metodo viene chiamato da controlloScacco e controlla se il pezzo che stiamo controllando può arrivare alla casella del re. Se può farlo restituisce true, quindi è sotto scacco, se non può farlo va in eccezione e quindi va avanti
     public static void controlloSePezzoArrivaRe(int PosXRe, int PosYRe, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
-        if (PosXRe == 0 || PosYRe == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera123");
+        if (PosXRe == 0 || PosYRe == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         if (scacchiera.casella[PosXRe][PosYRe].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[PosXRe][PosYRe].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
         PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getClass());
@@ -60,15 +58,15 @@ public class MossaServiceImpl implements Mossa {
                //verifico il colore
                if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco")) {
                    //assegno il valore del pezzo mangiato
-                   int pb = GiocatoreControGiocatore.getGiocatore1().getPunteggio();
+                   int pb = GameSession.getGiocatore1().getPunteggio();
                    pb+=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getValore();
-                   GiocatoreControGiocatore.getGiocatore1().setPunteggio(pb);
-                   System.out.println("punteggio bianco : " + GiocatoreControGiocatore.getGiocatore1().getPunteggio());
+                   GameSession.getGiocatore1().setPunteggio(pb);
+                   System.out.println("punteggio bianco : " + GameSession.getGiocatore1().getPunteggio());
                } else {
-                   int pn = GiocatoreControGiocatore.getGiocatore2().getPunteggio();
+                   int pn = GameSession.getGiocatore2().getPunteggio();
                    pn+=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getValore();
-                   GiocatoreControGiocatore.getGiocatore2().setPunteggio(pn);
-                   System.out.println("punteggio nero : " + GiocatoreControGiocatore.getGiocatore2().getPunteggio());
+                   GameSession.getGiocatore2().setPunteggio(pn);
+                   System.out.println("punteggio nero : " + GameSession.getGiocatore2().getPunteggio());
                }
            }
        }
@@ -93,7 +91,7 @@ public class MossaServiceImpl implements Mossa {
             if (scaccoMatto){
                 System.out.println("SCACCO MATTO");
                 System.out.println("Il "+ scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore() +" ha vinto!");
-                GiocatoreControGiocatore.setScaccoMatto1(true);
+                GameSession.setScaccoMatto1(true);
             }
             else {
                 if (colore.equals("bianco"))

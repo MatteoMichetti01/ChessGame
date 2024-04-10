@@ -1,7 +1,5 @@
 package logic;
 
-import java.util.Scanner;
-
 public class Partita {
     private Giocatore giocatoreAttuale;
     Modalita modalita;
@@ -24,20 +22,25 @@ public class Partita {
             System.out.println("Inserisci nome per giocatore nero:  ");
             String nomeNero = gestioneInput.inputNonVuoto();
             Giocatore g2 = new Giocatore(nomeNero,"nero");
-            this.modalita = new GiocatoreControGiocatore(g1, g2);
+            this.modalita = new GameSession(g1, g2);
             this.modalita.startGame();
         }
-        else{
-        System.out.println("Quale colore vuoi essere?(bianco o nero):  ");
-        String colore = gestioneInput.inputNonVuoto();
-        System.out.println("Inserisci il nome:  ");
-        String nome = gestioneInput.inputNonVuoto();
-        Giocatore g2 = new Giocatore(nome,colore);
-        Giocatore g1 = new Giocatore("computer","bianco");
-            this.modalita= new GiocatoreControComputer(g1,g2);
-            this.modalita.startGame();
+        else {
+            System.out.println("Quale colore vuoi essere?(bianco o nero):  ");
+            String colore = gestioneInput.inputNonVuoto();
+            System.out.println("Inserisci il nome:  ");
+            String nome = gestioneInput.inputNonVuoto();
+            Giocatore g1 = new Giocatore(nome, colore);
+            if (colore.equals("nero")) {
+                Giocatore g2 = new Giocatore("computer", "bianco");
+                this.modalita = new GameSession(g1, g2);
+                this.modalita.startGame();
+            } else {
+                Giocatore g2 = new Giocatore("computer", "nero");
+                this.modalita = new GameSession(g1, g2);
+                this.modalita.startGame();
+            }
         }
-
     }
 
 
