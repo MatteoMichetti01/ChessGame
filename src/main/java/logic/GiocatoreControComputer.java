@@ -30,6 +30,7 @@ public class GiocatoreControComputer extends Modalita{
             System.out.println();
             System.out.println("Inizia il turno " + computer.getNome());
             while (resa && !(scaccoMatto1)) {
+                while (!mossaFatta) {
                 List<Pezzo> pezziComputer = new ArrayList<>();
                 List<String> mosse = new ArrayList<>();
 
@@ -44,39 +45,46 @@ public class GiocatoreControComputer extends Modalita{
                     }
                 }
 
-            while (mosse.isEmpty()) {
-                int c = random1.nextInt(pezziComputer.size());
-                temp = pezziComputer.get(c);
+                while (mosse.isEmpty()) {
+                    int c = random1.nextInt(pezziComputer.size());
+                    temp = pezziComputer.get(c);
 
 
-                for (int i = 0; i < 9; i++) {
-                    for (int j = 0; j < 9; j++) {
-                        if (scacchiera.casella[i][j].getPezzo() != null) {
-                            if (temp.getNome().equals(scacchiera.casella[i][j].getPezzo().getNome())) {
-                                temp.setPosX(i);
-                                temp.setPosY(j);
+                    for (int i = 0; i < 9; i++) {
+                        for (int j = 0; j < 9; j++) {
+                            if (scacchiera.casella[i][j].getPezzo() != null) {
+                                if (temp.getNome().equals(scacchiera.casella[i][j].getPezzo().getNome())) {
+                                    temp.setPosX(i);
+                                    temp.setPosY(j);
+                                }
+                            }
+                        }
+                    }
+                    for (int k = 1; k < 9; k++) {
+                        for (int z = 1; z < 9; z++) {
+                            try {
+                                PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(temp.getClass());
+                                service.controlloMossa(k, z, temp.getPosX(), temp.getPosY(), scacchiera);
+                                mosse.add(scacchiera.casella[k][z].getPosizione());
+                            } catch (MossaNonValida m) {
                             }
                         }
                     }
                 }
-                for (int k = 1; k < 9; k++) {
-                    for (int z = 1; z < 9; z++) {
-                        try {
-                            PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(temp.getClass());
-                            service.controlloMossa(k, z, temp.getPosX(), temp.getPosY(), scacchiera);
-                            mosse.add(scacchiera.casella[k][z].getPosizione());
-                        } catch (MossaNonValida m) {
-                        }
-                    }
+
+                int m = random2.nextInt(mosse.size());
+                String mossaTemp = mosse.get(m);
+                try {
+                    System.out.println("il computer ha mosso il pezzo: " + temp.getNome() + " nella casella: " + mossaTemp);
+                    p1.move(temp.getNome(), mossaTemp, computer.getColore());
+                    mossaFatta = true;
+                } catch (MossaNonValida mos) {
                 }
             }
-
-            int m = random2.nextInt(mosse.size());
-            String mossaTemp = mosse.get(m);
-            p1.move(temp.getNome(), mossaTemp, computer.getColore());
-            System.out.println("il computer ha mosso il pezzo: " + temp.getNome() + " nella casella: " + mossaTemp);
             scacchiera.viewscacchiera();
+                scacchiera.viewscacchieraPos();
             System.out.println();
+            mossaFatta=false;
 
             while (!mossaFatta && resa && !(scaccoMatto1)) {
                 System.out.println("Tocca a " + this.giocatore2.getNome());
@@ -97,6 +105,7 @@ public class GiocatoreControComputer extends Modalita{
             }
             if(mossaFatta && !(scaccoMatto1)){
                 scacchiera.viewscacchiera();
+                scacchiera.viewscacchieraPos();
                 System.out.println();
                 System.out.println();
                 mossaFatta=false;

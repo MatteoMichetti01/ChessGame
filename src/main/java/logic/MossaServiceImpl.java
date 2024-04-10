@@ -81,9 +81,9 @@ public class MossaServiceImpl implements Mossa {
         if (sottoScacco) {
             sottoScacco = Scacco.uscitaScacco(scacchiera, nuovaPosX, nuovaPosY);
             if (sottoScacco) {
-                System.out.println("il re è ancora sotto scacco");
-                scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(new_Posizione, scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
-                scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", vecchiapos, false);
+               // System.out.println("il re è ancora sotto scacco");
+                scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(vecchiapos, scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
+                scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella("   ", new_Posizione, false);
                 throw new MossaNonValida("sei ancora in scacco, riprova con un'altra mossa ");
             }
         }
