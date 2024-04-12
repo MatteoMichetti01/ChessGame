@@ -27,7 +27,7 @@ public class Partita {
         }
         else {
             System.out.println("Quale colore vuoi essere?(bianco o nero):  ");
-            String colore = gestioneInput.inputNonVuoto();
+            String colore = gestioneInput.inputColore();
             System.out.println("Inserisci il nome:  ");
             String nome = gestioneInput.inputNonVuoto();
             Giocatore g1 = new Giocatore(nome, colore);

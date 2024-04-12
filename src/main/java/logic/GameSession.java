@@ -104,6 +104,7 @@ public class GameSession extends Modalita{
                 }
             }
             if (scaccoMatto1) {
+                scaccoMatto1 = false;
                 System.out.println("Torna al menù principale (1)");
                 System.out.println("Esci (2)");
                 String input = gestioneInput.leggiNumeroInput();
@@ -182,7 +183,6 @@ public class GameSession extends Modalita{
                         }
                     }
                     scacchiera.viewscacchiera();
-                    scacchiera.viewscacchieraPos();
                     System.out.println();
                     mossaFatta = false;
 
@@ -208,7 +208,6 @@ public class GameSession extends Modalita{
                     }
                     if (mossaFatta && !(scaccoMatto1)) {
                         scacchiera.viewscacchiera();
-                        scacchiera.viewscacchieraPos();
                         System.out.println();
                         System.out.println();
                         mossaFatta = false;
@@ -252,7 +251,6 @@ public class GameSession extends Modalita{
 
                     if (mossaFatta && !(scaccoMatto1)) {
                         scacchiera.viewscacchiera();
-                        scacchiera.viewscacchieraPos();
                         System.out.println();
                         System.out.println();
                         mossaFatta = false;
@@ -311,7 +309,6 @@ public class GameSession extends Modalita{
                         }
                     }
                     scacchiera.viewscacchiera();
-                    scacchiera.viewscacchieraPos();
                     System.out.println();
                     mossaFatta = false;
                 }

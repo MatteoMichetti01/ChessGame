@@ -11,6 +11,10 @@ public class ReginaServiceImpl implements PezzoService<Regina> {
                 (Math.abs(nuovaPosX - vecchiaPosX) == Math.abs(nuovaPosY - vecchiaPosY)))) {
             throw new MossaNonValida("Mossa non valida per la regina");
         }
+
+        //if (MossaServiceImpl.pezzoInchiodato(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera))
+            //throw new MossaNonValida("Non puoi metterti in scacco da solo");
+
         //pezzo in mezzo
         if (nuovaPosX == vecchiaPosX) {
             int inizio = Math.min(vecchiaPosY, nuovaPosY) + 1;

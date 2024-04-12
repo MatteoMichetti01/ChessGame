@@ -28,7 +28,7 @@ public class GestioneInput {
                 if (!(pezzo.equals("p1")) && !(pezzo.equals("p2")) && !(pezzo.equals("p3")) && !(pezzo.equals("p4")) && !(pezzo.equals("p5"))
                         && !(pezzo.equals("p6")) && !(pezzo.equals("p7")) && !(pezzo.equals("p8")) && !(pezzo.equals("t1")) && !(pezzo.equals("t2"))
                         && !(pezzo.equals("c1")) && !(pezzo.equals("c2")) && !(pezzo.equals("a1")) && !(pezzo.equals("a2"))
-                        && !(pezzo.equals("qn")) && !(pezzo.equals("re")) && !(pezzo.equals("qP")) && !(pezzo.equals("aP")) && !(pezzo.equals("cP")) && !(pezzo.equals("tP"))) {
+                        && !(pezzo.equals("qn")) && !(pezzo.equals("re")) && !(pezzo.equals("qP")) && !(pezzo.equals("aP")) && !(pezzo.equals("cP")) && !(pezzo.equals("tP")) && !(pezzo.equals("o"))) {
                     throw new MossaNonValida("Inserisci un pezzo valido (ad esempio: p4)");
                 }
                 return pezzo;
@@ -73,6 +73,20 @@ public class GestioneInput {
                 String input = scanner.nextLine();
                 if(input.isEmpty()) {
                     throw new MossaNonValida("input non valido, riprova: ");
+                }
+                return input;
+            } catch (MossaNonValida m) {
+                System.out.println(m.getMessage());
+            }
+        }
+    }
+
+    public String inputColore() throws MossaNonValida{
+        while(true) {
+            try{
+                String input = scanner.nextLine();
+                if(!(input.equals("nero")) && !(input.equals("bianco"))) {
+                    throw new MossaNonValida("input non valido, inserisci bianco o nero: ");
                 }
                 return input;
             } catch (MossaNonValida m) {

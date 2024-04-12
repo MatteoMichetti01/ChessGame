@@ -32,7 +32,7 @@ public class Scacchiera {
         casella[1][4] = new Casella("D1", new Regina("qnB","nero"),1,4,true);
         casella[1][5] = new Casella("E1", new Re("reB","nero"),1,5,true);
         casella[1][6] = new Casella("F1", new Alfiere("a2B","nero"),1,6,true);
-        casella[1][7] = new Casella("G1", new Cavallo("c2b","nero"),1,7,true);
+        casella[1][7] = new Casella("G1", new Cavallo("c2B","nero"),1,7,true);
         casella[1][8] = new Casella("H1", new Torre("t2B","nero"),1,8,true);
 
         String[]  lettere = new String[]{"j", "A", "B", "C", "D", "E", "F", "G", "H"};
@@ -85,7 +85,7 @@ public class Scacchiera {
         }
 
     }
-    public void viewscacchieraPos(){
+    /*public void viewscacchieraPos(){
         for(int k=0;k<9;k++){
             System.out.print(" "+this.casella[0][k].getPosizione()+"  ");
         }
@@ -97,6 +97,6 @@ public class Scacchiera {
             }
         }
 
-    }
+    }*/
 
 }

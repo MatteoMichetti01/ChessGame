@@ -21,6 +21,72 @@ public class MossaServiceImpl implements Mossa {
         service.controlloMossa(PosXRe,PosYRe,vecchiaPosX,vecchiaPosY,scacchiera);
     }
 
+    /*public static boolean pezzoInchiodato (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
+        String colore = scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore();
+        int posxRE = 0, posyRE = 0;
+        if (colore.equals("nero")) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (scacchiera.casella[i][j].getPezzo() != null) {
+                        if (scacchiera.casella[i][j].getPezzo().getNome().equals("reB") && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
+                            posxRE = i;
+                            posyRE = j;
+                        }
+
+                    }
+                }
+            }
+        }
+        // altrimenti se colore è bianco allora mi salvo le coordinate del re bianco
+        else {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (scacchiera.casella[i][j].getPezzo() != null) {
+                        if (scacchiera.casella[i][j].getPezzo().getNome().equals("reW") && scacchiera.casella[i][j].getPezzo().getColore().equals(colore)) {
+                            posxRE = i;
+                            posyRE = j;
+                        }
+
+                    }
+                }
+            }
+        }
+        Casella temp = new Casella("   ", scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(),false);
+        if (scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo() != null) {
+            temp = scacchiera.casella[nuovaPosX][nuovaPosY];
+        }
+        scacchiera.casella[nuovaPosX][nuovaPosY] = new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo(), nuovaPosX, nuovaPosY, true);
+        scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella("   ", scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), false);
+        for (int i=1; i<9; i++) {
+            for (int j=1; j<9; j++) {
+                if (scacchiera.casella[i][j].isOccupata() && !(scacchiera.casella[i][j].getPezzo().getColore().equals(colore))) {
+                    try {
+                        controlloSePezzoArrivaRe(posxRE, posyRE, i, j, scacchiera);
+                        scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
+                        if (temp.isOccupata()) {
+                            scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
+                        } else {
+                            scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
+                        }
+                        return true;
+                    } catch (MossaNonValida m) {
+                    }
+                }
+            }
+        }
+
+        scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
+        if (temp.isOccupata()) {
+            scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
+        } else {
+            scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
+        }
+        return false;
+    }
+
+     */
+
+
     public Scacchiera move(String nomePezzo, String new_Posizione, String colore) throws MossaNonValida {
         int vecchiaPosX = 0, vecchiaPosY = 0;
         int nuovaPosX = 0, nuovaPosY = 0;
@@ -93,9 +159,12 @@ public class MossaServiceImpl implements Mossa {
             }
         }
         sottoScacco = Scacco.controlloScacco(scacchiera, nuovaPosX, nuovaPosY);
+
         if (sottoScacco) {
             scaccoMatto = Scacco.controlloScaccoMatto(scacchiera, nuovaPosX, nuovaPosY);
             if (scaccoMatto){
+                scacchiera.viewscacchiera();
+                System.out.println();
                 System.out.println("SCACCO MATTO");
                 System.out.println("Il "+ scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore() +" ha vinto!");
                 GameSession.setScaccoMatto1(true);

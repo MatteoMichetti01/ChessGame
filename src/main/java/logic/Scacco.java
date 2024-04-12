@@ -61,7 +61,6 @@ public class Scacco {
     }
 
 
-
     /*
     Questo metodo controlla se dopo una mossa il re è sotto scacco. Restituisce true se è sotto scacco, false altrimenti.
     Controlla se un pezzo avversario potrebbe raggiungere la casella del re, nel caso fosse possibile, il re è sotto scacco
@@ -155,18 +154,24 @@ public class Scacco {
                             // false perchè vuol dire che c'è almeno una mossa che mi fa uscire dallo scacco e quindi automaticamente non è scacco
                             // matto. Se non trova nessuna mossa per nessun pezzo per uscire dallo scacco allora arriva alla fine del metodo e
                             // restituisce true perchè è scacco matto.
+                            Casella temp = new Casella("  ", scacchiera.casella[k][z].getPosizione(), false);
                             if (mossasi) {
                                 if(scacchiera.casella[k][z].isOccupata()){
-                                    sScacco = Scacco.uscitaScacco(scacchiera, k, z);
+                                    temp = scacchiera.casella[k][z];
                                 }
                                 else {
                                     scacchiera.casella[k][z] = new Casella(scacchiera.casella[k][z].getPosizione(), scacchiera.casella[i][j].getPezzo(), k, z, true);
                                     scacchiera.casella[i][j] = new Casella("   ", scacchiera.casella[i][j].getPosizione(), false);
                                     sScacco = Scacco.uscitaScacco(scacchiera, k, z);
                                     scacchiera.casella[i][j] = new Casella(scacchiera.casella[i][j].getPosizione(), scacchiera.casella[k][z].getPezzo(), i, j, true);
-                                    scacchiera.casella[k][z] = new Casella("   ", scacchiera.casella[k][z].getPosizione(), false);
+                                    if (temp.isOccupata()) {
+                                        scacchiera.casella[k][z] = temp;
+                                    } else {
+                                        scacchiera.casella[k][z] = new Casella("   ", scacchiera.casella[k][z].getPosizione(), false);
+                                    }
                                 }
                                 if (!(sScacco)) {
+                                    System.out.println("possibile mossa per uscire dallo scacco: " + scacchiera.casella[i][j].getPezzo().getNome() + " in " + scacchiera.casella[k][z].getPosizione());
                                     return false;
                                 }
                             }
