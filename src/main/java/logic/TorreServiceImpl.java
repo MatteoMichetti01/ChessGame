@@ -8,9 +8,6 @@ public class TorreServiceImpl implements PezzoService<Torre> {
     @Override
     public void controlloMossa(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
 
-        //if (MossaServiceImpl.pezzoInchiodato(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera))
-            //throw new MossaNonValida("Non puoi metterti in scacco da solo");
-
         //verifica che la torre non possa andare in diagonale
         if (nuovaPosY != vecchiaPosY) {
             if (nuovaPosX != vecchiaPosX) {

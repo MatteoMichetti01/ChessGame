@@ -12,8 +12,6 @@ public class CavalloServiceImpl implements PezzoService<Cavallo> {
                 || (nuovaPosX == vecchiaPosX - 1 && nuovaPosY == vecchiaPosY - 2) || (nuovaPosX == vecchiaPosX - 1 && nuovaPosY == vecchiaPosY + 2))) {
             throw new MossaNonValida("Il cavallo può muoversi solo ad L");
         }
-        //if (MossaServiceImpl.pezzoInchiodato(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera))
-            //throw new MossaNonValida("Non puoi metterti in scacco da solo");
     }
 
 }

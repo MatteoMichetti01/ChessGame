@@ -7,8 +7,6 @@ public class AlfiereServiceImpl implements PezzoService<Alfiere> {
 
     @Override
     public void controlloMossa (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
-        //if (MossaServiceImpl.pezzoInchiodato(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera))
-            //throw new MossaNonValida("Non puoi metterti in scacco da solo");
 
         if (Math.abs(nuovaPosX - vecchiaPosX) != Math.abs(nuovaPosY - vecchiaPosY))
             throw new MossaNonValida("L'alfiere può andare solo in diagonale");

@@ -9,8 +9,6 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
     @Override
     public void controlloMossa (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
 
-        //if (MossaServiceImpl.pezzoInchiodato(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera))
-            //throw new MossaNonValida("Non puoi metterti in scacco da solo");
         if (nuovaPosY == vecchiaPosY && (vecchiaPosX == 2 || vecchiaPosX == 7)) {
             if (Math.abs(nuovaPosX - vecchiaPosX) > 2)
                 throw new MossaNonValida("Mossa non valida, il pedone può avanzare alla prima mossa al massimo di due caselle");
