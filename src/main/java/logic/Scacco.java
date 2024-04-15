@@ -159,7 +159,7 @@ public class Scacco {
                                 if(scacchiera.casella[k][z].isOccupata()){
                                     temp = scacchiera.casella[k][z];
                                 }
-                                else {
+
                                     scacchiera.casella[k][z] = new Casella(scacchiera.casella[k][z].getPosizione(), scacchiera.casella[i][j].getPezzo(), k, z, true);
                                     scacchiera.casella[i][j] = new Casella("   ", scacchiera.casella[i][j].getPosizione(), false);
                                     sScacco = Scacco.uscitaScacco(scacchiera, k, z);
@@ -169,7 +169,7 @@ public class Scacco {
                                     } else {
                                         scacchiera.casella[k][z] = new Casella("   ", scacchiera.casella[k][z].getPosizione(), false);
                                     }
-                                }
+
                                 if (!(sScacco)) {
                                     System.out.println("possibile mossa per uscire dallo scacco: " + scacchiera.casella[i][j].getPezzo().getNome() + " in " + scacchiera.casella[k][z].getPosizione());
                                     return false;

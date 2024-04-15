@@ -103,7 +103,7 @@ public class MossaServiceImpl implements Mossa {
             }
         }
         pezzoInchiodato = Scacco.controlloScacco(scacchiera,tempPosX,tempPosY);
-        if(pezzoInchiodato) {
+        if(pezzoInchiodato && !sottoScacco) {
             scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(vecchiapos, scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
             if (temp.isOccupata()) {
                 scacchiera.casella[nuovaPosX][nuovaPosY] = temp;

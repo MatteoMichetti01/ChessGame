@@ -42,14 +42,14 @@ public class SessioneGioco extends Modalita{
                         System.out.println("Tocca a " + giocatore1.getNome());
                         System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                         GiocatoreService<? extends Giocatore> service = GiocatoreServiceFactory.getGiocatoreService(giocatore1.getClass());
-                        String pezzoBianco = service.getPezzo(giocatore1);
+                        String pezzoBianco = service.getPezzo(giocatore1, scacchiera);
                         if (pezzoBianco.equals("o")) {
                             if (this.opzioni().equals("3")) resa = false;
                             nomeResa = giocatore1.getNome();
                             break;
                         }
                         System.out.println("Inserisci mossa: ");
-                        String mossaBianco = service.getPosizioneMossa(pezzoBianco);
+                        String mossaBianco = service.getPosizioneMossa(pezzoBianco, scacchiera);
                     try {
                         scacchiera = p1.move(pezzoBianco, mossaBianco.toUpperCase(), this.giocatore1.getColore());
                         mossaFatta = true;
@@ -70,14 +70,15 @@ public class SessioneGioco extends Modalita{
                     System.out.println("Tocca a " + giocatore2.getNome());
                     System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                     GiocatoreService<? extends Giocatore> service2 = GiocatoreServiceFactory.getGiocatoreService(giocatore2.getClass());
-                    String pezzoNero = service2.getPezzo(giocatore2);
+                    String pezzoNero = service2.getPezzo(giocatore2, scacchiera);
                     if (pezzoNero.equals("o")) {
                         if (this.opzioni().equals("3")) resa = false;
                         nomeResa = giocatore2.getNome();
                         break;
                     }
                     System.out.println("Inserisci mossa: ");
-                    String mossaNero = service2.getPosizioneMossa(pezzoNero);
+                    String mossaNero = service2.getPosizioneMossa(pezzoNero, scacchiera);
+                    System.out.println("mossa nero" + mossaNero);
                     try {
                         scacchiera = p1.move(pezzoNero, mossaNero.toUpperCase(), giocatore2.getColore());
                         mossaFatta = true;

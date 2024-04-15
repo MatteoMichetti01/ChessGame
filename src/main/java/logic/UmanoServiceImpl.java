@@ -1,10 +1,11 @@
 package logic;
 
 import domain.Pezzo;
+import domain.Scacchiera;
 
 public class UmanoServiceImpl implements GiocatoreService<Umano> {
     GestioneInput gestioneInput = GestioneInput.getInstance();
-    public String getPezzo(Giocatore g) throws MossaNonValida {
+    public String getPezzo(Giocatore g, Scacchiera scacchiera) throws MossaNonValida {
         if(g.getColore().equals("bianco")){
             return gestioneInput.leggiPezzoInput()+"W";
         }
@@ -12,7 +13,7 @@ public class UmanoServiceImpl implements GiocatoreService<Umano> {
 
     }
 
-    public String getPosizioneMossa(String p) throws MossaNonValida {
+    public String getPosizioneMossa(String p, Scacchiera scacchiera) throws MossaNonValida {
         return gestioneInput.inputNonVuoto();
 
     }
