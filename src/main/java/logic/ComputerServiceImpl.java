@@ -6,6 +6,7 @@ public class ComputerServiceImpl implements GiocatoreService<Computer> {
     Scacchiera scacchiera = new Scacchiera();
     Random random1 = new Random();
     Random random2 = new Random();
+    Pezzo temp2;
 
     public String getPezzo(Giocatore g1) {
         Pezzo temp;
@@ -22,13 +23,13 @@ public class ComputerServiceImpl implements GiocatoreService<Computer> {
         }
         int c = random1.nextInt(pezziComputer.size());
         temp = pezziComputer.get(c);
+        System.out.print("il computer ha mosso " + temp.getNome()+" ");
         return temp.getNome();
     }
 
 
     public String getPosizioneMossa(String p) {
         List<String> mosse = new ArrayList<>();
-        Pezzo temp2 = null;
         while (mosse.isEmpty()) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -56,6 +57,7 @@ public class ComputerServiceImpl implements GiocatoreService<Computer> {
 
         int m = random2.nextInt(mosse.size());
         String mossaTemp = mosse.get(m);
+        System.out.print("in "+ mossaTemp);
         return mossaTemp;
     }
 }

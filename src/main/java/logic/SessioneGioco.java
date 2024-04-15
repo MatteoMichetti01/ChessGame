@@ -39,19 +39,19 @@ public class SessioneGioco extends Modalita{
             while (resa && !(scaccoMatto1)) {
                 //TURNO GIOCATORE BIANCO
                 while (!mossaFatta && resa && !(scaccoMatto1)) {
-                    System.out.println("Tocca a " + giocatore1.getNome());
-                    System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
-                    GiocatoreService<? extends Giocatore> service = GiocatoreServiceFactory.getGiocatoreService(giocatore1.getClass());
-                    String pezzoBianco = service.getPezzo(giocatore1);
-                    if (pezzoBianco.equals("o")) {
-                        if (this.opzioni().equals("3")) resa = false;
-                        nomeResa = giocatore1.getNome();
-                        break;
-                    }
-                    System.out.println("Inserisci mossa: ");
-                    String mossaBianco = service.getPosizioneMossa(pezzoBianco);
+                        System.out.println("Tocca a " + giocatore1.getNome());
+                        System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
+                        GiocatoreService<? extends Giocatore> service = GiocatoreServiceFactory.getGiocatoreService(giocatore1.getClass());
+                        String pezzoBianco = service.getPezzo(giocatore1);
+                        if (pezzoBianco.equals("o")) {
+                            if (this.opzioni().equals("3")) resa = false;
+                            nomeResa = giocatore1.getNome();
+                            break;
+                        }
+                        System.out.println("Inserisci mossa: ");
+                        String mossaBianco = service.getPosizioneMossa(pezzoBianco);
                     try {
-                        scacchiera = p1.move(pezzoBianco + "W", mossaBianco.toUpperCase(), this.giocatore1.getColore());
+                        scacchiera = p1.move(pezzoBianco, mossaBianco.toUpperCase(), this.giocatore1.getColore());
                         mossaFatta = true;
                     } catch (MossaNonValida m) {
                         System.out.println(m.getMessage());
@@ -79,11 +79,10 @@ public class SessioneGioco extends Modalita{
                     System.out.println("Inserisci mossa: ");
                     String mossaNero = service2.getPosizioneMossa(pezzoNero);
                     try {
-                        scacchiera = p1.move(pezzoNero + "B", mossaNero.toUpperCase(), giocatore2.getColore());
+                        scacchiera = p1.move(pezzoNero, mossaNero.toUpperCase(), giocatore2.getColore());
                         mossaFatta = true;
                     } catch (MossaNonValida m) {
                         System.out.println(m.getMessage());
-                        System.out.println("arriva qui");
                         scacchiera.viewscacchiera();
                         System.out.println();
                     }

@@ -30,12 +30,14 @@ public class Partita {
             String colore = gestioneInput.inputColore();
             System.out.println("Inserisci il nome:  ");
             String nome = gestioneInput.inputNonVuoto();
-            Giocatore g1 = new Umano(nome, colore);
+
             if (colore.equals("nero")) {
-                Giocatore g2 = new Computer("computer", "bianco");
+                Giocatore g1 = new Computer("computer", "bianco");
+                Giocatore g2 = new Umano(nome, colore);
                 this.modalita = new SessioneGioco(g1, g2);
                 this.modalita.startGame();
             } else {
+                Giocatore g1 = new Umano(nome, colore);
                 Giocatore g2 = new Computer("computer", "nero");
                 this.modalita = new SessioneGioco(g1, g2);
                 this.modalita.startGame();
