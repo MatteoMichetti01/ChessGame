@@ -1,6 +1,6 @@
 package logic;
 
-public class Giocatore {
+public abstract class Giocatore {
     String nome;
     String colore;
     int punteggio=0;

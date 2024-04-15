@@ -18,11 +18,11 @@ public class Partita {
         if(input.equals("1")){
             System.out.println("Chi vuole essere il bianco?(inserisci il nome):  ");
             String nomeBianco = gestioneInput.inputNonVuoto();
-            Giocatore g1 = new Giocatore(nomeBianco,"bianco");
+            Giocatore g1 = new Umano(nomeBianco,"bianco");
             System.out.println("Inserisci nome per giocatore nero:  ");
             String nomeNero = gestioneInput.inputNonVuoto();
-            Giocatore g2 = new Giocatore(nomeNero,"nero");
-            this.modalita = new GameSession(g1, g2);
+            Giocatore g2 = new Umano(nomeNero,"nero");
+            this.modalita = new SessioneGioco(g1, g2) ;
             this.modalita.startGame();
         }
         else {
@@ -30,14 +30,14 @@ public class Partita {
             String colore = gestioneInput.inputColore();
             System.out.println("Inserisci il nome:  ");
             String nome = gestioneInput.inputNonVuoto();
-            Giocatore g1 = new Giocatore(nome, colore);
+            Giocatore g1 = new Umano(nome, colore);
             if (colore.equals("nero")) {
-                Giocatore g2 = new Giocatore("computer", "bianco");
-                this.modalita = new GameSession(g1, g2);
+                Giocatore g2 = new Computer("computer", "bianco");
+                this.modalita = new SessioneGioco(g1, g2);
                 this.modalita.startGame();
             } else {
-                Giocatore g2 = new Giocatore("computer", "nero");
-                this.modalita = new GameSession(g1, g2);
+                Giocatore g2 = new Computer("computer", "nero");
+                this.modalita = new SessioneGioco(g1, g2);
                 this.modalita.startGame();
             }
         }

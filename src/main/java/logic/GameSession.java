@@ -1,4 +1,4 @@
-package logic;
+/*package logic;
 
 import domain.Pezzo;
 import domain.Scacchiera;
@@ -328,3 +328,4 @@ public class GameSession extends Modalita{
         return scanner.nextLine();
     }
 }
+*/

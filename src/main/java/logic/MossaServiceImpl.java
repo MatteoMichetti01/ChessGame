@@ -23,6 +23,8 @@ public class MossaServiceImpl implements Mossa {
         service.controlloMossa(PosXRe,PosYRe,vecchiaPosX,vecchiaPosY,scacchiera);
     }
 
+
+
     public Scacchiera move(String nomePezzo, String new_Posizione, String colore) throws MossaNonValida {
         int vecchiaPosX = 0, vecchiaPosY = 0;
         int nuovaPosX = 0, nuovaPosY = 0;
@@ -63,15 +65,15 @@ public class MossaServiceImpl implements Mossa {
                //verifico il colore
                if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco")) {
                    //assegno il valore del pezzo mangiato
-                   int pb = GameSession.getGiocatore1().getPunteggio();
+                   int pb = SessioneGioco.getGiocatore1().getPunteggio();
                    pb+=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getValore();
-                   GameSession.getGiocatore1().setPunteggio(pb);
-                   System.out.println("punteggio bianco : " + GameSession.getGiocatore1().getPunteggio());
+                   SessioneGioco.getGiocatore1().setPunteggio(pb);
+                   System.out.println("punteggio bianco : " + SessioneGioco.getGiocatore1().getPunteggio());
                } else {
-                   int pn = GameSession.getGiocatore2().getPunteggio();
+                   int pn = SessioneGioco.getGiocatore2().getPunteggio();
                    pn+=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getValore();
-                   GameSession.getGiocatore2().setPunteggio(pn);
-                   System.out.println("punteggio nero : " + GameSession.getGiocatore2().getPunteggio());
+                   SessioneGioco.getGiocatore2().setPunteggio(pn);
+                   System.out.println("punteggio nero : " + SessioneGioco.getGiocatore2().getPunteggio());
                }
            }
        }
@@ -133,7 +135,7 @@ public class MossaServiceImpl implements Mossa {
                 System.out.println();
                 System.out.println("SCACCO MATTO");
                 System.out.println("Il "+ scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore() +" ha vinto!");
-                GameSession.setScaccoMatto1(true);
+                SessioneGioco.setScaccoMatto1(true);
             }
             else {
                 if (colore.equals("bianco"))

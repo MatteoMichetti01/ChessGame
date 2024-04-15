@@ -1,13 +1,14 @@
 package logic;
 
+import domain.Pezzo;
+
 public class UmanoServiceImpl implements GiocatoreService<Umano> {
     GestioneInput gestioneInput = GestioneInput.getInstance();
-    @Override
-    public String getPezzo() throws MossaNonValida {
+    public String getPezzo(Giocatore g) throws MossaNonValida {
         return gestioneInput.leggiPezzoInput();
     }
-    @Override
-    public String getPosizioneMossa() throws MossaNonValida {
+
+    public String getPosizioneMossa(String p) throws MossaNonValida {
         return gestioneInput.inputNonVuoto();
 
     }
