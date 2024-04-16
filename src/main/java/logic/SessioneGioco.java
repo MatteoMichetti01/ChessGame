@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class SessioneGioco extends Modalita{
 
 
-
+    Scacchiera scacchiera = new Scacchiera();
     public static boolean scaccoMatto1 = false;
 
     public static void setScaccoMatto1(boolean scaccoMatto) {
@@ -24,18 +24,21 @@ public class SessioneGioco extends Modalita{
         super(giocatore1, giocatore2);
     }
 
-
+    GestioneInput gestioneInput = GestioneInput.getInstance();
+    SalvataggioMosse salvataggioMosse = new SalvataggioMosse();
     @Override
     public void startGame() throws MossaNonValida {
             String nomeResa = null;
             boolean resa = true;
             boolean mossaFatta = false;
-            GestioneInput gestioneInput = GestioneInput.getInstance();
-            Scacchiera scacchiera = new Scacchiera();
+            boolean prova = false;
+            boolean prova1 = true;
+           // Scacchiera scacchiera = new Scacchiera();
             MossaServiceImpl p1 = new MossaServiceImpl(scacchiera);
             scacchiera.viewscacchiera();
             System.out.println();
             System.out.println("Inizia il turno " + giocatore1.getNome());
+            salvataggioMosse.addMossa(scacchiera);
             while (resa && !(scaccoMatto1)) {
                 //TURNO GIOCATORE BIANCO
                 while (!mossaFatta && resa && !(scaccoMatto1)) {
@@ -44,20 +47,41 @@ public class SessioneGioco extends Modalita{
                         GiocatoreService<? extends Giocatore> service = GiocatoreServiceFactory.getGiocatoreService(giocatore1.getClass());
                         String pezzoBianco = service.getPezzo(giocatore1, scacchiera);
                         if (pezzoBianco.equals("o")) {
-                            if (this.opzioni().equals("3")) resa = false;
-                            nomeResa = giocatore1.getNome();
-                            break;
+                            while (prova1) {
+                                if (this.opzioni().equals("2")) {
+                                    while (!prova) {
+                                        System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
+                                        int numMosse = gestioneInput.mosseIndieroInput();
+                                        try {
+                                            scacchiera = scacchiera.clone(salvataggioMosse.undoMosse(numMosse * 2));
+                                            prova = true;
+                                        } catch (MossaNonValida m) {
+                                            System.out.println(m.getMessage());
+                                        }
+                                    }
+                                    scacchiera.viewscacchiera();
+                                    System.out.println();
+                                    prova1=false;
+                                }
+                                if (this.opzioni().equals("3")) {
+                                    resa = false;
+                                    nomeResa = giocatore2.getNome();
+                                    prova1=false;
+                                }
+                            }
                         }
                         System.out.println("Inserisci mossa: ");
                         String mossaBianco = service.getPosizioneMossa(pezzoBianco, scacchiera);
                     try {
                         scacchiera = p1.move(pezzoBianco, mossaBianco.toUpperCase(), this.giocatore1.getColore());
                         mossaFatta = true;
+                        salvataggioMosse.addMossa(scacchiera);
                     } catch (MossaNonValida m) {
                         System.out.println(m.getMessage());
                         scacchiera.viewscacchiera();
                         System.out.println();
                     }
+                    System.out.println(mossaFatta);
                 }
                 if (mossaFatta && !(scaccoMatto1)) {
                     scacchiera.viewscacchiera();
@@ -72,9 +96,19 @@ public class SessioneGioco extends Modalita{
                     GiocatoreService<? extends Giocatore> service2 = GiocatoreServiceFactory.getGiocatoreService(giocatore2.getClass());
                     String pezzoNero = service2.getPezzo(giocatore2, scacchiera);
                     if (pezzoNero.equals("o")) {
-                        if (this.opzioni().equals("3")) resa = false;
-                        nomeResa = giocatore2.getNome();
-                        break;
+                        if(this.opzioni().equals("2")) {
+                            System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
+                            int numMosse = gestioneInput.mosseIndieroInput();
+                            scacchiera = salvataggioMosse.undoMosse(numMosse*2);
+                            scacchiera.viewscacchiera();
+                            mossaFatta=false;
+                            break;
+                        }
+                        if (this.opzioni().equals("3")) {
+                            resa = false;
+                            nomeResa = giocatore2.getNome();
+                            break;
+                        }
                     }
                     System.out.println("Inserisci mossa: ");
                     String mossaNero = service2.getPosizioneMossa(pezzoNero, scacchiera);
@@ -82,6 +116,7 @@ public class SessioneGioco extends Modalita{
                     try {
                         scacchiera = p1.move(pezzoNero, mossaNero.toUpperCase(), giocatore2.getColore());
                         mossaFatta = true;
+                        salvataggioMosse.addMossa(scacchiera);
                     } catch (MossaNonValida m) {
                         System.out.println(m.getMessage());
                         scacchiera.viewscacchiera();
@@ -118,11 +153,10 @@ public class SessioneGioco extends Modalita{
 
 
     @Override
-    public String opzioni() {
-        Scanner scanner = new Scanner(System.in);
+    public String opzioni() throws MossaNonValida {
         System.out.println("Salva partita (1)");
-        System.out.println("Annulla mossa (2)");
+        System.out.println("Annulla mosse (2)");
         System.out.println("Arrenditi (3)");
-        return scanner.nextLine();
+        return gestioneInput.opzioniInput();
     }
 }

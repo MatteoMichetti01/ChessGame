@@ -1,11 +1,12 @@
 package domain;
 
-public class Scacchiera {
+public class Scacchiera{
     public Casella[][] casella = new Casella[9][9];
     public Scacchiera(){
         this.casella = creazioneScacchiera();
 
     }
+
     public Casella[][] creazioneScacchiera() {
         casella[0][0] = new Casella(" ");
         casella[0][1] = new Casella("A  ");
@@ -85,6 +86,21 @@ public class Scacchiera {
         }
 
     }
+    public Scacchiera clone(Scacchiera scacchiera){
+        Scacchiera clone = new Scacchiera();
+        for (int i=1; i<9; i++) {
+            for (int j=1; j<9; j++) {
+                if (scacchiera.casella[i][j].isOccupata()) {
+                    clone.casella[i][j] = new Casella(clone.casella[i][j].getPosizione(), scacchiera.casella[i][j].getPezzo(), i,j, true);
+                }
+                else {
+                    clone.casella[i][j] = new Casella ("   ", clone.casella[i][j].getPosizione(), false);
+                }
+            }
+        }
+        return clone;
+    }
+
     /*public void viewscacchieraPos(){
         for(int k=0;k<9;k++){
             System.out.print(" "+this.casella[0][k].getPosizione()+"  ");

@@ -81,6 +81,36 @@ public class GestioneInput {
         }
     }
 
+    public String opzioniInput() throws MossaNonValida {
+        while(true) {
+            try {
+                String input = scanner.nextLine();
+                if (input.equals("1") || input.equals("2") || input.equals("3")) {
+                    return input;
+                }
+
+                throw new MossaNonValida("Inserisci un opzione valida (suggerimento: o 1 o 2 o 3):");
+            } catch (MossaNonValida m) {
+                System.out.println(m.getMessage());
+            }
+        }
+    }
+
+    public int mosseIndieroInput() throws MossaNonValida {
+        while(true) {
+            try {
+                int input = scanner.nextInt();
+                if (input == 1 || input == 2 || input == 3 || input == 4 || input == 5) {
+                    return input;
+                }
+
+                throw new MossaNonValida("Inserisci un numero di mosse valido (suggerimento: un numero da 1 a 5):");
+            } catch (MossaNonValida m) {
+                System.out.println(m.getMessage());
+            }
+        }
+    }
+
     public String inputColore() throws MossaNonValida{
         while(true) {
             try{
@@ -94,5 +124,7 @@ public class GestioneInput {
             }
         }
     }
+
+
 
 }

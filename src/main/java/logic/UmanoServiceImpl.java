@@ -6,10 +6,13 @@ import domain.Scacchiera;
 public class UmanoServiceImpl implements GiocatoreService<Umano> {
     GestioneInput gestioneInput = GestioneInput.getInstance();
     public String getPezzo(Giocatore g, Scacchiera scacchiera) throws MossaNonValida {
+        String input = gestioneInput.leggiPezzoInput();
+        if(input.equals("o"))
+            return input;
         if(g.getColore().equals("bianco")){
-            return gestioneInput.leggiPezzoInput()+"W";
+            return input+"W";
         }
-        else return gestioneInput.leggiPezzoInput()+"B";
+        else return input+"B";
 
     }
 

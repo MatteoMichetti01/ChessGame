@@ -23,5 +23,5 @@ public abstract class Modalita {
     }
 
     public abstract void startGame() throws MossaNonValida;
-    public abstract String opzioni();
+    public abstract String opzioni() throws MossaNonValida;
 }
