@@ -52,7 +52,7 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
             Giocatore g1 = SessioneGioco.getGiocatore1();
             Promozione.promozione(g1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
         }
-        if(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosY == 8){
+        if(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosX == 8){
             Giocatore g2 = SessioneGioco.getGiocatore2();
             Promozione.promozione(g2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
             }
