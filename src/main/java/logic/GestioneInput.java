@@ -28,7 +28,10 @@ public class GestioneInput {
                 if (!(pezzo.equals("p1")) && !(pezzo.equals("p2")) && !(pezzo.equals("p3")) && !(pezzo.equals("p4")) && !(pezzo.equals("p5"))
                         && !(pezzo.equals("p6")) && !(pezzo.equals("p7")) && !(pezzo.equals("p8")) && !(pezzo.equals("t1")) && !(pezzo.equals("t2"))
                         && !(pezzo.equals("c1")) && !(pezzo.equals("c2")) && !(pezzo.equals("a1")) && !(pezzo.equals("a2"))
-                        && !(pezzo.equals("qn")) && !(pezzo.equals("re")) && !(pezzo.equals("qP")) && !(pezzo.equals("aP")) && !(pezzo.equals("cP")) && !(pezzo.equals("tP")) && !(pezzo.equals("o"))) {
+                        && !(pezzo.equals("qn")) && !(pezzo.equals("re")) && !(pezzo.equals("q1")) && !(pezzo.equals("q2"))&& !(pezzo.equals("q3"))&& !(pezzo.equals("q4"))&& !(pezzo.equals("q5"))
+                        && !(pezzo.equals("q6"))&& !(pezzo.equals("q7"))&& !(pezzo.equals("q8"))&& !(pezzo.equals("a3"))&& !(pezzo.equals("a4"))&& !(pezzo.equals("a5"))&& !(pezzo.equals("a6"))&& !(pezzo.equals("a7"))&& !(pezzo.equals("a8"))
+                        && !(pezzo.equals("c3"))&& !(pezzo.equals("c4"))&& !(pezzo.equals("c5"))&& !(pezzo.equals("c6"))&& !(pezzo.equals("c7"))&& !(pezzo.equals("c8"))
+                        && !(pezzo.equals("t3")) && !(pezzo.equals("t4"))&& !(pezzo.equals("t5"))&& !(pezzo.equals("t6"))&& !(pezzo.equals("t7"))&& !(pezzo.equals("t8"))&& !(pezzo.equals("o"))) {
                     throw new MossaNonValida("Inserisci un pezzo valido (ad esempio: p4)");
                 }
                 return pezzo;
