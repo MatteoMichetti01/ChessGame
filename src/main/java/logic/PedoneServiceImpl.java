@@ -49,18 +49,13 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
 
         //PROMOZIONE
         if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco") && nuovaPosX == 1) {
-            System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
-            System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");
             Giocatore g1 = SessioneGioco.getGiocatore1();
             Promozione.promozione(g1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
         }
-            else{
-                if(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosX == 8){
-                Giocatore g2 = SessioneGioco.getGiocatore2();
-                Promozione.promozione(g2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+        if(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosY == 8){
+            Giocatore g2 = SessioneGioco.getGiocatore2();
+            Promozione.promozione(g2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
             }
-
-        }
 
     }
 }
