@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class PedoneServiceImpl implements PezzoService<Pedone> {
 
     @Override
-    public void controlloMossa (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
+    public void controlloMossa(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
 
         if (nuovaPosY == vecchiaPosY && (vecchiaPosX == 2 || vecchiaPosX == 7)) {
             if (Math.abs(nuovaPosX - vecchiaPosX) > 2)
@@ -51,62 +51,16 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
         if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco") && nuovaPosX == 1) {
             System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
             System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");
-            GestioneInput gestioneInput = GestioneInput.getInstance();
-            String pezzoBianco = gestioneInput.leggiPezzoInputPromozione();
-            switch (pezzoBianco) {
-                case "torre":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("tPW","bianco"),nuovaPosX,nuovaPosY,true);
-                    System.out.println("posizione " + scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione());
-                    System.out.println("pezzo " + scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getNome());
-
-                    break;
-                case "regina":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("qPW","bianco"),vecchiaPosX,vecchiaPosY,true);
-                    break;
-                case "alfiere":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("aPW","bianco"),nuovaPosX,nuovaPosY,true);
-
-                    break;
-                case "cavallo":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("cPW","bianco"),nuovaPosX,nuovaPosY,true);
-
-                    break;
-
-                default:
-                    System.out.println("Scelta non valida.");
-                    break;
-
+            Giocatore g1 = SessioneGioco.getGiocatore1();
+            Promozione.promozione(g1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+        }
+            else{
+                if(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosX == 8){
+                Giocatore g2 = SessioneGioco.getGiocatore2();
+                Promozione.promozione(g2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
             }
 
         }
-        if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosX == 8) {
-            System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
-            System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");
-            GestioneInput gestioneInput = GestioneInput.getInstance();
-            String pezzoNero = gestioneInput.leggiPezzoInputPromozione();
-            switch (pezzoNero) {
-                case "torre":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("tPB","nero"),nuovaPosX,nuovaPosY,true);
-                    break;
-                case "regina":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("qPB","nero"),nuovaPosX,nuovaPosY,true);
-                    break;
-                case "alfiere":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("aPB","nero"),nuovaPosX,nuovaPosY,true);
 
-                    break;
-                case "cavallo":
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("cPB","nero"),nuovaPosX,nuovaPosY,true);
-
-                    break;
-
-                default:
-                    System.out.println("Scelta non valida.");
-                    break;
-
-            }
-
-        }
     }
-
 }

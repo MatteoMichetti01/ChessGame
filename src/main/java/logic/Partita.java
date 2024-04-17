@@ -18,10 +18,10 @@ public class Partita {
         if(input.equals("1")){
             System.out.println("Chi vuole essere il bianco?(inserisci il nome):  ");
             String nomeBianco = gestioneInput.inputNonVuoto();
-            Giocatore g1 = new Umano(nomeBianco,"bianco");
+            Giocatore g1 = new Computer(nomeBianco,"bianco");
             System.out.println("Inserisci nome per giocatore nero:  ");
             String nomeNero = gestioneInput.inputNonVuoto();
-            Giocatore g2 = new Umano(nomeNero,"nero");
+            Giocatore g2 = new Computer(nomeNero,"nero");
             this.modalita = new SessioneGioco(g1, g2) ;
             this.modalita.startGame();
         }
