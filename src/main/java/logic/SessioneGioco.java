@@ -11,13 +11,17 @@ import java.util.Scanner;
 public class SessioneGioco extends Modalita{
 
 
-    Scacchiera scacchiera = new Scacchiera();
+
     public static boolean scaccoMatto1 = false;
+    static boolean selezioneMenu = false;
 
     public static void setScaccoMatto1(boolean scaccoMatto) {
         scaccoMatto1 = scaccoMatto;
     }
 
+    public static void setSelezioneMenu(boolean selezioneMenu1) {
+        selezioneMenu = selezioneMenu1;
+    }
 
     public SessioneGioco(Giocatore giocatore1, Giocatore giocatore2) {
 
@@ -31,44 +35,53 @@ public class SessioneGioco extends Modalita{
             String nomeResa = null;
             boolean resa = true;
             boolean mossaFatta = false;
-            boolean prova = false;
-            boolean prova1 = true;
-           // Scacchiera scacchiera = new Scacchiera();
+            boolean undoMossa = false;
+            Scacchiera scacchiera = new Scacchiera();
             MossaServiceImpl p1 = new MossaServiceImpl(scacchiera);
             scacchiera.viewscacchiera();
             System.out.println();
             System.out.println("Inizia il turno " + giocatore1.getNome());
             salvataggioMosse.addMossa(scacchiera);
             while (resa && !(scaccoMatto1)) {
+
                 //TURNO GIOCATORE BIANCO
                 while (!mossaFatta && resa && !(scaccoMatto1)) {
                         System.out.println("Tocca a " + giocatore1.getNome());
                         System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                         GiocatoreService<? extends Giocatore> service = GiocatoreServiceFactory.getGiocatoreService(giocatore1.getClass());
                         String pezzoBianco = service.getPezzo(giocatore1, scacchiera);
-                        if (pezzoBianco.equals("o")) {
-                            while (prova1) {
+                        while (selezioneMenu) {
+                             if (pezzoBianco.equals("o")) {
                                 if (this.opzioni().equals("2")) {
-                                    while (!prova) {
+                                    undoMossa = false;
+                                    while (!undoMossa) {
                                         System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
-                                        int numMosse = gestioneInput.mosseIndieroInput();
                                         try {
-                                            scacchiera = scacchiera.clone(salvataggioMosse.undoMosse(numMosse * 2));
-                                            prova = true;
-                                        } catch (MossaNonValida m) {
-                                            System.out.println(m.getMessage());
-                                        }
+                                            scacchiera= salvataggioMosse.undoMosse(gestioneInput.mosseIndieroInput() * 2);
+                                            p1 = new MossaServiceImpl(scacchiera);
+                                            undoMossa = true;
+                                            selezioneMenu=false;
+                                        } catch (MossaNonValida m) {}
                                     }
                                     scacchiera.viewscacchiera();
                                     System.out.println();
-                                    prova1=false;
+                                    break;
+
                                 }
                                 if (this.opzioni().equals("3")) {
                                     resa = false;
                                     nomeResa = giocatore2.getNome();
-                                    prova1=false;
+                                    selezioneMenu=false;
+                                    break;
                                 }
                             }
+                        }
+                        if(!resa)break;
+                        if(undoMossa){
+                            System.out.println("Tocca a " + giocatore1.getNome());
+                            System.out.println("Inserisci il pezzo che vuoi spostare: ");
+                            pezzoBianco = service.getPezzo(giocatore1, scacchiera);
+                            undoMossa = false;
                         }
                         System.out.println("Inserisci mossa: ");
                         String mossaBianco = service.getPosizioneMossa(pezzoBianco, scacchiera);
@@ -95,20 +108,33 @@ public class SessioneGioco extends Modalita{
                     System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                     GiocatoreService<? extends Giocatore> service2 = GiocatoreServiceFactory.getGiocatoreService(giocatore2.getClass());
                     String pezzoNero = service2.getPezzo(giocatore2, scacchiera);
-                    if (pezzoNero.equals("o")) {
-                        if(this.opzioni().equals("2")) {
-                            System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
-                            int numMosse = gestioneInput.mosseIndieroInput();
-                            scacchiera = salvataggioMosse.undoMosse(numMosse*2);
-                            scacchiera.viewscacchiera();
-                            mossaFatta=false;
-                            break;
+                    while(selezioneMenu) {
+                        if (pezzoNero.equals("o")) {
+                            if (this.opzioni().equals("2")) {
+                                System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
+                                try {
+                                    scacchiera = salvataggioMosse.undoMosse(gestioneInput.mosseIndieroInput() * 2);
+                                    p1 = new MossaServiceImpl(scacchiera);
+                                    selezioneMenu = false;
+                                }catch (MossaNonValida m){}
+
+                                scacchiera.viewscacchiera();
+                                System.out.println();
+                                break;
+                            }
+                            if (this.opzioni().equals("3")) {
+                                resa = false;
+                                nomeResa = giocatore2.getNome();
+                                break;
+                            }
                         }
-                        if (this.opzioni().equals("3")) {
-                            resa = false;
-                            nomeResa = giocatore2.getNome();
-                            break;
-                        }
+                    }
+
+                    if(undoMossa){
+                        System.out.println("Tocca a " + giocatore2.getNome());
+                        System.out.println("Inserisci il pezzo che vuoi spostare: ");
+                        pezzoNero= service2.getPezzo(giocatore2, scacchiera);
+                        undoMossa = false;
                     }
                     System.out.println("Inserisci mossa: ");
                     String mossaNero = service2.getPosizioneMossa(pezzoNero, scacchiera);

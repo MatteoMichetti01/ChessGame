@@ -6,7 +6,6 @@ public class Scacchiera{
         this.casella = creazioneScacchiera();
 
     }
-
     public Casella[][] creazioneScacchiera() {
         casella[0][0] = new Casella(" ");
         casella[0][1] = new Casella("A  ");

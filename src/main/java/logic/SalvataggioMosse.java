@@ -16,16 +16,7 @@ public class SalvataggioMosse {
             mosse.remove(0);
         }
         Scacchiera clone = new Scacchiera();
-        for (int i=1; i<9; i++) {
-            for (int j=1; j<9; j++) {
-                if (scacchiera.casella[i][j].isOccupata()) {
-                    clone.casella[i][j] = new Casella(clone.casella[i][j].getPosizione(), scacchiera.casella[i][j].getPezzo(), i,j, true);
-                }
-                else {
-                    clone.casella[i][j] = new Casella ("   ", clone.casella[i][j].getPosizione(), false);
-                }
-            }
-        }
+        clone = clone.clone(scacchiera);
         mosse.add(clone);
     }
     public Scacchiera undoMosse(int quanto) throws MossaNonValida {
