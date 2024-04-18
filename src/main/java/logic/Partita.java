@@ -1,5 +1,10 @@
 package logic;
 
+import bozzascritturafile.ScriviSuFile;
+
+import java.io.IOException;
+import java.util.List;
+
 public class Partita {
     private Giocatore giocatoreAttuale;
     Modalita modalita;
@@ -8,7 +13,7 @@ public class Partita {
 
     }
 
-    public void selezionaModalita() throws MossaNonValida {
+    public void selezionaModalita() throws MossaNonValida, IOException {
 
         GestioneInput gestioneInput = GestioneInput.getInstance();
         System.out.println("Seleziona la modalità di gioco: ");
@@ -22,8 +27,10 @@ public class Partita {
             System.out.println("Inserisci nome per giocatore nero:  ");
             String nomeNero = gestioneInput.inputNonVuoto();
             Giocatore g2 = new Umano(nomeNero,"nero");
-            this.modalita = new SessioneGioco(g1, g2) ;
-            this.modalita.startGame();
+            SessioneGioco sessione = SessioneGioco.getInstance(g1,g2);
+            sessione.startGame();
+            //this.modalita = new SessioneGioco(g1, g2) ;
+            //this.modalita.startGame();
         }
         else {
             System.out.println("Quale colore vuoi essere?(bianco o nero):  ");
@@ -47,7 +54,7 @@ public class Partita {
 
 
 
-    public void menuPrincipale() throws MossaNonValida {
+    public void menuPrincipale() throws MossaNonValida, IOException {
         GestioneInput gestioneInput = GestioneInput.getInstance();
         System.out.println("BENVENUTO IN SCACCHI MAC!");
         System.out.println("Nuova partita (1)");
@@ -55,6 +62,25 @@ public class Partita {
         String input = gestioneInput.leggiNumeroInput();
         if (input.equals("1")) {
             this.selezionaModalita();
+        }
+        if(input.equals("2")) {
+            List<String> fileSalvati = ScriviSuFile.getSavedGameFiles();
+            System.out.println("Partite salvate:");
+            for (String fileName : fileSalvati) {
+                System.out.println(fileName);
+            }
+            System.out.println("Inserisci il nome della partita che vuoi caricare:");
+            String fileName = gestioneInput.leggiInput();
+            try {
+                //da aggiustare qui perchè non prende l'istanza, bisogna vedere come prendere l'istanza dal singleton (getinstance)
+                SessioneGioco g = ScriviSuFile.loadGame(fileName);
+                System.out.println("Partita caricata con successo.");
+                this.modalita = new SessioneGioco(g);
+                this.modalita.startGame();
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println("Errore durante il caricamento della partita: " + e.getMessage());
+            }
+
         }
     }
 

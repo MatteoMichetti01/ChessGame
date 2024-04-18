@@ -1,8 +1,9 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Pezzo {
+public abstract class Pezzo implements Serializable {
         protected String colore;
         protected String nome;
         protected int valore;

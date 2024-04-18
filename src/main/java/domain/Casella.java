@@ -1,6 +1,8 @@
 package domain;
 
-public class Casella {
+import java.io.Serializable;
+
+public class Casella implements Serializable {
     String Posizione;
 
     String nome;

@@ -2,13 +2,15 @@ package logic;
 
 //import Controller.PedoneServiceImpl;
 
+import java.io.IOException;
+
 public class ChessGame {
-    public static void newGame() throws MossaNonValida {
+    public static void newGame() throws MossaNonValida, IOException {
         Partita partita = new Partita();
         partita.menuPrincipale();
     }
 
-    public static void main(String[] args) throws MossaNonValida {
+    public static void main(String[] args) throws MossaNonValida, IOException {
         ChessGame.newGame();
     }
 }

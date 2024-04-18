@@ -1,6 +1,8 @@
 package domain;
 
-public class Scacchiera{
+import java.io.Serializable;
+
+public class Scacchiera implements Serializable {
     public Casella[][] casella = new Casella[9][9];
     public Scacchiera(){
         this.casella = creazioneScacchiera();
@@ -98,6 +100,11 @@ public class Scacchiera{
             }
         }
         return clone;
+    }
+
+
+    public Casella[][] getScacchiera() {
+        return this.casella;
     }
 
     /*public void viewscacchieraPos(){

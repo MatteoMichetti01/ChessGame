@@ -1,8 +1,9 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class GestioneInput {
+public class GestioneInput implements Serializable {
     private static GestioneInput instance;
     private Scanner scanner;
 

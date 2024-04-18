@@ -1,6 +1,8 @@
 package domain;
 
-public class Pedone extends Pezzo {
+import java.io.Serializable;
+
+public class Pedone extends Pezzo implements Serializable {
 
     public Pedone(String nome, String colore) {
 

@@ -1,19 +1,33 @@
 package logic;
 
+import bozzascritturafile.ScriviSuFile;
 import domain.Pezzo;
 import domain.Scacchiera;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class SessioneGioco extends Modalita{
+import static bozzascritturafile.ScriviSuFile.*;
 
-
-
+public class SessioneGioco extends Modalita implements Serializable {
+    private static final long serialVersionUID = 1L;
+    //Singleton
+    private static SessioneGioco instance;
+    //get instance della singleton
+    public static SessioneGioco getInstance(Giocatore giocatore1, Giocatore giocatore2) {
+        if (instance == null) {
+            instance = new SessioneGioco(giocatore1, giocatore2);
+        }
+        return instance;
+    }
     public static boolean scaccoMatto1 = false;
     static boolean selezioneMenu = false;
+
+    private Scacchiera scacchiera;
 
     public static void setScaccoMatto1(boolean scaccoMatto) {
         scaccoMatto1 = scaccoMatto;
@@ -24,34 +38,57 @@ public class SessioneGioco extends Modalita{
     }
 
     public SessioneGioco(Giocatore giocatore1, Giocatore giocatore2) {
-
         super(giocatore1, giocatore2);
     }
 
-    GestioneInput gestioneInput = GestioneInput.getInstance();
+    private SessioneGioco game;
+
+    public SessioneGioco() {
+        // Costruttore vuoto necessario per la deserializzazione
+        game = new SessioneGioco();
+    }
+    public SessioneGioco(SessioneGioco game) throws MossaNonValida, IOException {
+        instance = game;
+    }
+
     SalvataggioMosse salvataggioMosse = new SalvataggioMosse();
     @Override
-    public void startGame() throws MossaNonValida {
+    public void startGame() throws MossaNonValida, IOException {
+            createSaveDirectory();
+            GestioneInput gestioneInput = GestioneInput.getInstance();
             String nomeResa = null;
             boolean resa = true;
             boolean mossaFatta = false;
             boolean undoMossa = false;
-            Scacchiera scacchiera = new Scacchiera();
+            boolean partitaSalvata = false;
+            scacchiera = new Scacchiera();
             MossaServiceImpl p1 = new MossaServiceImpl(scacchiera);
             scacchiera.viewscacchiera();
             System.out.println();
             System.out.println("Inizia il turno " + giocatore1.getNome());
             salvataggioMosse.addMossa(scacchiera);
-            while (resa && !(scaccoMatto1)) {
+            while (resa && !(scaccoMatto1) && !(partitaSalvata)) {
 
                 //TURNO GIOCATORE BIANCO
-                while (!mossaFatta && resa && !(scaccoMatto1)) {
+                while (!mossaFatta && resa && !(scaccoMatto1) && !(partitaSalvata)) {
                         System.out.println("Tocca a " + giocatore1.getNome());
                         System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                         GiocatoreService<? extends Giocatore> service = GiocatoreServiceFactory.getGiocatoreService(giocatore1.getClass());
                         String pezzoBianco = service.getPezzo(giocatore1, scacchiera);
                         while (selezioneMenu) {
                              if (pezzoBianco.equals("o")) {
+                                 if(this.opzioni().equals("1")) {
+                                     System.out.println("inserisci il nome della partita: ");
+                                     String nomeFile = gestioneInput.leggiInput();
+                                     try {
+                                         ScriviSuFile.saveGame(this, nomeFile);
+                                         System.out.println("la partita è sata salvata con successo");
+                                         partitaSalvata = true;
+                                     } catch (IOException e) {
+                                        System.out.println("Errore durante il salvataggio della partita: " + e.getMessage());
+                                     }
+                                     break;
+                                 }
                                 if (this.opzioni().equals("2")) {
                                     undoMossa = false;
                                     while (!undoMossa) {
@@ -77,6 +114,7 @@ public class SessioneGioco extends Modalita{
                             }
                         }
                         if(!resa)break;
+                        if(partitaSalvata)break;
                         if(undoMossa){
                             System.out.println("Tocca a " + giocatore1.getNome());
                             System.out.println("Inserisci il pezzo che vuoi spostare: ");
@@ -103,13 +141,25 @@ public class SessioneGioco extends Modalita{
                 }
 
                 //TURNO GIOCATORE NERO
-                while (!mossaFatta && resa && !(scaccoMatto1)) {
+                while (!mossaFatta && resa && !(scaccoMatto1) && !(partitaSalvata)) {
                     System.out.println("Tocca a " + giocatore2.getNome());
                     System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
                     GiocatoreService<? extends Giocatore> service2 = GiocatoreServiceFactory.getGiocatoreService(giocatore2.getClass());
                     String pezzoNero = service2.getPezzo(giocatore2, scacchiera);
                     while(selezioneMenu) {
                         if (pezzoNero.equals("o")) {
+                            if(this.opzioni().equals("1")) {
+                                System.out.println("inserisci il nome della partita: ");
+                                String nomeFile = gestioneInput.leggiInput();
+                                try {
+                                    ScriviSuFile.saveGame(this, nomeFile);
+                                    System.out.println("la partita è sata salvata con successo");
+                                    partitaSalvata = true;
+                                } catch (IOException e) {
+                                    System.out.println("Errore durante il salvataggio della partita: " + e.getMessage());
+                                }
+                                break;
+                            }
                             if (this.opzioni().equals("2")) {
                                 System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
                                 try {
@@ -129,7 +179,8 @@ public class SessioneGioco extends Modalita{
                             }
                         }
                     }
-
+                    if(!resa)break;
+                    if(partitaSalvata)break;
                     if(undoMossa){
                         System.out.println("Tocca a " + giocatore2.getNome());
                         System.out.println("Inserisci il pezzo che vuoi spostare: ");
@@ -165,6 +216,14 @@ public class SessioneGioco extends Modalita{
                     ChessGame.newGame();
                 }
             }
+            if(partitaSalvata) {
+                System.out.println("Torna al menù principale (1)");
+                System.out.println("Esci (2)");
+                String input = gestioneInput.leggiNumeroInput();
+                if (input.equals("1")) {
+                    ChessGame.newGame();
+                }
+            }
             if (scaccoMatto1) {
                 scaccoMatto1 = false;
                 System.out.println("Torna al menù principale (1)");
@@ -180,6 +239,7 @@ public class SessioneGioco extends Modalita{
 
     @Override
     public String opzioni() throws MossaNonValida {
+        GestioneInput gestioneInput = GestioneInput.getInstance();
         System.out.println("Salva partita (1)");
         System.out.println("Annulla mosse (2)");
         System.out.println("Arrenditi (3)");

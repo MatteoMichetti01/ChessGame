@@ -3,8 +3,9 @@ import domain.Casella;
 import domain.Pezzo;
 import domain.Scacchiera;
 
+import java.io.Serializable;
 import java.util.*;
-public class SalvataggioMosse {
+public class SalvataggioMosse implements Serializable {
 
     List<Scacchiera> mosse;
     public SalvataggioMosse() {

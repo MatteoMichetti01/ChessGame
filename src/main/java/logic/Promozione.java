@@ -17,31 +17,31 @@ public class Promozione {
         if(g.getClass().equals(Umano.class)){
             GestioneInput gestioneInput = GestioneInput.getInstance();
             String pezzoPromosso = gestioneInput.leggiPezzoInputPromozione();
-        switch (pezzoPromosso) {
-            case "torre":
-                contaTorri++;
-                scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("t"+contaTorri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
-                break;
-            case "regina":
-                contaRegine++;
-                scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("q"+contaRegine+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
-                break;
-            case "alfiere":
-                contaAlfieri++;
-                scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("a"+contaAlfieri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
-                break;
-            case "cavallo":
-                contaCavalli++;
-                scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("c"+contaCavalli+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
-                break;
+            switch (pezzoPromosso) {
+                case "torre":
+                    contaTorri++;
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("t"+contaTorri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    break;
+                case "regina":
+                    contaRegine++;
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("q"+contaRegine+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    break;
+                case "alfiere":
+                    contaAlfieri++;
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("a"+contaAlfieri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    break;
+                case "cavallo":
+                    contaCavalli++;
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("c"+contaCavalli+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    break;
 
-            default:
-                System.out.println("Scelta non valida.");
-                break;
+                default:
+                    System.out.println("Scelta non valida.");
+                    break;
+
+            }
 
         }
-
-    }
         else {
             Random r = new Random();
             String[] A ={"torre","regina","alfiere","cavallo"};
