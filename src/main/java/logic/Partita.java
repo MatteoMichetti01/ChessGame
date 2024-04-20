@@ -73,9 +73,8 @@ public class Partita {
             String fileName = gestioneInput.leggiInput();
             try {
                 //da aggiustare qui perchè non prende l'istanza, bisogna vedere come prendere l'istanza dal singleton (getinstance)
-                SessioneGioco g = ScriviSuFile.loadGame(fileName);
                 System.out.println("Partita caricata con successo.");
-                this.modalita = new SessioneGioco(g);
+                this.modalita = ScriviSuFile.loadGame(fileName);
                 this.modalita.startGame();
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Errore durante il caricamento della partita: " + e.getMessage());

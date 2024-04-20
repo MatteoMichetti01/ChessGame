@@ -1,6 +1,8 @@
 package logic;
 
-public abstract class Giocatore {
+import java.io.Serializable;
+
+public abstract class Giocatore implements Serializable {
     String nome;
     String colore;
     int punteggio=0;
