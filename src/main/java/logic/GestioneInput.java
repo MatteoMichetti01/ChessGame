@@ -18,10 +18,6 @@ public class GestioneInput implements Serializable {
         return instance;
     }
 
-    public static void annulla() {
-        instance = null;
-    }
-
     public String leggiInput() {
         return scanner.nextLine();
     }
@@ -68,7 +64,7 @@ public class GestioneInput implements Serializable {
                     return input;
                 }
 
-                throw new MossaNonValida("Inserisci una modalitÃ  valida (suggerimento: o 1 o 2):");
+                throw new MossaNonValida("Inserisci una modalità valida (suggerimento: o 1 o 2):");
             } catch (MossaNonValida m) {
                 System.out.println(m.getMessage());
             }

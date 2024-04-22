@@ -3,9 +3,7 @@ package logic;
 import domain.Pezzo;
 import domain.Scacchiera;
 
-import java.io.Serializable;
-
-public class UmanoServiceImpl implements GiocatoreService<Umano>{
+public class UmanoServiceImpl implements GiocatoreService<Umano> {
     GestioneInput gestioneInput = GestioneInput.getInstance();
     public String getPezzo(Giocatore g, Scacchiera scacchiera) throws MossaNonValida {
         String input = gestioneInput.leggiPezzoInput();
