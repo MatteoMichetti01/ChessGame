@@ -128,6 +128,12 @@ public class SessioneGioco extends Modalita implements Serializable {
                         scacchiera = p1.move(pezzoBianco, mossaBianco.toUpperCase(), this.giocatore1.getColore());
                         mossaFatta = true;
                         salvataggioMosse.addMossa(scacchiera);
+                        if(p1.pezzoMangiato!=null) {
+                            giocatore1.punteggio += p1.pezzoMangiato.getValore();
+                            p1.pezzoMangiato = null;
+                            System.out.println("punteggio bianco "+ giocatore1.getPunteggio());
+                        }
+
                     } catch (MossaNonValida m) {
                         System.out.println(m.getMessage());
                         scacchiera.viewscacchiera();
@@ -196,6 +202,12 @@ public class SessioneGioco extends Modalita implements Serializable {
                         scacchiera = p1.move(pezzoNero, mossaNero.toUpperCase(), giocatore2.getColore());
                         mossaFatta = true;
                         salvataggioMosse.addMossa(scacchiera);
+                        if(p1.pezzoMangiato!=null) {
+                            giocatore2.punteggio+=p1.pezzoMangiato.getValore();
+                            System.out.println("punteggio nero "+ giocatore2.getPunteggio());
+                            p1.pezzoMangiato=null;
+                        }
+
                     } catch (MossaNonValida m) {
                         System.out.println(m.getMessage());
                         scacchiera.viewscacchiera();

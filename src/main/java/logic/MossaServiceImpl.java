@@ -6,6 +6,7 @@ public class MossaServiceImpl implements Mossa {
     public boolean scaccoMatto = false;
 
     public boolean pezzoInchiodato = false;
+    public Pezzo pezzoMangiato;
 
     Scacchiera scacchiera;
 
@@ -63,18 +64,7 @@ public class MossaServiceImpl implements Mossa {
            //CONTROLLO SE IL PEZZO HA UN COLORE DIVERSO
            if (!(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore().equals(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore()))) {
                //verifico il colore
-               if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco")) {
-                   //assegno il valore del pezzo mangiato
-                   int pb = SessioneGioco.getGiocatore1().getPunteggio();
-                   pb+=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getValore();
-                   SessioneGioco.getGiocatore1().setPunteggio(pb);
-                   System.out.println("punteggio bianco : " + SessioneGioco.getGiocatore1().getPunteggio());
-               } else {
-                   int pn = SessioneGioco.getGiocatore2().getPunteggio();
-                   pn+=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getValore();
-                   SessioneGioco.getGiocatore2().setPunteggio(pn);
-                   System.out.println("punteggio nero : " + SessioneGioco.getGiocatore2().getPunteggio());
-               }
+             pezzoMangiato=scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo();
            }
        }
 

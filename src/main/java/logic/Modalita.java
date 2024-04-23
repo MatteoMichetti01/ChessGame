@@ -1,10 +1,11 @@
 package logic;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public abstract class Modalita {
-    static Giocatore giocatore1;
-    static Giocatore giocatore2;
+public abstract class Modalita implements Serializable {
+    Giocatore giocatore1;
+    Giocatore giocatore2;
 
     static SessioneGioco s;
 
@@ -17,11 +18,11 @@ public abstract class Modalita {
     public Modalita(SessioneGioco s1) {
     }
 
-    public static Giocatore getGiocatore1() {
+    public Giocatore getGiocatore1() {
         return giocatore1;
     }
 
-    public static Giocatore getGiocatore2() {
+    public Giocatore getGiocatore2() {
         return giocatore2;
     }
 
