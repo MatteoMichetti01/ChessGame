@@ -6,6 +6,7 @@ import domain.Scacchiera;
 public class UmanoServiceImpl implements GiocatoreService<Umano> {
     GestioneInput gestioneInput = GestioneInput.getInstance();
     public String getPezzo(Giocatore g, Scacchiera scacchiera) throws MossaNonValida {
+        gestioneInput.pulisci();
         String input = gestioneInput.leggiPezzoInput();
         if(input.equals("o")){
             SessioneGioco.setSelezioneMenu(true);
@@ -19,6 +20,7 @@ public class UmanoServiceImpl implements GiocatoreService<Umano> {
     }
 
     public String getPosizioneMossa(String p, Scacchiera scacchiera) throws MossaNonValida {
+        gestioneInput.pulisci();
         return gestioneInput.inputNonVuoto();
 
     }

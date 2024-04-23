@@ -29,8 +29,6 @@ public class Partita {
             Giocatore g2 = new Umano(nomeNero,"nero");
             SessioneGioco sessione = SessioneGioco.getInstance(g1,g2);
             sessione.startGame();
-            //this.modalita = new SessioneGioco(g1, g2) ;
-            //this.modalita.startGame();
         }
         else {
             System.out.println("Quale colore vuoi essere?(bianco o nero):  ");
@@ -41,13 +39,13 @@ public class Partita {
             if (colore.equals("nero")) {
                 Giocatore g1 = new Computer("computer", "bianco");
                 Giocatore g2 = new Umano(nome, colore);
-                this.modalita = new SessioneGioco(g1, g2);
-                this.modalita.startGame();
+                SessioneGioco sessione = SessioneGioco.getInstance(g1,g2);
+                sessione.startGame();
             } else {
                 Giocatore g1 = new Umano(nome, colore);
                 Giocatore g2 = new Computer("computer", "nero");
-                this.modalita = new SessioneGioco(g1, g2);
-                this.modalita.startGame();
+                SessioneGioco sessione = SessioneGioco.getInstance(g1,g2);
+                sessione.startGame();
             }
         }
     }

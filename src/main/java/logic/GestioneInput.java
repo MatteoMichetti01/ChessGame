@@ -22,6 +22,10 @@ public class GestioneInput implements Serializable {
         return scanner.nextLine();
     }
 
+    public void pulisci() {
+        instance=null;
+    }
+
     public String leggiPezzoInput() throws MossaNonValida{
         while (true) {
             try {
@@ -89,7 +93,7 @@ public class GestioneInput implements Serializable {
         while(true) {
             try {
                 String input = scanner.nextLine();
-                if (input.equals("1") || input.equals("2") || input.equals("3")) {
+                if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4")) {
                     return input;
                 }
 

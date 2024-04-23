@@ -62,6 +62,7 @@ public class ComputerServiceImpl implements GiocatoreService<Computer> {
             int m = random2.nextInt(mosse.size());
             mossaTemp = mosse.get(m);
         }
+        System.out.println ("in: "+mossaTemp);
         return mossaTemp;
     }
 }

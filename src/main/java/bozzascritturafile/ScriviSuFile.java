@@ -1,11 +1,8 @@
 package bozzascritturafile;
-import logic.ChessGame;
 import logic.SessioneGioco;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.*;
 
 public class ScriviSuFile {
@@ -28,6 +25,7 @@ public class ScriviSuFile {
         File[] files = saveDirectory.listFiles();
 
         if (files != null) {
+            Arrays.sort(files, (a, b) -> a.getName().compareTo(b.getName()));
             for (File file : files) {
                 if (file.isFile()) {
                     savedGames.add(file.getName());

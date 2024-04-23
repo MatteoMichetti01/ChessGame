@@ -1,15 +1,10 @@
 package logic;
 
 import bozzascritturafile.ScriviSuFile;
-import domain.Pezzo;
 import domain.Scacchiera;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
 
 import static bozzascritturafile.ScriviSuFile.*;
 
@@ -22,6 +17,9 @@ public class SessioneGioco extends Modalita implements Serializable {
         if (instance == null) {
             instance = new SessioneGioco(giocatore1, giocatore2);
         }
+        return instance;
+    }
+    public static SessioneGioco getInstance() {
         return instance;
     }
     public static boolean scaccoMatto1 = false;
@@ -41,17 +39,6 @@ public class SessioneGioco extends Modalita implements Serializable {
     public SessioneGioco(Giocatore giocatore1, Giocatore giocatore2) {
         super(giocatore1, giocatore2);
     }
-
-    private SessioneGioco game;
-
-    public SessioneGioco() {
-        // Costruttore vuoto necessario per la deserializzazione
-        game = new SessioneGioco();
-    }
-    public SessioneGioco(SessioneGioco game) throws MossaNonValida, IOException {
-        instance = game;
-    }
-
     SalvataggioMosse salvataggioMosse = new SalvataggioMosse();
     @Override
     public void startGame() throws MossaNonValida, IOException {
@@ -62,6 +49,7 @@ public class SessioneGioco extends Modalita implements Serializable {
             boolean mossaFatta = false;
             boolean undoMossa = false;
             boolean partitaSalvata = false;
+            boolean chiudiMenu = false;
             MossaServiceImpl p1 = new MossaServiceImpl(scacchiera);
             scacchiera.viewscacchiera();
             System.out.println();
@@ -72,7 +60,9 @@ public class SessioneGioco extends Modalita implements Serializable {
                 //TURNO GIOCATORE BIANCO
                 while (!mossaFatta && resa && !(scaccoMatto1) && !(partitaSalvata)) {
                         System.out.println("Tocca a " + giocatore1.getNome());
-                        System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
+                        if(!(giocatore1.getClass().equals(Computer.class))) {
+                            System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
+                        }
                         GiocatoreService<? extends Giocatore> service = GiocatoreServiceFactory.getGiocatoreService(giocatore1.getClass());
                         String pezzoBianco = service.getPezzo(giocatore1, scacchiera);
                         while (selezioneMenu) {
@@ -92,14 +82,16 @@ public class SessioneGioco extends Modalita implements Serializable {
                                  }
                                 if (scelta.equals("2")) {
                                     undoMossa = false;
+                                    System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
                                     while (!undoMossa) {
-                                        System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
                                         try {
                                             scacchiera= salvataggioMosse.undoMosse(gestioneInput.mosseIndieroInput() * 2);
                                             p1 = new MossaServiceImpl(scacchiera);
                                             undoMossa = true;
                                             selezioneMenu=false;
-                                        } catch (MossaNonValida m) {}
+                                        } catch (MossaNonValida m) {
+                                            System.out.println(m.getMessage());
+                                        }
                                     }
                                     scacchiera.viewscacchiera();
                                     System.out.println();
@@ -109,6 +101,11 @@ public class SessioneGioco extends Modalita implements Serializable {
                                 if (scelta.equals("3")) {
                                     resa = false;
                                     nomeResa = giocatore1.getNome();
+                                    selezioneMenu=false;
+                                    break;
+                                }
+                                if(scelta.equals("4")) {
+                                    chiudiMenu=true;
                                     selezioneMenu=false;
                                     break;
                                 }
@@ -122,24 +119,32 @@ public class SessioneGioco extends Modalita implements Serializable {
                             pezzoBianco = service.getPezzo(giocatore1, scacchiera);
                             undoMossa = false;
                         }
-                        System.out.println("Inserisci mossa: ");
-                        String mossaBianco = service.getPosizioneMossa(pezzoBianco, scacchiera);
-                    try {
-                        scacchiera = p1.move(pezzoBianco, mossaBianco.toUpperCase(), this.giocatore1.getColore());
-                        mossaFatta = true;
-                        salvataggioMosse.addMossa(scacchiera);
-                        if(p1.pezzoMangiato!=null) {
-                            giocatore1.punteggio += p1.pezzoMangiato.getValore();
-                            p1.pezzoMangiato = null;
-                            System.out.println("punteggio bianco "+ giocatore1.getPunteggio());
-                        }
+                        if(!chiudiMenu) {
+                            if (!(giocatore1.getClass().equals(Computer.class))) {
+                                System.out.println("Inserisci mossa: ");
+                            }
+                            String mossaBianco = service.getPosizioneMossa(pezzoBianco, scacchiera);
+                            try {
+                                scacchiera = p1.move(pezzoBianco, mossaBianco.toUpperCase(), this.giocatore1.getColore());
+                                mossaFatta = true;
+                                salvataggioMosse.addMossa(scacchiera);
+                                if (p1.pezzoMangiato != null) {
+                                    giocatore1.punteggio += p1.pezzoMangiato.getValore();
+                                    p1.pezzoMangiato = null;
+                                    System.out.println("punteggio bianco " + giocatore1.getPunteggio());
+                                }
 
-                    } catch (MossaNonValida m) {
-                        System.out.println(m.getMessage());
-                        scacchiera.viewscacchiera();
-                        System.out.println();
-                    }
-                    System.out.println(mossaFatta);
+                            } catch (MossaNonValida m) {
+                                System.out.println(m.getMessage());
+                                scacchiera.viewscacchiera();
+                                System.out.println();
+                            }
+                        }
+                        else {
+                            scacchiera.viewscacchiera();
+                            System.out.println();
+                        }
+                        chiudiMenu=false;
                 }
                 if (mossaFatta && !(scaccoMatto1)) {
                     scacchiera.viewscacchiera();
@@ -150,7 +155,9 @@ public class SessioneGioco extends Modalita implements Serializable {
                 //TURNO GIOCATORE NERO
                 while (!mossaFatta && resa && !(scaccoMatto1) && !(partitaSalvata)) {
                     System.out.println("Tocca a " + giocatore2.getNome());
-                    System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
+                    if(!(giocatore2.getClass().equals(Computer.class))) {
+                        System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
+                    }
                     GiocatoreService<? extends Giocatore> service2 = GiocatoreServiceFactory.getGiocatoreService(giocatore2.getClass());
                     String pezzoNero = service2.getPezzo(giocatore2, scacchiera);
                     while(selezioneMenu) {
@@ -168,21 +175,32 @@ public class SessioneGioco extends Modalita implements Serializable {
                                 }
                                 break;
                             }
-                            if (this.opzioni().equals("2")) {
+                            if (scelta.equals("2")) {
+                                undoMossa = false;
                                 System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
-                                try {
-                                    scacchiera = salvataggioMosse.undoMosse(gestioneInput.mosseIndieroInput() * 2);
-                                    p1 = new MossaServiceImpl(scacchiera);
-                                    selezioneMenu = false;
-                                }catch (MossaNonValida m){}
-
+                                while (!undoMossa) {
+                                    try {
+                                        scacchiera= salvataggioMosse.undoMosse(gestioneInput.mosseIndieroInput() * 2);
+                                        p1 = new MossaServiceImpl(scacchiera);
+                                        undoMossa = true;
+                                        selezioneMenu=false;
+                                    } catch (MossaNonValida m) {
+                                        System.out.println(m.getMessage());
+                                    }
+                                }
                                 scacchiera.viewscacchiera();
                                 System.out.println();
                                 break;
                             }
                             if (scelta.equals("3")) {
                                 resa = false;
-                                nomeResa = giocatore2.getNome();
+                                nomeResa = giocatore1.getNome();
+                                selezioneMenu=false;
+                                break;
+                            }
+                            if(scelta.equals("4")) {
+                                chiudiMenu=true;
+                                selezioneMenu=false;
                                 break;
                             }
                         }
@@ -195,24 +213,32 @@ public class SessioneGioco extends Modalita implements Serializable {
                         pezzoNero= service2.getPezzo(giocatore2, scacchiera);
                         undoMossa = false;
                     }
-                    System.out.println("Inserisci mossa: ");
-                    String mossaNero = service2.getPosizioneMossa(pezzoNero, scacchiera);
-                    System.out.println("mossa nero" + mossaNero);
-                    try {
-                        scacchiera = p1.move(pezzoNero, mossaNero.toUpperCase(), giocatore2.getColore());
-                        mossaFatta = true;
-                        salvataggioMosse.addMossa(scacchiera);
-                        if(p1.pezzoMangiato!=null) {
-                            giocatore2.punteggio+=p1.pezzoMangiato.getValore();
-                            System.out.println("punteggio nero "+ giocatore2.getPunteggio());
-                            p1.pezzoMangiato=null;
+                    if(!chiudiMenu) {
+                        if (!(giocatore2.getClass().equals(Computer.class))) {
+                            System.out.println("Inserisci mossa: ");
                         }
+                        String mossaNero = service2.getPosizioneMossa(pezzoNero, scacchiera);
+                        try {
+                            scacchiera = p1.move(pezzoNero, mossaNero.toUpperCase(), giocatore2.getColore());
+                            mossaFatta = true;
+                            salvataggioMosse.addMossa(scacchiera);
+                            if (p1.pezzoMangiato != null) {
+                                giocatore2.punteggio += p1.pezzoMangiato.getValore();
+                                System.out.println("punteggio nero " + giocatore2.getPunteggio());
+                                p1.pezzoMangiato = null;
+                            }
 
-                    } catch (MossaNonValida m) {
-                        System.out.println(m.getMessage());
+                        } catch (MossaNonValida m) {
+                            System.out.println(m.getMessage());
+                            scacchiera.viewscacchiera();
+                            System.out.println();
+                        }
+                    }
+                    else {
                         scacchiera.viewscacchiera();
                         System.out.println();
                     }
+                    chiudiMenu=false;
                 }
                 if (mossaFatta && !(scaccoMatto1)) {
                     scacchiera.viewscacchiera();
@@ -221,6 +247,8 @@ public class SessioneGioco extends Modalita implements Serializable {
                 }
             }
             if (!resa) {
+                resa = true;
+                scacchiera = new Scacchiera();
                 System.out.println("Fine partita!");
                 System.out.println(nomeResa + " si è arreso");
                 System.out.println("Torna al menù principale (1)");
@@ -231,6 +259,8 @@ public class SessioneGioco extends Modalita implements Serializable {
                 }
             }
             if(partitaSalvata) {
+                partitaSalvata=false;
+                scacchiera = new Scacchiera();
                 System.out.println("Torna al menù principale (1)");
                 System.out.println("Esci (2)");
                 String input = gestioneInput.leggiNumeroInput();
@@ -257,6 +287,8 @@ public class SessioneGioco extends Modalita implements Serializable {
         System.out.println("Salva partita (1)");
         System.out.println("Annulla mosse (2)");
         System.out.println("Arrenditi (3)");
+        System.out.println("Esci dal menù (4)");
         return gestioneInput.opzioniInput();
     }
+
 }
