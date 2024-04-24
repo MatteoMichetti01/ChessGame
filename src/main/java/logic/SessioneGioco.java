@@ -40,6 +40,8 @@ public class SessioneGioco extends Modalita implements Serializable {
         super(giocatore1, giocatore2);
     }
     SalvataggioMosse salvataggioMosse = new SalvataggioMosse();
+
+    public int numeroMosse = 0;
     @Override
     public void startGame() throws MossaNonValida, IOException {
             createSaveDirectory();
@@ -127,6 +129,7 @@ public class SessioneGioco extends Modalita implements Serializable {
                             try {
                                 scacchiera = p1.move(pezzoBianco, mossaBianco.toUpperCase(), this.giocatore1.getColore());
                                 mossaFatta = true;
+                                numeroMosse++;
                                 salvataggioMosse.addMossa(scacchiera);
                                 if (p1.pezzoMangiato != null) {
                                     giocatore1.punteggio += p1.pezzoMangiato.getValore();
@@ -194,7 +197,7 @@ public class SessioneGioco extends Modalita implements Serializable {
                             }
                             if (scelta.equals("3")) {
                                 resa = false;
-                                nomeResa = giocatore1.getNome();
+                                nomeResa = giocatore2.getNome();
                                 selezioneMenu=false;
                                 break;
                             }
@@ -220,6 +223,7 @@ public class SessioneGioco extends Modalita implements Serializable {
                         String mossaNero = service2.getPosizioneMossa(pezzoNero, scacchiera);
                         try {
                             scacchiera = p1.move(pezzoNero, mossaNero.toUpperCase(), giocatore2.getColore());
+                            numeroMosse++;
                             mossaFatta = true;
                             salvataggioMosse.addMossa(scacchiera);
                             if (p1.pezzoMangiato != null) {
@@ -260,6 +264,7 @@ public class SessioneGioco extends Modalita implements Serializable {
             }
             if(partitaSalvata) {
                 partitaSalvata=false;
+                numeroMosse=0;
                 scacchiera = new Scacchiera();
                 System.out.println("Torna al menù principale (1)");
                 System.out.println("Esci (2)");

@@ -63,7 +63,6 @@ public class Partita {
         }
         if(input.equals("2")) {
             List<String> fileSalvati = ScriviSuFile.getSavedGameFiles();
-            System.out.println("Partite salvate:");
             for (String fileName : fileSalvati) {
                 System.out.println(fileName);
             }

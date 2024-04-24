@@ -75,6 +75,21 @@ public class GestioneInput implements Serializable {
         }
     }
 
+    public String leggiSceltaInput() throws MossaNonValida {
+        while(true) {
+            try {
+                String input = scanner.nextLine();
+                if (input.equals("1") || input.equals("2") || input.equals("3")) {
+                    return input;
+                }
+
+                throw new MossaNonValida("Inserisci una modalità valida (suggerimento: o 1 o 2 o 3):");
+            } catch (MossaNonValida m) {
+                System.out.println(m.getMessage());
+            }
+        }
+    }
+
     public String inputNonVuoto() throws MossaNonValida{
         while(true) {
             try{
@@ -97,7 +112,7 @@ public class GestioneInput implements Serializable {
                     return input;
                 }
 
-                throw new MossaNonValida("Inserisci un opzione valida (suggerimento: o 1 o 2 o 3):");
+                throw new MossaNonValida("Inserisci un opzione valida (suggerimento: o 1 o 2 o 3 o 4):");
             } catch (MossaNonValida m) {
                 System.out.println(m.getMessage());
             }
