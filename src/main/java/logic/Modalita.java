@@ -21,6 +21,6 @@ public abstract class Modalita implements Serializable {
         return giocatore2;
     }
 
-    public abstract void startGame() throws MossaNonValida, IOException;
-    public abstract String opzioni() throws MossaNonValida;
+    public abstract void StartGame() throws MossaNonValida, IOException;
+    public abstract String Opzioni() throws MossaNonValida;
 }

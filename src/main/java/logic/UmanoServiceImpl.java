@@ -1,15 +1,14 @@
 package logic;
 
-import domain.Pezzo;
 import domain.Scacchiera;
 
 public class UmanoServiceImpl implements GiocatoreService<Umano> {
-    GestioneInput gestioneInput = GestioneInput.getInstance();
+    GestioneInput gestioneInput = GestioneInput.GetInstance();
     public String getPezzo(Giocatore g, Scacchiera scacchiera) throws MossaNonValida {
-        gestioneInput.pulisci();
-        String input = gestioneInput.leggiPezzoInput();
+        gestioneInput.Pulisci();
+        String input = gestioneInput.LeggiPezzoInput();
         if(input.equals("o")){
-            SessioneGioco.setSelezioneMenu(true);
+            SessioneGioco.SetSelezioneMenu(true);
             return input;
         }
         if(g.getColore().equals("bianco")){
@@ -20,8 +19,8 @@ public class UmanoServiceImpl implements GiocatoreService<Umano> {
     }
 
     public String getPosizioneMossa(String p, Scacchiera scacchiera) throws MossaNonValida {
-        gestioneInput.pulisci();
-        return gestioneInput.inputNonVuoto();
+        gestioneInput.Pulisci();
+        return gestioneInput.InputNonVuoto();
 
     }
 }

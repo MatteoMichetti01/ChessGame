@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class Scacchiera implements Serializable {
     public Casella[][] casella = new Casella[9][9];
     public Scacchiera(){
-        this.casella = creazioneScacchiera();
+        this.casella = CreazioneScacchiera();
 
     }
-    public Casella[][] creazioneScacchiera() {
+    public Casella[][] CreazioneScacchiera() {
         casella[0][0] = new Casella(" ");
         casella[0][1] = new Casella("A  ");
         casella[0][2] = new Casella("B  ");
@@ -74,7 +74,7 @@ public class Scacchiera implements Serializable {
         return casella;
     }
 
-    public void viewscacchiera(){
+    public void ViewScacchiera(){
         for(int k=0;k<9;k++){
             System.out.print(" "+this.casella[0][k].getNome()+"  ");
         }
@@ -87,7 +87,7 @@ public class Scacchiera implements Serializable {
         }
 
     }
-    public Scacchiera clone(Scacchiera scacchiera){
+    public Scacchiera Clone(Scacchiera scacchiera){
         Scacchiera clone = new Scacchiera();
         for (int i=1; i<9; i++) {
             for (int j=1; j<9; j++) {
@@ -103,8 +103,18 @@ public class Scacchiera implements Serializable {
     }
 
 
-    public Casella[][] getScacchiera() {
+    public Casella[][] GetScaccchiera() {
         return this.casella;
+    }
+
+    public int ContaPezzi(Scacchiera s){
+        int count=0;
+        for(int i = 0; i <9; i++){
+            for(int j=0; j<9; j++){
+                if(s.casella[i][j].isOccupata())count+=1;
+            }
+        }
+        return count;
     }
 
     /*public void viewscacchieraPos(){

@@ -74,12 +74,12 @@ public class ScriviSuFile {
     }
 
     public static String scelta() throws MossaNonValida {
-        GestioneInput gestioneInput = GestioneInput.getInstance();
+        GestioneInput gestioneInput = GestioneInput.GetInstance();
         System.out.println("Inserisci come vuoi che siano ordinate le partite: ");
         System.out.println("Ordinamento per mosse effettuate (1)");
         System.out.println("Numero complessivo di personaggi sulla scacchiera (2)");
         System.out.println("Valore complessivo dei personaggi sulla scacchiera (3)");
-        return gestioneInput.leggiSceltaInput();
+        return gestioneInput.LeggiSceltaInput();
     }
 
 

@@ -2,8 +2,6 @@ package logic;
 import domain.*;
 import domain.Scacchiera;
 
-import java.util.Scanner;
-
 public class PedoneServiceImpl implements PezzoService<Pedone> {
 
     @Override
@@ -47,7 +45,7 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
         }
 
 
-        SessioneGioco m1 = SessioneGioco.getInstance();
+        SessioneGioco m1 = SessioneGioco.GetInstance();
         //PROMOZIONE
         if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco") && nuovaPosX == 1) {
             Promozione.promozione(m1.giocatore1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);

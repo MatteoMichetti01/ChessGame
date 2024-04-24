@@ -121,11 +121,11 @@ public class MossaServiceImpl implements Mossa {
         if (sottoScacco) {
             scaccoMatto = Scacco.controlloScaccoMatto(scacchiera, nuovaPosX, nuovaPosY);
             if (scaccoMatto){
-                scacchiera.viewscacchiera();
+                scacchiera.ViewScacchiera();
                 System.out.println();
                 System.out.println("SCACCO MATTO");
                 System.out.println("Il "+ scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore() +" ha vinto!");
-                SessioneGioco.setScaccoMatto1(true);
+                SessioneGioco.SetScaccoMatto1(true);
             }
             else {
                 if (colore.equals("bianco"))

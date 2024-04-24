@@ -11,22 +11,22 @@ public class GestioneInput implements Serializable {
         scanner = new Scanner(System.in);
     }
 
-    public static synchronized GestioneInput getInstance() {
+    public static synchronized GestioneInput GetInstance() {
         if (instance == null) {
             instance = new GestioneInput();
         }
         return instance;
     }
 
-    public String leggiInput() {
+    public String LeggiInput() {
         return scanner.nextLine();
     }
 
-    public void pulisci() {
+    public void Pulisci() {
         instance=null;
     }
 
-    public String leggiPezzoInput() throws MossaNonValida{
+    public String LeggiPezzoInput() throws MossaNonValida{
         while (true) {
             try {
                 String pezzo = scanner.nextLine();
@@ -45,7 +45,7 @@ public class GestioneInput implements Serializable {
             }
         }
     }
-    public String leggiPezzoInputPromozione() throws MossaNonValida{
+    public String LeggiPezzoInputPromozione() throws MossaNonValida{
         while (true) {
             try {
                 String pezzo = scanner.nextLine();
@@ -60,7 +60,7 @@ public class GestioneInput implements Serializable {
     }
 
 
-    public String leggiNumeroInput() throws MossaNonValida {
+    public String LeggiNumeroInput() throws MossaNonValida {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -75,7 +75,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String leggiSceltaInput() throws MossaNonValida {
+    public String LeggiSceltaInput() throws MossaNonValida {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -90,7 +90,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String inputNonVuoto() throws MossaNonValida{
+    public String InputNonVuoto() throws MossaNonValida{
         while(true) {
             try{
                 String input = scanner.nextLine();
@@ -104,7 +104,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String opzioniInput() throws MossaNonValida {
+    public String OpzioniInput() throws MossaNonValida {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -119,7 +119,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public int mosseIndieroInput() throws MossaNonValida {
+    public int MosseIndieroInput() throws MossaNonValida {
         while(true) {
             try {
                 int input = scanner.nextInt();
@@ -134,7 +134,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String inputColore() throws MossaNonValida{
+    public String InputColore() throws MossaNonValida{
         while(true) {
             try{
                 String input = scanner.nextLine();
