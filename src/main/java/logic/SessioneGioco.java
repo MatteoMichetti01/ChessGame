@@ -12,6 +12,7 @@ public class SessioneGioco extends Modalita implements Serializable {
     int contatorePatta=50;
     int numeroPezziBianco;
     int numeroPezziNero;
+
     String salvataggioPartita= null;
     private static final long serialVersionUID = 1L;
     //Singleton
@@ -33,6 +34,8 @@ public class SessioneGioco extends Modalita implements Serializable {
     public static boolean scaccoMatto1 = false;
 
     Scacchiera scacchiera = new Scacchiera();
+    public int numeroPezzi = scacchiera.ContaPezzi(scacchiera);
+    public int valorePezzi = scacchiera.ContaValorePezzi(scacchiera);
     static boolean selezioneMenu = false;
 
 
@@ -91,6 +94,7 @@ public class SessioneGioco extends Modalita implements Serializable {
                                     System.out.println("la partita è sata salvata con successo");
                                     partitaSalvata = true;
                                     salvataggioPartita="bianco";
+                                    selezioneMenu=false;
                                 } catch (IOException e) {
                                     System.out.println("Errore durante il salvataggio della partita: " + e.getMessage());
                                 }
@@ -147,6 +151,8 @@ public class SessioneGioco extends Modalita implements Serializable {
                             scacchiera = p1.move(pezzoBianco, mossaBianco.toUpperCase(), this.giocatore1.getColore());
                             mossaFatta = true;
                             numeroMosse++;
+                            numeroPezzi = scacchiera.ContaPezzi(scacchiera);
+                            valorePezzi = scacchiera.ContaValorePezzi(scacchiera);
                             salvataggioMosse.addMossa(scacchiera);
                             if (p1.pezzoMangiato != null) {
                                 giocatore1.punteggio += p1.pezzoMangiato.getValore();
@@ -192,6 +198,7 @@ public class SessioneGioco extends Modalita implements Serializable {
                                     System.out.println("la partita è sata salvata con successo");
                                     partitaSalvata = true;
                                     salvataggioPartita="nero";
+                                    selezioneMenu=false;
                                 } catch (IOException e) {
                                     System.out.println("Errore durante il salvataggio della partita: " + e.getMessage());
                                 }
@@ -243,6 +250,8 @@ public class SessioneGioco extends Modalita implements Serializable {
                         try {
                             scacchiera = p1.move(pezzoNero, mossaNero.toUpperCase(), giocatore2.getColore());
                             numeroMosse++;
+                            numeroPezzi = scacchiera.ContaPezzi(scacchiera);
+                            valorePezzi = scacchiera.ContaValorePezzi(scacchiera);
                             mossaFatta = true;
                             salvataggioMosse.addMossa(scacchiera);
                             if (p1.pezzoMangiato != null) {
@@ -271,16 +280,15 @@ public class SessioneGioco extends Modalita implements Serializable {
             numeroPezziNero=scacchiera.ContaPezzi(scacchiera);
             salvataggioPartita = "bianco";
         }
-        if(contatorePatta==0){
-            System.out.println("Partita Patta (Regola 50 mosse!)");
-            System.out.println("Torna al menù principale (1)");
-            System.out.println("Esci (2)");
-            String input = gestioneInput.LeggiNumeroInput();
-            if (input.equals("1")) {
-                ChessGame.NewGame();
+            if(contatorePatta==0){
+                System.out.println("Partita Patta (Regola 50 mosse!)");
+                System.out.println("Torna al menù principale (1)");
+                System.out.println("Esci (2)");
+                String input = gestioneInput.LeggiNumeroInput();
+                if (input.equals("1")) {
+                    ChessGame.NewGame();
+                }
             }
-
-        }
             if (!resa) {
                 resa = true;
                 scacchiera = new Scacchiera();

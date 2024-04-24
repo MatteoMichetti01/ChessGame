@@ -117,6 +117,17 @@ public class Scacchiera implements Serializable {
         return count;
     }
 
+    public int ContaValorePezzi(Scacchiera s){
+        int valore=0;
+        for(int i = 0; i <9; i++){
+            for(int j=0; j<9; j++){
+                if(s.casella[i][j].isOccupata())
+                    valore+=s.casella[i][j].pezzo.getValore();
+            }
+        }
+        return valore;
+    }
+
     /*public void viewscacchieraPos(){
         for(int k=0;k<9;k++){
             System.out.print(" "+this.casella[0][k].getPosizione()+"  ");

@@ -38,9 +38,20 @@ public class ScriviSuFile {
                     });
                     break;
                 case "2":
-
+                    System.out.println("Lista di partite salvate per numero di pezzi sulla scacchiera, in ordine crescente: ");
+                    Arrays.sort(files, (a, b) -> {
+                        int numMosseA = getNumeroPezzi(a);
+                        int numMosseB = getNumeroPezzi(b);
+                        return Integer.compare(numMosseA, numMosseB);
+                    });
                     break;
                 case"3":
+                    System.out.println("Lista di partite salvate per valore dei pezzi sulla scacchiera, in ordine crescente: ");
+                    Arrays.sort(files, (a, b) -> {
+                        int numMosseA = getValorePezzi(a);
+                        int numMosseB = getValorePezzi(b);
+                        return Integer.compare(numMosseA, numMosseB);
+                    });
                     break;
             }
             for (File file : files) {
@@ -73,12 +84,30 @@ public class ScriviSuFile {
         }
     }
 
+    public static int getNumeroPezzi(File file) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(Files.newInputStream(file.toPath()))) {
+            SessioneGioco s1 = (SessioneGioco) inputStream.readObject();
+            return s1.numeroPezzi;
+        }catch (IOException | ClassNotFoundException e) {
+            return -1;
+        }
+    }
+
+    public static int getValorePezzi(File file) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(Files.newInputStream(file.toPath()))) {
+            SessioneGioco s1 = (SessioneGioco) inputStream.readObject();
+            return s1.valorePezzi;
+        }catch (IOException | ClassNotFoundException e) {
+            return -1;
+        }
+    }
+
     public static String scelta() throws MossaNonValida {
         GestioneInput gestioneInput = GestioneInput.GetInstance();
         System.out.println("Inserisci come vuoi che siano ordinate le partite: ");
         System.out.println("Ordinamento per mosse effettuate (1)");
-        System.out.println("Numero complessivo di personaggi sulla scacchiera (2)");
-        System.out.println("Valore complessivo dei personaggi sulla scacchiera (3)");
+        System.out.println("Numero complessivo di pezzi sulla scacchiera (2)");
+        System.out.println("Valore complessivo dei pezzi sulla scacchiera (3)");
         return gestioneInput.LeggiSceltaInput();
     }
 
