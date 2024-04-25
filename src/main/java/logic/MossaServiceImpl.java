@@ -57,6 +57,28 @@ public class MossaServiceImpl implements Mossa {
         PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getClass());
         service.controlloMossa(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
 
+
+        SessioneGioco m1 = SessioneGioco.GetInstance();
+        //PROMOZIONE
+        if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco") &&  nuovaPosX == 1 ) {
+            if(scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && !scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getNome().equals("reB")) {
+                Promozione.promozione(m1.giocatore1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+            }
+            else if(!scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata()){
+                Promozione.promozione(m1.giocatore1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+            }
+        }
+        if(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosX == 8){
+            if(scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && !scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getNome().equals("reW")) {
+                Promozione.promozione(m1.giocatore2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+            }
+            else if(!scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata()){
+                Promozione.promozione(m1.giocatore2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+            }
+
+        }
+
+
         //punteggio
 
 

@@ -45,16 +45,5 @@ public class PedoneServiceImpl implements PezzoService<Pedone> {
         }
 
 
-        SessioneGioco m1 = SessioneGioco.GetInstance();
-        //PROMOZIONE
-        if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco") && nuovaPosX == 1) {
-            Promozione.promozione(m1.giocatore1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
-        }
-        if(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosX == 8){
-            Promozione.promozione(m1.giocatore2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
-        }
-
-
     }
-
 }
