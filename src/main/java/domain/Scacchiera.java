@@ -87,6 +87,19 @@ public class Scacchiera implements Serializable {
         }
 
     }
+    public void ViewScacchiera2(){
+        for(int k=0;k<9;k++){
+            System.out.print(" "+this.casella[0][k].getNome()+"  ");
+        }
+        for (int i =1;i<9;i++){
+            System.out.println();
+            for(int j=0;j<9;j++){
+                System.out.print(this.casella[i][j].getPosizione()+ " | ");
+
+            }
+        }
+
+    }
     public Scacchiera Clone(Scacchiera scacchiera){
         Scacchiera clone = new Scacchiera();
         for (int i=1; i<9; i++) {

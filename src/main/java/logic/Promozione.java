@@ -20,19 +20,19 @@ public class Promozione {
             switch (pezzoPromosso) {
                 case "torre":
                     contaTorri++;
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("t"+contaTorri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), new Torre("t"+contaTorri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
                     break;
                 case "regina":
                     contaRegine++;
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("q"+contaRegine+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), new Regina("q"+contaRegine+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
                     break;
                 case "alfiere":
                     contaAlfieri++;
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("a"+contaAlfieri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), new Alfiere("a"+contaAlfieri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
                     break;
                 case "cavallo":
                     contaCavalli++;
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("c"+contaCavalli+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), new Cavallo("c"+contaCavalli+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
                     break;
 
                 default:
@@ -50,19 +50,19 @@ public class Promozione {
             switch (scelta) {
                 case "torre":
                     contaTorri++;
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Torre("t"+contaTorri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), new Torre("t"+contaTorri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
                     break;
                 case "regina":
                     contaRegine++;
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Regina("q"+contaRegine+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), new Regina("q"+contaRegine+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
                     break;
                 case "alfiere":
                     contaAlfieri++;
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Alfiere("a"+contaAlfieri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), new Alfiere("a"+contaAlfieri+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
                     break;
                 case "cavallo":
                     contaCavalli++;
-                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[nuovaPosX][nuovaPosY].getPosizione(), new Cavallo("c"+contaCavalli+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
+                    scacchiera.casella[vecchiaPosX][vecchiaPosY]=new Casella(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPosizione(), new Cavallo("c"+contaCavalli+scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getNome().charAt(2),g.getColore()),vecchiaPosX,vecchiaPosY,true);
                     break;
 
                 default:
