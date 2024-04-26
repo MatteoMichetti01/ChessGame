@@ -19,14 +19,24 @@ public class SalvataggioMosse implements Serializable {
         mosse.add(clone);
     }
     public Scacchiera UndoMosse(int quanto) throws MossaNonValida {
-        if(quanto >= mosse.size()){System.out.println("Puoi tornare indietro al più "+mosse.size()/2+" mosse!");
+        if(quanto >= mosse.size()){
+            if(mosse.size()%2==0) {
+
+                System.out.println("Puoi tornare indietro al più " + (mosse.size() / 2 -1 ) + " mosse!");
+            }
+            else {
+
+                System.out.println("Puoi tornare indietro al più " + mosse.size() / 2 + " mosse!");
+            }
             throw new MossaNonValida("Non hai fatto abbastanza mosse");}
         Scacchiera vecchiaScacchiera;
         vecchiaScacchiera = mosse.get(mosse.size()-1-quanto);
         int size = mosse.size();
         for(int i = 0; i<quanto;i++){
             mosse.remove(size-i-1);
+
         }
+
         return vecchiaScacchiera;
     }
 

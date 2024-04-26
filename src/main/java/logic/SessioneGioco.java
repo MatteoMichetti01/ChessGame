@@ -69,7 +69,12 @@ public class SessioneGioco extends Modalita implements Serializable {
         System.out.println();
         if(this.numeroMosse== 0){
         System.out.println("Inizia il turno " + giocatore1.getNome());}
-        salvataggioMosse.addMossa(scacchiera);
+
+        //Questo if serve perche se la partita viene ricaricata si aggiunge una scacchiera in piu e l'undo non funzione bene
+        if(this.numeroMosse==0) {
+            salvataggioMosse.addMossa(scacchiera);
+        }
+
 
         while (resa && !(scaccoMatto1) && !(partitaSalvata)&& contatorePatta>=0) {
             if (salvataggioPartita == null || salvataggioPartita.equals("bianco")) {
@@ -279,16 +284,22 @@ public class SessioneGioco extends Modalita implements Serializable {
             }
             numeroPezziNero=scacchiera.ContaPezzi(scacchiera);
             salvataggioPartita = "bianco";
-        }
+
             if(contatorePatta==0){
                 System.out.println("Partita Patta (Regola 50 mosse!)");
                 System.out.println("Torna al menù principale (1)");
                 System.out.println("Esci (2)");
                 String input = gestioneInput.LeggiNumeroInput();
                 if (input.equals("1")) {
+                    contatorePatta=50;
                     ChessGame.NewGame();
                 }
+                if(input.equals("2")){
+                    break;
+                }
             }
+        }
+
             if (!resa) {
                 resa = true;
                 scacchiera = new Scacchiera();
