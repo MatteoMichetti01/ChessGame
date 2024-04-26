@@ -9,16 +9,16 @@ public class SalvataggioMosse implements Serializable {
     public SalvataggioMosse() {
         this.mosse = new LinkedList<>();
     }
-    public void addMossa(Scacchiera scacchiera){
+    public void aggiungiMossa(Scacchiera scacchiera){
         if(mosse.size()==10){
             mosse.remove(0);
             mosse.remove(0);
         }
         Scacchiera clone = new Scacchiera();
-        clone = clone.Clone(scacchiera);
+        clone = clone.clone(scacchiera);
         mosse.add(clone);
     }
-    public Scacchiera UndoMosse(int quanto) throws MossaNonValida {
+    public Scacchiera undoMosse(int quanto) throws MossaNonValida {
         if(quanto >= mosse.size()){
             if(mosse.size()%2==0) {
 

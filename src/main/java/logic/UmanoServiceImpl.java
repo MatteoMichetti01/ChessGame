@@ -3,13 +3,13 @@ package logic;
 import domain.Scacchiera;
 
 public class UmanoServiceImpl implements GiocatoreService<Umano> {
-    GestioneInput gestioneInput = GestioneInput.GetInstance();
+    GestioneInput gestioneInput = GestioneInput.getIstanza();
     @Override
     public String getPezzo(Giocatore g, Scacchiera scacchiera) throws MossaNonValida {
-        gestioneInput.Pulisci();
-        String input = gestioneInput.LeggiPezzoInput();
+        gestioneInput.pulisci();
+        String input = gestioneInput.leggiPezzoInput();
         if(input.equals("o")){
-            SessioneGioco.SetSelezioneMenu(true);
+            SessioneGioco.setSelezioneMenu(true);
             return input;
         }
         if(g.getColore().equals("bianco")){
@@ -20,8 +20,8 @@ public class UmanoServiceImpl implements GiocatoreService<Umano> {
     }
 @Override
     public String getPosizioneMossa(String p, Scacchiera scacchiera) {
-        gestioneInput.Pulisci();
-        return gestioneInput.InputNonVuoto();
+        gestioneInput.pulisci();
+        return gestioneInput.inputNonVuoto();
 
     }
 }

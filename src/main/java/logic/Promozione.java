@@ -15,8 +15,8 @@ public class Promozione {
         System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
         System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");
         if(g.getClass().equals(Umano.class)){
-            GestioneInput gestioneInput = GestioneInput.GetInstance();
-            String pezzoPromosso = gestioneInput.LeggiPezzoInputPromozione();
+            GestioneInput gestioneInput = GestioneInput.getIstanza();
+            String pezzoPromosso = gestioneInput.leggiPezzoInputPromozione();
             switch (pezzoPromosso) {
                 case "torre":
                     contaTorri++;

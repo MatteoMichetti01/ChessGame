@@ -6,7 +6,7 @@ import java.util.Objects;
 public abstract class Pezzo implements Serializable {
         protected String colore;
         protected String nome;
-        protected int valore;
+        protected int VALORE;
 
          int posX;
          int posY;
@@ -46,8 +46,8 @@ public abstract class Pezzo implements Serializable {
         this.posY = posY;
     }
 
-    public int getValore() {
-        return valore;
+    public int getVALORE() {
+        return VALORE;
     }
 
     @Override

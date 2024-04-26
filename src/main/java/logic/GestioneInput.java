@@ -4,29 +4,29 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class GestioneInput implements Serializable {
-    private static GestioneInput instance;
+    private static GestioneInput istanza;
     private final Scanner scanner;
 
     private GestioneInput() {
         scanner = new Scanner(System.in);
     }
 
-    public static synchronized GestioneInput GetInstance() {
-        if (instance == null) {
-            instance = new GestioneInput();
+    public static synchronized GestioneInput getIstanza() {
+        if (istanza == null) {
+            istanza = new GestioneInput();
         }
-        return instance;
+        return istanza;
     }
 
-    public String LeggiInput() {
+    public String leggiInput() {
         return scanner.nextLine();
     }
 
-    public void Pulisci() {
-        instance=null;
+    public void pulisci() {
+        istanza =null;
     }
 
-    public String LeggiPezzoInput() {
+    public String leggiPezzoInput() {
         while (true) {
             try {
                 String pezzo = scanner.nextLine();
@@ -45,7 +45,7 @@ public class GestioneInput implements Serializable {
             }
         }
     }
-    public String LeggiPezzoInputPromozione() {
+    public String leggiPezzoInputPromozione() {
         while (true) {
             try {
                 String pezzo = scanner.nextLine();
@@ -60,7 +60,7 @@ public class GestioneInput implements Serializable {
     }
 
 
-    public String LeggiNumeroInput()  {
+    public String leggiNumeroInput()  {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -75,7 +75,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String LeggiSceltaInput() {
+    public String leggiSceltaInput() {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -90,7 +90,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String InputNonVuoto() {
+    public String inputNonVuoto() {
         while(true) {
             try{
                 String input = scanner.nextLine();
@@ -104,7 +104,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String OpzioniInput() {
+    public String opzioniInput() {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -119,7 +119,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public int MosseIndietroInput()  {
+    public int mosseIndietroInput()  {
         while(true) {
             try {
                 int input = scanner.nextInt();
@@ -134,7 +134,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String InputColore() {
+    public String inputColore() {
         while(true) {
             try{
                 String input = scanner.nextLine();

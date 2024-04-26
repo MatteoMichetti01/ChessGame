@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class Scacchiera implements Serializable {
     public Casella[][] casella = new Casella[9][9];
     public Scacchiera(){
-        this.casella = CreazioneScacchiera();
+        this.casella = creazioneScacchiera();
 
     }
-    public Casella[][] CreazioneScacchiera() {
+    public Casella[][] creazioneScacchiera() {
         casella[0][0] = new Casella(" ");
         casella[0][1] = new Casella("A  ");
         casella[0][2] = new Casella("B  ");
@@ -26,7 +26,6 @@ public class Scacchiera implements Serializable {
             }
 
         }
-
 
         casella[1][1] = new Casella("A1", new Torre("t1B","nero"),1,1,true);
         casella[1][2] = new Casella("B1", new Cavallo( "c1B","nero"),1,2,true);
@@ -64,17 +63,10 @@ public class Scacchiera implements Serializable {
         casella[8][7] = new Casella ("G8", new Cavallo("c2W","bianco"),8,7,true);
         casella[8][8] = new Casella ("H8",new Torre("t2W","bianco"),8,8,true);
 
-
-
-
-        //inserimento nome per attributo di casella con coordinate giuste di scachiera
-
-
-
         return casella;
     }
 
-    public void ViewScacchiera(){
+    public void viewScacchiera(){
         for(int k=0;k<9;k++){
             System.out.print(" "+this.casella[0][k].getNome()+"  ");
         }
@@ -82,13 +74,11 @@ public class Scacchiera implements Serializable {
             System.out.println();
             for(int j=0;j<9;j++){
                 System.out.print(this.casella[i][j].getNome()+ " | ");
-
             }
         }
-
     }
 
-    public Scacchiera Clone(Scacchiera scacchiera){
+    public Scacchiera clone(Scacchiera scacchiera){
         Scacchiera clone = new Scacchiera();
         for (int i=1; i<9; i++) {
             for (int j=1; j<9; j++) {
@@ -103,22 +93,23 @@ public class Scacchiera implements Serializable {
         return clone;
     }
 
-    public int ContaPezzi(Scacchiera s){
+    public int contaPezzi(Scacchiera s){
         int count=0;
         for(int i = 0; i <9; i++){
             for(int j=0; j<9; j++){
-                if(s.casella[i][j].isOccupata())count+=1;
+                if(s.casella[i][j].isOccupata())
+                    count+=1;
             }
         }
         return count;
     }
 
-    public int ContaValorePezzi(Scacchiera s){
+    public int contaValorePezzi(Scacchiera s){
         int valore=0;
         for(int i = 0; i <9; i++){
             for(int j=0; j<9; j++){
                 if(s.casella[i][j].isOccupata())
-                    valore+=s.casella[i][j].pezzo.getValore();
+                    valore+=s.casella[i][j].pezzo.getVALORE();
             }
         }
         return valore;

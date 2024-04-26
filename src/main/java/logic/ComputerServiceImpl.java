@@ -7,7 +7,7 @@ public class ComputerServiceImpl implements GiocatoreService<Computer> {
     Random random1 = new Random();
     Random random2 = new Random();
     Pezzo temp2;
-@Override
+    @Override
     public String getPezzo(Giocatore g1, Scacchiera scacchiera) {
         Pezzo temp;
 
@@ -28,7 +28,7 @@ public class ComputerServiceImpl implements GiocatoreService<Computer> {
         return temp.getNome();
     }
 
-@Override
+    @Override
     public String getPosizioneMossa(String p, Scacchiera scacchiera) {
         String mossaTemp = "";
         List<String> mosse = new ArrayList<>();

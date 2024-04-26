@@ -58,7 +58,7 @@ public class MossaServiceImpl implements Mossa {
         service.controlloMossa(nuovaPosX,nuovaPosY,vecchiaPosX,vecchiaPosY,scacchiera);
 
 
-        SessioneGioco m1 = SessioneGioco.GetInstance();
+        SessioneGioco m1 = SessioneGioco.getInstanza();
         //PROMOZIONE
         if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco") &&  nuovaPosX == 1 && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getClass().equals(Pedone.class) ) {
             if(scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && !scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getNome().equals("reB")) {
@@ -134,11 +134,11 @@ public class MossaServiceImpl implements Mossa {
         if (sottoScacco) {
             scaccoMatto = Scacco.controlloScaccoMatto(scacchiera, nuovaPosX, nuovaPosY);
             if (scaccoMatto){
-                scacchiera.ViewScacchiera();
+                scacchiera.viewScacchiera();
                 System.out.println();
                 System.out.println("SCACCO MATTO");
                 System.out.println("Il "+ scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore() +" ha vinto!");
-                SessioneGioco.SetScaccoMatto1(true);
+                SessioneGioco.setScaccoMatto1(true);
             }
             else {
                 if (colore.equals("bianco"))
