@@ -11,7 +11,7 @@ public class Promozione {
    static int contaAlfieri=2;
 
 
-    public static void promozione(Giocatore g, Scacchiera scacchiera, int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY) throws MossaNonValida {
+    public static void promozione(Giocatore g, Scacchiera scacchiera, int vecchiaPosX, int vecchiaPosY)  {
         System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
         System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");
         if(g.getClass().equals(Umano.class)){

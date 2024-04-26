@@ -62,18 +62,18 @@ public class MossaServiceImpl implements Mossa {
         //PROMOZIONE
         if (scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("bianco") &&  nuovaPosX == 1 && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getClass().equals(Pedone.class) ) {
             if(scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && !scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getNome().equals("reB")) {
-                Promozione.promozione(m1.giocatore1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+                Promozione.promozione(m1.giocatore1, scacchiera,vecchiaPosX, vecchiaPosY);
             }
             else if(!scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata()){
-                Promozione.promozione(m1.giocatore1, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+                Promozione.promozione(m1.giocatore1, scacchiera,vecchiaPosX, vecchiaPosY);
             }
         }
         if(scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals("nero") && nuovaPosX == 8 && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getClass().equals(Pedone.class)){
             if(scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && !scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getNome().equals("reW")) {
-                Promozione.promozione(m1.giocatore2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+                Promozione.promozione(m1.giocatore2, scacchiera, vecchiaPosX, vecchiaPosY);
             }
             else if(!scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata()){
-                Promozione.promozione(m1.giocatore2, scacchiera, nuovaPosX, nuovaPosY, vecchiaPosX, vecchiaPosY);
+                Promozione.promozione(m1.giocatore2, scacchiera, vecchiaPosX, vecchiaPosY);
             }
 
         }
@@ -117,24 +117,15 @@ public class MossaServiceImpl implements Mossa {
         pezzoInchiodato = Scacco.controlloScacco(scacchiera,tempPosX,tempPosY);
         if(pezzoInchiodato && !sottoScacco) {
             scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(vecchiapos, scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
-            if (temp.isOccupata()) {
-                scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
-            } else {
-                scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
-            }
+            scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
             throw new MossaNonValida("il pezzo è inchiodato, non puoi metterti in scacco da solo");
         }
 
         if (sottoScacco) {
             sottoScacco = Scacco.uscitaScacco(scacchiera, nuovaPosX, nuovaPosY);
             if (sottoScacco) {
-               // System.out.println("il re è ancora sotto scacco");
                 scacchiera.casella[vecchiaPosX][vecchiaPosY] = new Casella(vecchiapos, scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo(), vecchiaPosX, vecchiaPosY, true);
-                if (temp.isOccupata()) {
-                    scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
-                } else {
-                    scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
-                }
+                scacchiera.casella[nuovaPosX][nuovaPosY] = temp;
                 throw new MossaNonValida("sei ancora in scacco, riprova con un'altra mossa ");
             }
         }

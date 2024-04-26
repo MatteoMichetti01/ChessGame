@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class Partita {
-    private Giocatore giocatoreAttuale;
+
     Modalita modalita;
 
     public Partita() {

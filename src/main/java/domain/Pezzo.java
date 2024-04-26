@@ -50,10 +50,6 @@ public abstract class Pezzo implements Serializable {
         return valore;
     }
 
-    public void setValore(int valore) {
-        this.valore = valore;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

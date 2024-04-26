@@ -1,7 +1,5 @@
 package logic;
 
-//import Controller.PedoneServiceImpl;
-
 import java.io.IOException;
 
 public class ChessGame {

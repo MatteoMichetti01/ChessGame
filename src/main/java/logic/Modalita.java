@@ -13,14 +13,6 @@ public abstract class Modalita implements Serializable {
         giocatore2=giocatore2_;
     }
 
-    public Giocatore getGiocatore1() {
-        return giocatore1;
-    }
-
-    public Giocatore getGiocatore2() {
-        return giocatore2;
-    }
-
     public abstract void StartGame() throws MossaNonValida, IOException;
     public abstract String Opzioni() throws MossaNonValida;
 }

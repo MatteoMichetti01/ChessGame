@@ -32,9 +32,6 @@ public abstract class Giocatore implements Serializable {
         return punteggio;
     }
 
-    public void setPunteggio(int punteggio_) {
-        punteggio = punteggio_;
-    }
 }
 
 

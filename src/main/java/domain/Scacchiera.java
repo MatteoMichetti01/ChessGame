@@ -103,11 +103,6 @@ public class Scacchiera implements Serializable {
         return clone;
     }
 
-
-    public Casella[][] GetScaccchiera() {
-        return this.casella;
-    }
-
     public int ContaPezzi(Scacchiera s){
         int count=0;
         for(int i = 0; i <9; i++){
@@ -128,19 +123,5 @@ public class Scacchiera implements Serializable {
         }
         return valore;
     }
-
-    /*public void viewscacchieraPos(){
-        for(int k=0;k<9;k++){
-            System.out.print(" "+this.casella[0][k].getPosizione()+"  ");
-        }
-        for (int i =1;i<9;i++){
-            System.out.println();
-            for(int j=0;j<9;j++){
-                System.out.print(this.casella[i][j].getPosizione()+ " | ");
-
-            }
-        }
-
-    }*/
 
 }

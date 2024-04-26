@@ -2,5 +2,5 @@ package logic;
 import domain.*;
 
 public interface Mossa  {
-    public Scacchiera move(String nomePezzo, String new_Posizione, String colore) throws MossaNonValida;
+    Scacchiera move(String nomePezzo, String new_Posizione, String colore) throws MossaNonValida;
 }

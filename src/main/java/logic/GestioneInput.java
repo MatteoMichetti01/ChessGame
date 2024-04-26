@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GestioneInput implements Serializable {
     private static GestioneInput instance;
-    private Scanner scanner;
+    private final Scanner scanner;
 
     private GestioneInput() {
         scanner = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class GestioneInput implements Serializable {
         instance=null;
     }
 
-    public String LeggiPezzoInput() throws MossaNonValida{
+    public String LeggiPezzoInput() {
         while (true) {
             try {
                 String pezzo = scanner.nextLine();
@@ -45,7 +45,7 @@ public class GestioneInput implements Serializable {
             }
         }
     }
-    public String LeggiPezzoInputPromozione() throws MossaNonValida{
+    public String LeggiPezzoInputPromozione() {
         while (true) {
             try {
                 String pezzo = scanner.nextLine();
@@ -60,7 +60,7 @@ public class GestioneInput implements Serializable {
     }
 
 
-    public String LeggiNumeroInput() throws MossaNonValida {
+    public String LeggiNumeroInput()  {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -75,7 +75,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String LeggiSceltaInput() throws MossaNonValida {
+    public String LeggiSceltaInput() {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -90,7 +90,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String InputNonVuoto() throws MossaNonValida{
+    public String InputNonVuoto() {
         while(true) {
             try{
                 String input = scanner.nextLine();
@@ -104,7 +104,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String OpzioniInput() throws MossaNonValida {
+    public String OpzioniInput() {
         while(true) {
             try {
                 String input = scanner.nextLine();
@@ -119,7 +119,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public int MosseIndieroInput() throws MossaNonValida {
+    public int MosseIndietroInput()  {
         while(true) {
             try {
                 int input = scanner.nextInt();
@@ -134,7 +134,7 @@ public class GestioneInput implements Serializable {
         }
     }
 
-    public String InputColore() throws MossaNonValida{
+    public String InputColore() {
         while(true) {
             try{
                 String input = scanner.nextLine();

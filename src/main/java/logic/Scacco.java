@@ -66,7 +66,7 @@ public class Scacco {
     Controlla se un pezzo avversario potrebbe raggiungere la casella del re, nel caso fosse possibile, il re è sotto scacco
     e restituisce true.
     */
-    public static boolean controlloScacco(Scacchiera scacchiera, int posPezzoX, int posPezzoY) throws MossaNonValida {
+    public static boolean controlloScacco(Scacchiera scacchiera, int posPezzoX, int posPezzoY)  {
         int posxRE = 0, posyRE = 0;
         // mi salvo in una variabile il colore dei pezzi che dovò controllare
         String colore = scacchiera.casella[posPezzoX][posPezzoY].getPezzo().getColore();
@@ -124,9 +124,9 @@ public class Scacco {
      *
      * @return true se il re è in scacco matto, altrimenti false.
     */
-    public static boolean controlloScaccoMatto(Scacchiera scacchiera, int posPezzoX, int posPezzoY)throws MossaNonValida {
-        boolean mossasi = true;
-        boolean sScacco = true;
+    public static boolean controlloScaccoMatto(Scacchiera scacchiera, int posPezzoX, int posPezzoY) {
+        boolean mossasi;
+        boolean sScacco;
         String colore = scacchiera.casella[posPezzoX][posPezzoY].getPezzo().getColore();
         // questi due for servono per prendere tutti i pezzi del colore che vogliamo controllare
         for (int i=1; i<9; i++) {

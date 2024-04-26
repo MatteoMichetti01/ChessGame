@@ -52,8 +52,7 @@ public class ReServiceImpl implements PezzoService<Re> {
                                 PezzoService<? extends Pezzo> service = PezzoServiceFactory.getPezzoService(scacchiera.casella[i][j].getPezzo().getClass());
                                 service.controlloMossa(nuovaPosX, nuovaPosY, i, j, scacchiera);
                                 return true;
-                            } catch (MossaNonValida m) {
-                            }
+                            } catch (MossaNonValida m) {}
                         }
                     }
                 }

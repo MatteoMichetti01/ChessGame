@@ -106,11 +106,10 @@ public class SessioneGioco extends Modalita implements Serializable {
                                 break;
                             }
                             if (scelta.equals("2")) {
-                                undoMossa = false;
                                 System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
                                 while (!undoMossa) {
                                     try {
-                                        scacchiera = salvataggioMosse.UndoMosse(gestioneInput.MosseIndieroInput() * 2);
+                                        scacchiera = salvataggioMosse.UndoMosse(gestioneInput.MosseIndietroInput() * 2);
                                         p1 = new MossaServiceImpl(scacchiera);
                                         undoMossa = true;
                                         selezioneMenu = false;
@@ -210,11 +209,10 @@ public class SessioneGioco extends Modalita implements Serializable {
                                 break;
                             }
                             if (scelta.equals("2")) {
-                                undoMossa = false;
                                 System.out.println("inserisci di quante mosse vuoi tornare indietro (inserisci un numero da 1 a 5): ");
                                 while (!undoMossa) {
                                     try {
-                                        scacchiera = salvataggioMosse.UndoMosse(gestioneInput.MosseIndieroInput() * 2);
+                                        scacchiera = salvataggioMosse.UndoMosse(gestioneInput.MosseIndietroInput() * 2);
                                         p1 = new MossaServiceImpl(scacchiera);
                                         undoMossa = true;
                                         selezioneMenu = false;
@@ -338,7 +336,7 @@ public class SessioneGioco extends Modalita implements Serializable {
 
 
     @Override
-    public String Opzioni() throws MossaNonValida {
+    public String Opzioni() {
         GestioneInput gestioneInput = GestioneInput.GetInstance();
         System.out.println("Salva partita (1)");
         System.out.println("Annulla mosse (2)");

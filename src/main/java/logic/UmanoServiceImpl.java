@@ -4,6 +4,7 @@ import domain.Scacchiera;
 
 public class UmanoServiceImpl implements GiocatoreService<Umano> {
     GestioneInput gestioneInput = GestioneInput.GetInstance();
+    @Override
     public String getPezzo(Giocatore g, Scacchiera scacchiera) throws MossaNonValida {
         gestioneInput.Pulisci();
         String input = gestioneInput.LeggiPezzoInput();
@@ -17,8 +18,8 @@ public class UmanoServiceImpl implements GiocatoreService<Umano> {
         else return input+"B";
 
     }
-
-    public String getPosizioneMossa(String p, Scacchiera scacchiera) throws MossaNonValida {
+@Override
+    public String getPosizioneMossa(String p, Scacchiera scacchiera) {
         gestioneInput.Pulisci();
         return gestioneInput.InputNonVuoto();
 

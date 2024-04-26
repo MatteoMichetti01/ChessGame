@@ -18,7 +18,7 @@ public class Casella implements Serializable {
         this.pezzo=pezzo;
         this.posX=posX;
         this.posY=posY;
-        this.occupata=true;
+        this.occupata=occupata;
 
     }
 
@@ -29,7 +29,7 @@ public class Casella implements Serializable {
     public Casella(String nome, String Posizione, boolean occupata){
         this.Posizione = Posizione;
         this.nome=nome;
-        this.occupata=false;
+        this.occupata=occupata;
     }
 
 
@@ -41,18 +41,6 @@ public class Casella implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setPosizione(String posizione) {
-        this.Posizione = posizione;
-    }
-
-    public int getPosPezzoX() {
-        return posX;
-    }
-
-    public void setPosPezzoX(int posPezzoX) {
-        this.posX = posPezzoX;
     }
 
     public Pezzo getPezzo() {
@@ -69,7 +57,4 @@ public class Casella implements Serializable {
         return this.occupata;
     }
 
-    public void cambioOccupata() {
-        this.occupata= !this.occupata;
-    }
 }
