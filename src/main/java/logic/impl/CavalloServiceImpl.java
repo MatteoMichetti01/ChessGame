@@ -1,7 +1,9 @@
-package logic;
+package logic.impl;
 
 import domain.Cavallo;
 import domain.Scacchiera;
+import logic.MossaNonValida;
+import logic.PezzoService;
 
 public class CavalloServiceImpl implements PezzoService<Cavallo> {
     @Override

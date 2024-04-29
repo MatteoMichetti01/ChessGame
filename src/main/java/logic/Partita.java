@@ -1,6 +1,9 @@
 package logic;
 
-import bozzascritturafile.ScriviSuFile;
+import ScritturaSuFile.ScriviSuFile;
+import domain.Computer;
+import domain.Giocatore;
+import domain.Umano;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +16,7 @@ public class Partita {
 
     }
 
-    public void selezionaModalita() throws MossaNonValida, IOException {
+    public void selezionaModalita() throws MossaNonValida, IOException, InputNonValido {
 
         GestioneInput gestioneInput = GestioneInput.getIstanza();
         System.out.println("Seleziona la modalità di gioco: ");
@@ -53,7 +56,7 @@ public class Partita {
 
 
 
-    public void menuPrincipale() throws MossaNonValida, IOException {
+    public void menuPrincipale() throws MossaNonValida, IOException, InputNonValido {
         GestioneInput gestioneInput = GestioneInput.getIstanza();
         System.out.println("BENVENUTO IN SCACCHI MAC!");
         System.out.println("Nuova partita (1)");
@@ -68,11 +71,9 @@ public class Partita {
                 System.out.println(fileName);
             }
             System.out.println("Inserisci il nome della partita che vuoi caricare:");
-            String fileName = gestioneInput.leggiInput();
             try {
-                //da aggiustare qui perchè non prende l'istanza, bisogna vedere come prendere l'istanza dal singleton (getinstance)
+                this.modalita = ScriviSuFile.caricaPartita(gestioneInput.leggiInput());
                 System.out.println("Partita caricata con successo.");
-                this.modalita = ScriviSuFile.caricaPartita(fileName);
                 this.modalita.avviaPartita();
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Errore durante il caricamento della partita: " + e.getMessage());

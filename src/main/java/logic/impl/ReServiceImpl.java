@@ -1,9 +1,12 @@
-package logic;
+package logic.impl;
 
 import domain.Casella;
 import domain.Pezzo;
 import domain.Re;
 import domain.Scacchiera;
+import logic.MossaNonValida;
+import logic.PezzoService;
+import logic.PezzoServiceFactory;
 
 public class ReServiceImpl implements PezzoService<Re> {
     @Override

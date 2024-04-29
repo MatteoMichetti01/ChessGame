@@ -1,5 +1,7 @@
-package logic;
+package logic.impl;
 import domain.*;
+import logic.*;
+
 import java.util.*;
 
 public class ComputerServiceImpl implements GiocatoreService<Computer> {

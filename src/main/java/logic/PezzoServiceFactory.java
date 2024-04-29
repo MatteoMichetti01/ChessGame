@@ -1,6 +1,7 @@
 package logic;
 
 import domain.*;
+import logic.impl.*;
 
 public class PezzoServiceFactory {
     public static PezzoService<? extends Pezzo> getPezzoService (Class clas) throws MossaNonValida {

@@ -37,11 +37,11 @@ public class GestioneInput implements Serializable {
                         && !(pezzo.equals("q6"))&& !(pezzo.equals("q7"))&& !(pezzo.equals("q8"))&& !(pezzo.equals("a3"))&& !(pezzo.equals("a4"))&& !(pezzo.equals("a5"))&& !(pezzo.equals("a6"))&& !(pezzo.equals("a7"))&& !(pezzo.equals("a8"))
                         && !(pezzo.equals("c3"))&& !(pezzo.equals("c4"))&& !(pezzo.equals("c5"))&& !(pezzo.equals("c6"))&& !(pezzo.equals("c7"))&& !(pezzo.equals("c8"))
                         && !(pezzo.equals("t3")) && !(pezzo.equals("t4"))&& !(pezzo.equals("t5"))&& !(pezzo.equals("t6"))&& !(pezzo.equals("t7"))&& !(pezzo.equals("t8"))&& !(pezzo.equals("o"))) {
-                    throw new MossaNonValida("Inserisci un pezzo valido (ad esempio: p4)");
+                    throw new InputNonValido("Inserisci un pezzo valido (ad esempio: p4)");
                 }
                 return pezzo;
-            } catch (MossaNonValida m) {
-                System.out.println(m.getMessage());
+            } catch (InputNonValido i) {
+                System.out.println(i.getMessage());
             }
         }
     }
@@ -50,11 +50,11 @@ public class GestioneInput implements Serializable {
             try {
                 String pezzo = scanner.nextLine();
                 if (!(pezzo.equals("regina")) && !(pezzo.equals("torre")) && !(pezzo.equals("cavallo")) && !(pezzo.equals("alfiere"))) {
-                    throw new MossaNonValida("Inserisci un pezzo valido per la promozione ");
+                    throw new InputNonValido("Inserisci un pezzo valido per la promozione ");
                 }
                 return pezzo;
-            } catch (MossaNonValida m) {
-                System.out.println(m.getMessage());
+            } catch (InputNonValido i) {
+                System.out.println(i.getMessage());
             }
         }
     }
@@ -67,10 +67,9 @@ public class GestioneInput implements Serializable {
                 if (input.equals("1") || input.equals("2")) {
                     return input;
                 }
-
-                throw new MossaNonValida("Inserisci una modalità valida (suggerimento: o 1 o 2):");
-            } catch (MossaNonValida m) {
-                System.out.println(m.getMessage());
+                throw new InputNonValido("Inserisci una modalità valida (suggerimento: o 1 o 2):");
+            } catch (InputNonValido i) {
+                System.out.println(i.getMessage());
             }
         }
     }
@@ -82,10 +81,9 @@ public class GestioneInput implements Serializable {
                 if (input.equals("1") || input.equals("2") || input.equals("3")) {
                     return input;
                 }
-
-                throw new MossaNonValida("Inserisci una modalità valida (suggerimento: o 1 o 2 o 3):");
-            } catch (MossaNonValida m) {
-                System.out.println(m.getMessage());
+                throw new InputNonValido("Inserisci una modalità valida (suggerimento: o 1 o 2 o 3):");
+            } catch (InputNonValido i) {
+                System.out.println(i.getMessage());
             }
         }
     }
@@ -95,11 +93,11 @@ public class GestioneInput implements Serializable {
             try{
                 String input = scanner.nextLine();
                 if(input.isEmpty()) {
-                    throw new MossaNonValida("input non valido, riprova: ");
+                    throw new InputNonValido("input non valido, riprova: ");
                 }
                 return input;
-            } catch (MossaNonValida m) {
-                System.out.println(m.getMessage());
+            } catch (InputNonValido i) {
+                System.out.println(i.getMessage());
             }
         }
     }
@@ -112,9 +110,9 @@ public class GestioneInput implements Serializable {
                     return input;
                 }
 
-                throw new MossaNonValida("Inserisci un opzione valida (suggerimento: o 1 o 2 o 3 o 4):");
-            } catch (MossaNonValida m) {
-                System.out.println(m.getMessage());
+                throw new InputNonValido("Inserisci un opzione valida (suggerimento: o 1 o 2 o 3 o 4):");
+            } catch (InputNonValido i) {
+                System.out.println(i.getMessage());
             }
         }
     }
@@ -127,9 +125,9 @@ public class GestioneInput implements Serializable {
                     return input;
                 }
 
-                throw new MossaNonValida("Inserisci un numero di mosse valido (suggerimento: un numero da 1 a 5):");
-            } catch (MossaNonValida m) {
-                System.out.println(m.getMessage());
+                throw new InputNonValido("Inserisci un numero di mosse valido (suggerimento: un numero da 1 a 5):");
+            } catch (InputNonValido i) {
+                System.out.println(i.getMessage());
             }
         }
     }
@@ -139,11 +137,11 @@ public class GestioneInput implements Serializable {
             try{
                 String input = scanner.nextLine();
                 if(!(input.equals("nero")) && !(input.equals("bianco"))) {
-                    throw new MossaNonValida("input non valido, inserisci bianco o nero: ");
+                    throw new InputNonValido("input non valido, inserisci bianco o nero: ");
                 }
                 return input;
-            } catch (MossaNonValida m) {
-                System.out.println(m.getMessage());
+            } catch (InputNonValido i) {
+                System.out.println(i.getMessage());
             }
         }
     }

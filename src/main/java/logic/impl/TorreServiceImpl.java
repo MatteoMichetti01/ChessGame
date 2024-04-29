@@ -1,7 +1,9 @@
-package logic;
+package logic.impl;
 
 import domain.Scacchiera;
 import domain.Torre;
+import logic.MossaNonValida;
+import logic.PezzoService;
 
 public class TorreServiceImpl implements PezzoService<Torre> {
 

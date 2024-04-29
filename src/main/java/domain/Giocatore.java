@@ -1,11 +1,11 @@
-package logic;
+package domain;
 
 import java.io.Serializable;
 
 public abstract class Giocatore implements Serializable {
     String nome;
     String colore;
-    int punteggio=0;
+    public int punteggio=0;
 
     public Giocatore(String nome, String colore) {
         this.nome = nome;

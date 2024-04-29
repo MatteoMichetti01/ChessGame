@@ -1,12 +1,15 @@
 package logic;
 
-import bozzascritturafile.ScriviSuFile;
+import ScritturaSuFile.ScriviSuFile;
+import domain.Computer;
+import domain.Giocatore;
 import domain.Scacchiera;
+import logic.impl.MossaServiceImpl;
 
 import java.io.IOException;
 import java.io.Serializable;
 
-import static bozzascritturafile.ScriviSuFile.*;
+import static ScritturaSuFile.ScriviSuFile.*;
 
 public class SessioneGioco extends Modalita implements Serializable {
     int contatorePatta=50;
@@ -54,7 +57,7 @@ public class SessioneGioco extends Modalita implements Serializable {
 
     public int numeroMosse = 0;
     @Override
-    public void avviaPartita() throws MossaNonValida, IOException {
+    public void avviaPartita() throws MossaNonValida, IOException, InputNonValido {
         creazioneDirectory();
         GestioneInput gestioneInput = GestioneInput.getIstanza();
         gestioneInput.pulisci();
@@ -83,9 +86,6 @@ public class SessioneGioco extends Modalita implements Serializable {
                 //TURNO GIOCATORE BIANCO
                 while (!mossaFatta && resa && !(scaccoMatto1) && !(partitaSalvata)) {
                     System.out.println("Tocca a " + giocatore1.getNome());
-                    if (!(giocatore1.getClass().equals(Computer.class))) {
-                        System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
-                    }
                     GiocatoreService<? extends Giocatore> service = GiocatoreServiceFactory.getGiocatoreService(giocatore1.getClass());
                     String pezzoBianco = service.getPezzo(giocatore1, scacchiera);
                     while (selezioneMenu) {
@@ -142,7 +142,6 @@ public class SessioneGioco extends Modalita implements Serializable {
                     if (partitaSalvata) break;
                     if (undoMossa) {
                         System.out.println("Tocca a " + giocatore1.getNome());
-                        System.out.println("Inserisci il pezzo che vuoi spostare: ");
                         pezzoBianco = service.getPezzo(giocatore1, scacchiera);
                         undoMossa = false;
                     }
@@ -186,9 +185,6 @@ public class SessioneGioco extends Modalita implements Serializable {
                 //TURNO GIOCATORE NERO
                 while (!mossaFatta && resa && !(scaccoMatto1) && !(partitaSalvata)) {
                     System.out.println("Tocca a " + giocatore2.getNome());
-                    if (!(giocatore2.getClass().equals(Computer.class))) {
-                        System.out.println("Inserisci il pezzo che vuoi spostare o inserisci 'o' per accedere alle opzioni:");
-                    }
                     GiocatoreService<? extends Giocatore> service2 = GiocatoreServiceFactory.getGiocatoreService(giocatore2.getClass());
                     String pezzoNero = service2.getPezzo(giocatore2, scacchiera);
                     while (selezioneMenu) {
@@ -241,7 +237,6 @@ public class SessioneGioco extends Modalita implements Serializable {
                     if (partitaSalvata) break;
                     if (undoMossa) {
                         System.out.println("Tocca a " + giocatore2.getNome());
-                        System.out.println("Inserisci il pezzo che vuoi spostare: ");
                         pezzoNero = service2.getPezzo(giocatore2, scacchiera);
                         undoMossa = false;
                     }

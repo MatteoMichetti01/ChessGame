@@ -1,6 +1,8 @@
-package logic;
+package logic.impl;
 import domain.*;
 import domain.Scacchiera;
+import logic.MossaNonValida;
+import logic.PezzoService;
 
 public class PedoneServiceImpl implements PezzoService<Pedone> {
 

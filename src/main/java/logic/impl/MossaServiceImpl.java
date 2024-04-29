@@ -1,5 +1,6 @@
-package logic;
+package logic.impl;
 import domain.*;
+import logic.*;
 
 public class MossaServiceImpl implements Mossa {
     public boolean sottoScacco = false;

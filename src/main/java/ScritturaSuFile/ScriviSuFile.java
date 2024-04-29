@@ -1,7 +1,6 @@
-package bozzascritturafile;
-import logic.GestioneInput;
-import logic.MossaNonValida;
-import logic.SessioneGioco;
+package ScritturaSuFile;
+import logic.*;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,7 +20,7 @@ public class ScriviSuFile {
         }
     }
 
-    public static List<String> elencoPartiteSalvate() throws MossaNonValida {
+    public static List<String> elencoPartiteSalvate() {
         //In questa lista ci andranno i nomi dei file già ordinati
         List<String> partiteSalvate = new ArrayList<>();
         File cartellaSalvataggio = new File(DIRECTORY);
@@ -70,10 +69,14 @@ public class ScriviSuFile {
         }
     }
 
-    public static SessioneGioco caricaPartita(String filename) throws IOException, ClassNotFoundException {
+    public static SessioneGioco caricaPartita(String filename) throws IOException, ClassNotFoundException, InputNonValido, MossaNonValida {
         try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(DIRECTORY + filename)))) {
             return (SessioneGioco) ois.readObject();
+        } catch (IOException io) {
+            System.out.println("La partita non esiste o non può essere caricata!");
+            ChessGame.nuovaPartita();
         }
+        return null;
     }
 
     public static int getNumeroMosse1(File file) {
@@ -103,7 +106,7 @@ public class ScriviSuFile {
         }
     }
 
-    public static String scelta() throws MossaNonValida {
+    public static String scelta() {
         GestioneInput gestioneInput = GestioneInput.getIstanza();
         System.out.println("Inserisci come vuoi che siano ordinate le partite: ");
         System.out.println("Ordinamento per mosse effettuate (1)");

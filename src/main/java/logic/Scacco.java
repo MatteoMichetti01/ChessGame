@@ -3,6 +3,7 @@ package logic;
 import domain.Casella;
 import domain.Pezzo;
 import domain.Scacchiera;
+import logic.impl.MossaServiceImpl;
 
 public class Scacco {
 
