@@ -7,10 +7,14 @@ import logic.impl.MossaServiceImpl;
 
 public class Scacco {
 
-    /*
-    Questo metodo viene chiamato solo nel caso in cui si è verificato uno scacco, controlla se con la mossa inserita dell'utente
-    si è risolto lo scacco. Restituisce true se il re dopo la mossa è ancora sotto scacco, false altrimenti.
-    */
+    /**
+     * Controlla se il re è ancora sotto scacco dopo una mossa.
+     *
+     * @param scacchiera La scacchiera corrente.
+     * @param posPezzoX La coordinata X del pezzo mosso.
+     * @param posPezzoY La coordinata Y del pezzo mosso.
+     * @return true se il re è ancora sotto scacco dopo la mossa, false altrimenti.
+     */
     public static boolean uscitaScacco(Scacchiera scacchiera, int posPezzoX,int posPezzoY){
         int posxRE = 0, posyRE = 0;
         // mi salvo in una variabile il colore del re che dovò controllare
@@ -61,12 +65,14 @@ public class Scacco {
         return false;
     }
 
-
-    /*
-    Questo metodo controlla se dopo una mossa il re è sotto scacco. Restituisce true se è sotto scacco, false altrimenti.
-    Controlla se un pezzo avversario potrebbe raggiungere la casella del re, nel caso fosse possibile, il re è sotto scacco
-    e restituisce true.
-    */
+    /**
+     * Controlla se il re è sotto scacco.
+     *
+     * @param scacchiera La scacchiera corrente.
+     * @param posPezzoX La coordinata X del pezzo mosso.
+     * @param posPezzoY La coordinata Y del pezzo mosso.
+     * @return true se il re è sotto scacco, false altrimenti.
+     */
     public static boolean controlloScacco(Scacchiera scacchiera, int posPezzoX, int posPezzoY)  {
         int posxRE = 0, posyRE = 0;
         // mi salvo in una variabile il colore dei pezzi che dovò controllare
@@ -114,17 +120,14 @@ public class Scacco {
         return false;
     }
 
-    /*
-     * Questo metodo verifica se il re è in scacco matto.
-     * Restituisce true se il re è in scacco matto, altrimenti restituisce false e continua.
-     * Per determinare lo scacco matto, controlla se tutti i pezzi del colore del re sotto scacco
-     * non sono in grado di coprire il re dalla minaccia. Per fare ciò, prova tutte le mosse
-     * che ciascun pezzo può effettuare e se nessun pezzo può coprire il re dallo scacco, il metodo
-     * restituisce true. Questo controllo viene effettuato utilizzando il metodo uscitaScacco.
-     * Se viene trovata una mossa che consente al re di uscire dallo scacco, il metodo restituisce false.
+    /**
+     * Controlla se il re è in scacco matto.
      *
-     * @return true se il re è in scacco matto, altrimenti false.
-    */
+     * @param scacchiera La scacchiera corrente.
+     * @param posPezzoX La coordinata X del pezzo mosso.
+     * @param posPezzoY La coordinata Y del pezzo mosso.
+     * @return true se il re è in scacco matto, false altrimenti.
+     */
     public static boolean controlloScaccoMatto(Scacchiera scacchiera, int posPezzoX, int posPezzoY) {
         boolean mossasi;
         boolean sScacco;

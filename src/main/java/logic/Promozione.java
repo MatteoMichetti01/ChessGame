@@ -10,7 +10,14 @@ public class Promozione {
     static int contaCavalli=2;
    static int contaAlfieri=2;
 
-
+    /**
+     * Gestisce il processo di promozione di un pedone in una nuova pedina.
+     *
+     * @param g            Il giocatore che sta effettuando la promozione.
+     * @param scacchiera   La scacchiera corrente.
+     * @param vecchiaPosX  La coordinata X del pedone da promuovere.
+     * @param vecchiaPosY  La coordinata Y del pedone da promuovere.
+     */
     public static void promozione(Giocatore g, Scacchiera scacchiera, int vecchiaPosX, int vecchiaPosY)  {
         System.out.println("PROMOZIONE! SCEGLI IL NUOVO PEZZO");
         System.out.println("Scegli il nuovo pezzo (torre, regina, alfiere o cavallo):");

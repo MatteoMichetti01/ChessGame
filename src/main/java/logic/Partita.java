@@ -12,12 +12,21 @@ public class Partita {
 
     Modalita modalita;
 
-    public Partita() {
+    /**
+     * Costruttore della classe Partita.
+     * Crea una nuova istanza della classe Partita.
+     */
+    public Partita() {}
 
-    }
-
+    /**
+     * Gestisce la selezione della modalità di gioco e avvia la partita corrispondente.
+     * L'utente può selezionare tra "Giocatore contro giocatore" e "Giocatore contro computer".
+     *
+     * @throws MossaNonValida Se viene effettuata una mossa non valida durante la partita.
+     * @throws IOException     Se si verifica un errore di I/O durante il salvataggio della partita.
+     * @throws InputNonValido Se viene fornito un input non valido durante l'interazione con l'utente.
+     */
     public void selezionaModalita() throws MossaNonValida, IOException, InputNonValido {
-
         GestioneInput gestioneInput = GestioneInput.getIstanza();
         System.out.println("Seleziona la modalità di gioco: ");
         System.out.println("- Giocatore contro giocatore (1)");
@@ -55,7 +64,14 @@ public class Partita {
     }
 
 
-
+    /**
+     * Gestisce il menu principale del gioco.
+     * L'utente può scegliere tra "Nuova partita" e "Carica partita".
+     *
+     * @throws MossaNonValida Se viene effettuata una mossa non valida durante la partita.
+     * @throws IOException     Se si verifica un errore di I/O durante il salvataggio della partita.
+     * @throws InputNonValido Se viene fornito un input non valido durante l'interazione con l'utente.
+     */
     public void menuPrincipale() throws MossaNonValida, IOException, InputNonValido {
         GestioneInput gestioneInput = GestioneInput.getIstanza();
         System.out.println("BENVENUTO IN SCACCHI MAC!");

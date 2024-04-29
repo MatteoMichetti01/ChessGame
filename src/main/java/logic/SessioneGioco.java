@@ -22,18 +22,51 @@ public class SessioneGioco extends Modalita implements Serializable {
     private static SessioneGioco istanza;
     //get instance della singleton
 
-    public static void pulisciIstanza(){
-        istanza =null;
+    /**
+     * Questo metodo viene utilizzato per pulire l'istanza dell'oggetto SessioneGioco.
+     * Chiamando questo metodo, l'istanza corrente dell'oggetto SessioneGioco verrà
+     * impostata su null, consentendo così la rimozione di eventuali riferimenti
+     * all'oggetto esistente e agevolando il processo di garbage collection.
+     * È importante notare che chiamare questo metodo non elimina l'istanza di
+     * SessioneGioco, ma solo il riferimento ad essa. L'istanza stessa sarà ancora
+     * presente in memoria fintanto che non sarà più referenziata da nessuna variabile
+     * e sarà raccolta dal garbage collector in un momento successivo.
+     */
+    public static void pulisciIstanza() {
+        istanza = null;
     }
+
+    /**
+     * Restituisce l'istanza corrente dell'oggetto SessioneGioco.
+     * Se l'istanza non è stata ancora creata (ossia è null), viene creata
+     * una nuova istanza di SessioneGioco utilizzando i giocatori specificati,
+     * quindi restituita. Se l'istanza è già stata creata in precedenza,
+     * viene semplicemente restituita l'istanza esistente.
+     *
+     * @param giocatore1 Il primo giocatore della sessione di gioco.
+     * @param giocatore2 Il secondo giocatore della sessione di gioco.
+     * @return L'istanza corrente dell'oggetto SessioneGioco.
+     */
     public static SessioneGioco getInstanza(Giocatore giocatore1, Giocatore giocatore2) {
         if (istanza == null) {
             istanza = new SessioneGioco(giocatore1, giocatore2);
         }
         return istanza;
     }
+
+    /**
+     * Restituisce l'istanza corrente dell'oggetto SessioneGioco.
+     * Se l'istanza non è stata ancora creata (ossia è null),
+     * viene restituito null. Altrimenti, viene restituita
+     * l'istanza esistente.
+     *
+     * @return L'istanza corrente dell'oggetto SessioneGioco, oppure null
+     * se l'istanza non è stata ancora creata.
+     */
     public static SessioneGioco getInstanza() {
         return istanza;
     }
+
     public static boolean scaccoMatto1 = false;
 
     Scacchiera scacchiera = new Scacchiera();
@@ -42,20 +75,50 @@ public class SessioneGioco extends Modalita implements Serializable {
     static boolean selezioneMenu = false;
 
 
+    /**
+     * Imposta lo stato del flag di scacco matto per il giocatore 1.
+     * Questo metodo imposta lo stato del flag di scacco matto
+     * in base al valore specificato.
+     * @param scaccoMatto Lo stato del flag di scacco matto per il giocatore 1.
+     */
     public static void setScaccoMatto1(boolean scaccoMatto) {
         scaccoMatto1 = scaccoMatto;
     }
 
+    /**
+     * Imposta lo stato del flag di selezione del menu per il giocatore 1.
+     * Questo metodo imposta lo stato del flag di selezione del menu
+     * in base al valore specificato.
+     * @param selezioneMenu1 Lo stato del flag di selezione del menu per il giocatore 1.
+     */
     public static void setSelezioneMenu(boolean selezioneMenu1) {
         selezioneMenu = selezioneMenu1;
     }
 
+    /**
+     * Costruttore della classe SessioneGioco.
+     * Crea una nuova istanza di SessioneGioco con i due giocatori specificati.
+     *
+     * @param giocatore1 Il primo giocatore della sessione di gioco.
+     * @param giocatore2 Il secondo giocatore della sessione di gioco.
+     */
     public SessioneGioco(Giocatore giocatore1, Giocatore giocatore2) {
         super(giocatore1, giocatore2);
     }
+
     SalvataggioMosse salvataggioMosse = new SalvataggioMosse();
 
     public int numeroMosse = 0;
+
+    /**
+     * Avvia una nuova partita di scacchi. Questo metodo gestisce l'intero
+     * processo di gioco, inclusa l'interazione con i giocatori, la logica
+     * del gioco, le opzioni del menu e il salvataggio delle mosse.
+     *
+     * @throws MossaNonValida Se viene effettuata una mossa non valida durante la partita.
+     * @throws IOException     Se si verifica un errore di I/O durante il salvataggio della partita.
+     * @throws InputNonValido Se viene fornito un input non valido durante l'interazione con l'utente.
+     */
     @Override
     public void avviaPartita() throws MossaNonValida, IOException, InputNonValido {
         creazioneDirectory();
@@ -329,7 +392,11 @@ public class SessioneGioco extends Modalita implements Serializable {
         }
 
 
-
+    /**
+     * Mostra le opzioni del menu e restituisce l'input dell'utente.
+     *
+     * @return L'opzione scelta dall'utente come stringa.
+     */
     @Override
     public String opzioni() {
         GestioneInput gestioneInput = GestioneInput.getIstanza();

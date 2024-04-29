@@ -3,14 +3,27 @@ package logic;
 import java.io.Serializable;
 import java.util.Scanner;
 
+/**
+ * Questa classe gestisce l'input da parte dell'utente durante una partita di scacchi.
+ * È progettata come un singleton per garantire che vi sia una sola istanza attiva per l'intero programma.
+ */
 public class GestioneInput implements Serializable {
     private static GestioneInput istanza;
     private final Scanner scanner;
 
+    /**
+     * Costruttore privato per garantire che l'istanza sia creata solo internamente alla classe.
+     * Inizializza lo scanner per l'input da tastiera.
+     */
     private GestioneInput() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Restituisce l'istanza attuale di GestioneInput, creandola se non esiste (Singleton pattern).
+     *
+     * @return L'istanza di GestioneInput.
+     */
     public static synchronized GestioneInput getIstanza() {
         if (istanza == null) {
             istanza = new GestioneInput();
@@ -18,14 +31,29 @@ public class GestioneInput implements Serializable {
         return istanza;
     }
 
+    /**
+     * Legge una riga di input dall'utente.
+     *
+     * @return La riga di input letta.
+     */
     public String leggiInput() {
         return scanner.nextLine();
     }
-
+    /**
+     * Elimina l'istanza corrente di GestioneInput.
+     */
     public void pulisci() {
         istanza =null;
     }
 
+    /**
+     * Legge l'input dell'utente per un pezzo di scacchi.
+     * Restituisce l'input solo se corrisponde a un pezzo valido.
+     * Altrimenti, lancia un'eccezione InputNonValido.
+     *
+     * @return Il pezzo di scacchi inserito dall'utente.
+     * @throws InputNonValido Se l'input non corrisponde a un pezzo valido.
+     */
     public String leggiPezzoInput() {
         while (true) {
             try {
@@ -45,6 +73,15 @@ public class GestioneInput implements Serializable {
             }
         }
     }
+
+    /**
+     * Legge l'input dell'utente per la scelta di un pezzo durante la promozione di un pedone.
+     * Restituisce l'input solo se corrisponde a una delle opzioni valide (regina, torre, cavallo, alfiere).
+     * Altrimenti, stampa un messaggio di errore e richiede un nuovo input.
+     *
+     * @return Il pezzo scelto per la promozione.
+     * @throws InputNonValido Se l'input non corrisponde a un pezzo valido.
+     */
     public String leggiPezzoInputPromozione() {
         while (true) {
             try {
@@ -59,6 +96,13 @@ public class GestioneInput implements Serializable {
         }
     }
 
+    /**
+     * Legge l'input dell'utente per la scelta di una modalità (1 o 2).
+     * Restituisce l'input solo se corrisponde a una delle opzioni valide (1 o 2).
+     * Altrimenti, stampa un messaggio di errore e richiede un nuovo input.
+     *
+     * @return La modalità scelta dall'utente.
+     */
 
     public String leggiNumeroInput()  {
         while(true) {
@@ -74,6 +118,13 @@ public class GestioneInput implements Serializable {
         }
     }
 
+    /**
+     * Legge l'input dell'utente per la scelta di un'opzione (1, 2 o 3).
+     * Restituisce l'input solo se corrisponde a una delle opzioni valide (1, 2 o 3).
+     * Altrimenti, stampa un messaggio di errore e richiede un nuovo input.
+     *
+     * @return L'opzione scelta dall'utente.
+     */
     public String leggiSceltaInput() {
         while(true) {
             try {
@@ -88,6 +139,13 @@ public class GestioneInput implements Serializable {
         }
     }
 
+    /**
+     * Legge l'input dell'utente e verifica che non sia vuoto.
+     * Restituisce l'input solo se non è vuoto.
+     * Altrimenti, stampa un messaggio di errore e richiede un nuovo input.
+     *
+     * @return L'input non vuoto inserito dall'utente.
+     */
     public String inputNonVuoto() {
         while(true) {
             try{
@@ -102,6 +160,13 @@ public class GestioneInput implements Serializable {
         }
     }
 
+    /**
+     * Legge l'input dell'utente per la scelta di un'opzione (1, 2, 3 o 4).
+     * Restituisce l'input solo se corrisponde a una delle opzioni valide (1, 2, 3 o 4).
+     * Altrimenti, stampa un messaggio di errore e richiede un nuovo input.
+     *
+     * @return L'opzione scelta dall'utente.
+     */
     public String opzioniInput() {
         while(true) {
             try {
@@ -117,6 +182,13 @@ public class GestioneInput implements Serializable {
         }
     }
 
+    /**
+     * Legge l'input dell'utente per il numero di mosse indietro (da 1 a 5).
+     * Restituisce l'input solo se corrisponde a un numero di mosse valido (da 1 a 5).
+     * Altrimenti, stampa un messaggio di errore e richiede un nuovo input.
+     *
+     * @return Il numero di mosse indietro scelto dall'utente.
+     */
     public int mosseIndietroInput()  {
         while(true) {
             try {
@@ -132,6 +204,13 @@ public class GestioneInput implements Serializable {
         }
     }
 
+    /**
+     * Legge l'input dell'utente per la scelta del colore (nero o bianco).
+     * Restituisce l'input solo se corrisponde a una delle opzioni valide (nero o bianco).
+     * Altrimenti, stampa un messaggio di errore e richiede un nuovo input.
+     *
+     * @return Il colore scelto dall'utente.
+     */
     public String inputColore() {
         while(true) {
             try{
