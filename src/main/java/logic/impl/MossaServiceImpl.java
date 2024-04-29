@@ -2,7 +2,11 @@ package logic.impl;
 import domain.*;
 import logic.*;
 
+/**
+ * Questa classe fornisce l'implementazione dei metodi per gestire una mossa nel gioco degli scacchi.
+ */
 public class MossaServiceImpl implements Mossa {
+    // Variabili di stato per il controllo dello stato della partita
     public boolean sottoScacco = false;
     public boolean scaccoMatto = false;
 
@@ -11,12 +15,25 @@ public class MossaServiceImpl implements Mossa {
 
     Scacchiera scacchiera;
 
-
+    /**
+     * Costruttore della classe MossaServiceImpl.
+     *
+     * @param scacchiera La scacchiera su cui si sta giocando.
+     */
     public MossaServiceImpl(Scacchiera scacchiera) {
         this.scacchiera = scacchiera;
     }
 
-    // questo metodo viene chiamato da controlloScacco e controlla se il pezzo che stiamo controllando può arrivare alla casella del re. Se può farlo restituisce true, quindi è sotto scacco, se non può farlo va in eccezione e quindi va avanti
+    /**
+     * Questo metodo controlla se un pezzo può arrivare alla posizione del re avversario.
+     *
+     * @param PosXRe La posizione X del re avversario.
+     * @param PosYRe La posizione Y del re avversario.
+     * @param vecchiaPosX La posizione X del pezzo che si sta controllando.
+     * @param vecchiaPosY La posizione Y del pezzo che si sta controllando.
+     * @param scacchiera La scacchiera su cui si sta giocando.
+     * @throws MossaNonValida Eccezione che indica una mossa non valida.
+     */
     public static void controlloSePezzoArrivaRe(int PosXRe, int PosYRe, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         if (PosXRe == 0 || PosYRe == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         if (scacchiera.casella[PosXRe][PosYRe].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[PosXRe][PosYRe].getPezzo().getColore()))
@@ -26,7 +43,15 @@ public class MossaServiceImpl implements Mossa {
     }
 
 
-
+    /**
+     * Effettua una mossa di un pezzo sulla scacchiera.
+     *
+     * @param nomePezzo Il nome del pezzo da muovere.
+     * @param new_Posizione La nuova posizione in cui muovere il pezzo.
+     * @param colore Il colore del giocatore che sta muovendo il pezzo.
+     * @return La scacchiera dopo aver effettuato la mossa.
+     * @throws MossaNonValida Eccezione che indica una mossa non valida.
+     */
     public Scacchiera move(String nomePezzo, String new_Posizione, String colore) throws MossaNonValida {
         int vecchiaPosX = 0, vecchiaPosY = 0;
         int nuovaPosX = 0, nuovaPosY = 0;

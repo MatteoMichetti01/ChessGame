@@ -1,6 +1,6 @@
 package logic;
 
-import ScritturaSuFile.ScriviSuFile;
+import scritturaSuFile.ScriviSuFile;
 import domain.Computer;
 import domain.Giocatore;
 import domain.Umano;

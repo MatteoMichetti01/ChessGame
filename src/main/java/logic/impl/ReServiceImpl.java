@@ -8,7 +8,21 @@ import logic.MossaNonValida;
 import logic.PezzoService;
 import logic.PezzoServiceFactory;
 
+/**
+ * Questa classe fornisce un'implementazione dei metodi per il controllo delle mosse del Re.
+ */
 public class ReServiceImpl implements PezzoService<Re> {
+
+    /**
+     * Controlla la validità di una mossa per il Re sulla scacchiera.
+     *
+     * @param nuovaPosX   La nuova posizione X del pezzo.
+     * @param nuovaPosY   La nuova posizione Y del pezzo.
+     * @param vecchiaPosX La posizione X attuale del pezzo.
+     * @param vecchiaPosY La posizione Y attuale del pezzo.
+     * @param scacchiera  La scacchiera su cui si sta giocando.
+     * @throws MossaNonValida Se la mossa del Re non è valida.
+     */
     @Override
     public void controlloMossa(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         // Verifica che il re si stia muovendo di una sola casella in qualsiasi direzione
@@ -42,8 +56,14 @@ public class ReServiceImpl implements PezzoService<Re> {
     }
 
 
-    //controlla se un pezzo è protetto. Per fare ciò controlla ogni pezzo dello stesso colore, e se ne trova uno che può
-    //raggiungere la casella del pezzo che si trova in nuovaPosX,nuovaPosY, allora quel pezzo è protetto.
+    /**
+     * Controlla se un pezzo è protetto da altri pezzi del proprio colore.
+     *
+     * @param scacchiera La scacchiera su cui si sta giocando.
+     * @param nuovaPosX  La nuova posizione X del pezzo.
+     * @param nuovaPosY  La nuova posizione Y del pezzo.
+     * @return True se il pezzo è protetto, altrimenti False.
+     */
     public static boolean controlloPezzoProtetto (Scacchiera scacchiera, int nuovaPosX, int nuovaPosY) {
         String colore = scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore();
         for (int i=1; i<9; i++) {
@@ -65,8 +85,16 @@ public class ReServiceImpl implements PezzoService<Re> {
     }
 
 
-    //controlla se il re non fa una mossa che lo metta in scacco. Per fare ciò controlla ogni pezzo del colore opposto, e se ne trova uno che può
-    //raggiungere la casella del re che si trova in nuovaPosX,nuovaPosY, allora questa mossa mette in scacco il re per cui non è valida.
+    /**
+     * Controlla se una mossa del Re mette il Re stesso in scacco.
+     *
+     * @param scacchiera  La scacchiera su cui si sta giocando.
+     * @param nuovaPosX   La nuova posizione X del Re.
+     * @param nuovaPosY   La nuova posizione Y del Re.
+     * @param vecchiaPosX La posizione X attuale del Re.
+     * @param vecchiaPosY La posizione Y attuale del Re.
+     * @return True se la mossa mette il Re in scacco, altrimenti False.
+     */
     public static boolean controlloAutoScacco(Scacchiera scacchiera, int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY) {
         String colore = scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore();
         for (int i=1; i<9; i++) {

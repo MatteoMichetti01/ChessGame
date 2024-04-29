@@ -1,6 +1,6 @@
 package logic;
 
-import ScritturaSuFile.ScriviSuFile;
+import scritturaSuFile.ScriviSuFile;
 import domain.Computer;
 import domain.Giocatore;
 import domain.Scacchiera;
@@ -9,7 +9,7 @@ import logic.impl.MossaServiceImpl;
 import java.io.IOException;
 import java.io.Serializable;
 
-import static ScritturaSuFile.ScriviSuFile.*;
+import static scritturaSuFile.ScriviSuFile.*;
 
 public class SessioneGioco extends Modalita implements Serializable {
     int contatorePatta=50;

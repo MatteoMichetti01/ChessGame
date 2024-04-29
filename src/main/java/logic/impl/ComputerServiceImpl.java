@@ -4,11 +4,22 @@ import logic.*;
 
 import java.util.*;
 
+/**
+ * Implementazione del servizio per il giocatore Computer.
+ */
 public class ComputerServiceImpl implements GiocatoreService<Computer> {
 
     Random random1 = new Random();
     Random random2 = new Random();
     Pezzo temp2;
+
+    /**
+     * Ottiene il nome del pezzo da muovere per il giocatore Computer.
+     *
+     * @param g1 Il giocatore Computer.
+     * @param scacchiera La scacchiera attuale.
+     * @return Il nome del pezzo da muovere.
+     */
     @Override
     public String getPezzo(Giocatore g1, Scacchiera scacchiera) {
         Pezzo temp;
@@ -30,6 +41,13 @@ public class ComputerServiceImpl implements GiocatoreService<Computer> {
         return temp.getNome();
     }
 
+    /**
+     * Ottiene la posizione in cui muovere il pezzo per il giocatore Computer.
+     *
+     * @param p Il nome del pezzo da muovere.
+     * @param scacchiera La scacchiera attuale.
+     * @return La posizione in cui muovere il pezzo.
+     */
     @Override
     public String getPosizioneMossa(String p, Scacchiera scacchiera) {
         String mossaTemp = "";

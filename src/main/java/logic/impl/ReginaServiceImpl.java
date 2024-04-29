@@ -5,7 +5,21 @@ import domain.Scacchiera;
 import logic.MossaNonValida;
 import logic.PezzoService;
 
+/**
+ * Questa classe fornisce un'implementazione dei metodi per il controllo delle mosse della Regina.
+ */
 public class ReginaServiceImpl implements PezzoService<Regina> {
+
+    /**
+     * Controlla la validità di una mossa per la Regina sulla scacchiera.
+     *
+     * @param nuovaPosX   La nuova posizione X del pezzo.
+     * @param nuovaPosY   La nuova posizione Y del pezzo.
+     * @param vecchiaPosX La posizione X attuale del pezzo.
+     * @param vecchiaPosY La posizione Y attuale del pezzo.
+     * @param scacchiera  La scacchiera su cui si sta giocando.
+     * @throws MossaNonValida Se la mossa della Regina non è valida.
+     */
     @Override
     public void controlloMossa(int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
         //controllo che vada solo avanti o indietro sulla stessa riga o colonna e in diagonale

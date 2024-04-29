@@ -5,8 +5,21 @@ import domain.Scacchiera;
 import logic.MossaNonValida;
 import logic.PezzoService;
 
+/**
+ * Implementazione del servizio per il pezzo Alfiere.
+ */
 public class AlfiereServiceImpl implements PezzoService<Alfiere> {
 
+    /**
+     * Controlla se la mossa dell'Alfiere è valida.
+     *
+     * @param nuovaPosX     La nuova posizione X dell'Alfiere.
+     * @param nuovaPosY     La nuova posizione Y dell'Alfiere.
+     * @param vecchiaPosX   La vecchia posizione X dell'Alfiere.
+     * @param vecchiaPosY   La vecchia posizione Y dell'Alfiere.
+     * @param scacchiera    La scacchiera attuale.
+     * @throws MossaNonValida Se la mossa dell'Alfiere non è valida.
+     */
     @Override
     public void controlloMossa (int nuovaPosX, int nuovaPosY, int vecchiaPosX, int vecchiaPosY, Scacchiera scacchiera) throws MossaNonValida {
 
