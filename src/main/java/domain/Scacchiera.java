@@ -2,12 +2,27 @@ package domain;
 
 import java.io.Serializable;
 
+/**
+ * Questa classe rappresenta la scacchiera del gioco degli scacchi.
+ * Implementa l'interfaccia Serializable.
+ */
+
 public class Scacchiera implements Serializable {
     public Casella[][] casella = new Casella[9][9];
+
+    /**
+     * Costruisce una nuova scacchiera e inizializza le caselle.
+     */
     public Scacchiera(){
         this.casella = creazioneScacchiera();
 
     }
+
+    /**
+     * Crea e inizializza la configurazione standard della scacchiera.
+     *
+     * @return una matrice di caselle rappresentante la configurazione iniziale della scacchiera
+     */
     public Casella[][] creazioneScacchiera() {
         casella[0][0] = new Casella(" ");
         casella[0][1] = new Casella("A  ");
@@ -66,6 +81,9 @@ public class Scacchiera implements Serializable {
         return casella;
     }
 
+    /**
+     * Visualizza la scacchiera.
+     */
     public void viewScacchiera(){
         for(int k=0;k<9;k++){
             System.out.print(" "+this.casella[0][k].getNome()+"  ");
@@ -78,6 +96,12 @@ public class Scacchiera implements Serializable {
         }
     }
 
+    /**
+     * Clona la scacchiera specificata.
+     *
+     * @param scacchiera la scacchiera da clonare
+     * @return una copia della scacchiera specificata
+     */
     public Scacchiera clone(Scacchiera scacchiera){
         Scacchiera clone = new Scacchiera();
         for (int i=1; i<9; i++) {
@@ -92,7 +116,12 @@ public class Scacchiera implements Serializable {
         }
         return clone;
     }
-
+    /**
+     * Conta il numero totale di pezzi sulla scacchiera.
+     *
+     * @param s la scacchiera da esaminare
+     * @return il numero totale di pezzi sulla scacchiera
+     */
     public int contaPezzi(Scacchiera s){
         int count=0;
         for(int i = 0; i <9; i++){
@@ -103,6 +132,13 @@ public class Scacchiera implements Serializable {
         }
         return count;
     }
+
+    /**
+     * Calcola il valore totale dei pezzi sulla scacchiera.
+     *
+     * @param s la scacchiera da esaminare
+     * @return il valore totale dei pezzi sulla scacchiera
+     */
 
     public int contaValorePezzi(Scacchiera s){
         int valore=0;
