@@ -4,6 +4,9 @@ import domain.*;
 
 import java.util.Random;
 
+/**
+ * La classe Promozione gestisce il processo di promozione di un pedone in una nuova pedina.
+ */
 public class Promozione {
     static int contaTorri=2;
     static int contaRegine=1;

@@ -11,6 +11,11 @@ import java.io.Serializable;
 
 import static scritturaSuFile.ScriviSuFile.*;
 
+/**
+ * La classe SessioneGioco gestisce una singola partita di scacchi, includendo l'interazione
+ * con i giocatori, la logica del gioco, le opzioni del menu e il salvataggio delle mosse.
+ * Estende la classe Modalita e implementa l'interfaccia Serializable.
+ */
 public class SessioneGioco extends Modalita implements Serializable {
     int contatorePatta=50;
     int numeroPezziBianco;

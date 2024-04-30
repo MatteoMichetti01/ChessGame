@@ -3,6 +3,9 @@ package logic;
 import domain.*;
 import logic.impl.*;
 
+/**
+ * La classe PezzoServiceFactory fornisce un metodo statico per ottenere un'istanza del servizio corretto in base al tipo di pezzo specificato.
+ */
 public class PezzoServiceFactory {
     /**
      * Restituisce un'istanza del servizio corretto in base al tipo di pezzo passato come parametro.

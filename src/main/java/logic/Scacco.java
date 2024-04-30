@@ -5,6 +5,9 @@ import domain.Pezzo;
 import domain.Scacchiera;
 import logic.impl.MossaServiceImpl;
 
+/**
+ * La classe Scacco fornisce metodi per gestire lo stato di scacco degli scacchi.
+ */
 public class Scacco {
 
     /**

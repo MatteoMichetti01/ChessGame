@@ -8,6 +8,9 @@ import domain.Umano;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * La classe Partita gestisce la selezione della modalità di gioco e avvia la partita corrispondente.
+ */
 public class Partita {
 
     Modalita modalita;

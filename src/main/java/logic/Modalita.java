@@ -5,6 +5,9 @@ import domain.Giocatore;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Classe astratta che rappresenta una modalità di gioco.
+ */
 public abstract class Modalita implements Serializable {
     public Giocatore giocatore1;
     public Giocatore giocatore2;

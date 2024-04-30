@@ -1,7 +1,9 @@
 package logic;
 import domain.*;
 
-
+/**
+ * L'interfaccia Mossa definisce il modo per muovere un pezzo sulla scacchiera.
+ */
 public interface Mossa  {
     /**
      * Muove un pezzo sulla scacchiera.

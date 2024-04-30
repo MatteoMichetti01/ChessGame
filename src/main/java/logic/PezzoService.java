@@ -2,7 +2,11 @@ package logic;
 import domain.*;
 import logic.MossaNonValida;
 
-
+/**
+ * L'interfaccia PezzoService definisce un contratto per i servizi di controllo delle mosse dei pezzi sulla scacchiera.
+ *
+ * @param <T> Il tipo di pezzo gestito dal servizio.
+ */
 public interface PezzoService<T extends Pezzo> {
     /**
      * Controlla se una mossa è valida per il pezzo nelle posizioni specificate sulla scacchiera.
