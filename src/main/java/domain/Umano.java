@@ -13,6 +13,7 @@ public class Umano extends Giocatore {
      * @param nome    il nome del giocatore
      * @param colore  il colore delle pedine del giocatore
      */
+
     public Umano(String nome , String colore){
         super(nome,colore);
     }
