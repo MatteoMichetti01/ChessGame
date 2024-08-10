@@ -1,1 +1,1 @@
-# BoilerPlate del progetto
+Il gioco degli scacchi da terminale, è realizzato in Java, il progetto è stato realizzato con Antonio Addario ed Alessandro Consalvi, il lavoro è stato equamente distribuito. I loro profilo si trovano nella sezione "Contributors". 
