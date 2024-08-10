@@ -1,2 +1,1 @@
-Il gioco degli scacchi da terminale, è realizzato in Java, il progetto è stato realizzato con Antonio Addario ed Alessandro Consalvi, il lavoro è stato equamente distribuito. I loro profili si trovano nella sezione "Contributors". 
-Progetto universitario del corso di Laboratorio di Programmazione ad ogetti(Prof. Juri Di Rocco)
+Progetto universitario del gioco degli scacchi da terminale, sviluppato in Java, è stato realizzato in collaborazione con Antonio Addario e Alessandro Consalvi, con una distribuzione equa del lavoro tra i partecipanti. I profili dei contributori sono disponibili nella sezione "Contributors". Questo progetto è stato realizzato per il corso di Laboratorio di Programmazione a Oggetti, tenuto dal Prof. Juri Di Rocco.
