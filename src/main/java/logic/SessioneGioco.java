@@ -216,11 +216,9 @@ public class SessioneGioco extends Modalita implements Serializable {
                             System.out.println("Inserisci mossa: ");
                         }
                         String mossaBianco = service.getPosizioneMossa(pezzoBianco, scacchiera);
-                        if (pezzoBianco.equals("t2W") && mossaBianco.equals("arrocco")) {
+                        if (pezzoBianco.equals("t2W") && mossaBianco.equals("ARROCCO")) {
                             try {
                                 p1.move(pezzoBianco, "F8", "bianco");
-                                scacchiera.casella[8][5] = new Casella("   ", "E8", false);
-                                scacchiera.casella[8][7] = new Casella("G8", new Re("reW", "bianco"), 8, 7, true);
                             } catch (MossaNonValida m) {
                                 System.out.println(m.getMessage());
                                 scacchiera.viewScacchiera();

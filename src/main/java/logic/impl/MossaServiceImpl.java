@@ -75,8 +75,14 @@ public class MossaServiceImpl implements Mossa {
                 }
             }
         }
+        if(new_Posizione.equals("ARROCCO")){
+            nuovaPosX = 8;
+            nuovaPosY =6;
+            scacchiera.casella[8][5] = new Casella("   ", "E8", false);
+            scacchiera.casella[8][7] = new Casella("G8", new Re("reW", "bianco"), 8, 7, true);
+        }
         if (vecchiaPosX == 0 || vecchiaPosY == 0) throw new MossaNonValida("Mossa non valida, il pezzo non esiste");
-        if (nuovaPosX == 0 || nuovaPosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera1");
+        if (nuovaPosX == 0 || nuovaPosY == 0) throw new MossaNonValida("Mossa non valida, fuori scacchiera");
         if (scacchiera.casella[nuovaPosX][nuovaPosY].isOccupata() && scacchiera.casella[vecchiaPosX][vecchiaPosY].getPezzo().getColore().equals(scacchiera.casella[nuovaPosX][nuovaPosY].getPezzo().getColore()))
             throw new MossaNonValida("la casella è gia occupata");
 
